@@ -1,7 +1,7 @@
 import React from 'react';
 
-export var HowCow = React.createClass({
-	render: function() {
+export default class HowCow extends React.Component {
+	render () {
 		return (
 			<div id="aboutCow">
 
@@ -50,4 +50,4 @@ export var HowCow = React.createClass({
       </div>
 		);
 	}
-});
+};

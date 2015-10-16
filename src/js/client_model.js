@@ -1,4 +1,4 @@
-import ObservableThing from './observablething';
+import ObservableThing from './ObservableThing';
 import io from "socket.io-client";
 
 var  socket = io(FEEDS);
@@ -36,7 +36,3 @@ socket.on('nxws sources', function(jsonSources) {
   var sources = JSON.parse(jsonSources);
   sourceList.set(sources);
 });
-
-// module.exports = {
-//   getStateFromNewsItems: getStateFromNewsItems,
-// }

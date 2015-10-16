@@ -48,7 +48,19 @@
 	
 	'use strict';
 	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var _reactDom = __webpack_require__(1);
 	
@@ -62,100 +74,46 @@
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _news_view_mixinsJs = __webpack_require__(246);
+	var _client_model = __webpack_require__(246);
 	
-	var _client_model = __webpack_require__(247);
+	var _NewsSearchBar = __webpack_require__(297);
 	
-	var _news_view_header = __webpack_require__(298);
+	var _NewsSearchBar2 = _interopRequireDefault(_NewsSearchBar);
 	
-	var _news_view_about = __webpack_require__(300);
+	var _NewsTagList = __webpack_require__(298);
 	
-	__webpack_require__(301);
+	var _NewsTagList2 = _interopRequireDefault(_NewsTagList);
 	
-	var NewsItem = _react2['default'].createClass({
-	  displayName: 'NewsItem',
+	var _NewsInfo = __webpack_require__(299);
 	
-	  mixins: [_news_view_mixinsJs.FormatURLMixin, _news_view_mixinsJs.SetIntervalMixin],
-	  getInitialState: function getInitialState() {
-	    return { formattedTimeSince: (0, _moment2['default'])(this.props.info.fetchDate).fromNow() };
-	  },
-	  componentDidMount: function componentDidMount() {
-	    this.setInterval(this.updateTime, 30000);
-	  },
-	  updateTime: function updateTime() {
-	    this.setState({ formattedTimeSince: (0, _moment2['default'])(this.props.info.fetchDate).fromNow() });
-	  },
-	  render: function render() {
-	    var hosturl = this.getBaseURL(this.props.info.metalink);
-	    return _react2['default'].createElement(
-	      'div',
-	      { className: 'newsItem' },
-	      _react2['default'].createElement(
-	        'a',
-	        { href: this.props.info.link, target: '_blank' },
-	        _react2['default'].createElement(
-	          'div',
-	          { className: 'headTitle' },
-	          this.props.info.title
-	        )
-	      ),
-	      _react2['default'].createElement(
-	        'div',
-	        { className: 'subTitle' },
-	        hosturl,
-	        ', ',
-	        _react2['default'].createElement(
-	          'span',
-	          { className: 'subTime' },
-	          this.state.formattedTimeSince
-	        )
-	      )
-	    );
-	  }
-	});
+	var _NewsInfo2 = _interopRequireDefault(_NewsInfo);
 	
-	var NewsList = _react2['default'].createClass({
-	  displayName: 'NewsList',
+	var _NewsItem = __webpack_require__(303);
 	
-	  render: function render() {
-	    if (this.props.newsItems.length === 0) {
-	      return _react2['default'].createElement(
-	        'div',
-	        { id: 'emptyList' },
-	        _react2['default'].createElement(
-	          'p',
-	          null,
-	          'Please wait for some news to be published. Shan\'t be long.'
-	        ),
-	        _react2['default'].createElement(
-	          'p',
-	          { id: 'nogoodnews' },
-	          'No news is good moos, right?'
-	        )
-	      );
-	    } else {
-	      var makeList = function makeList(x) {
-	        return _react2['default'].createElement(
-	          'li',
-	          { key: x.guid },
-	          _react2['default'].createElement(NewsItem, { info: x })
-	        );
-	      };
-	      return _react2['default'].createElement(
-	        'ul',
-	        null,
-	        this.props.newsItems.map(makeList)
-	      );
-	    }
-	  }
-	});
+	var _NewsItem2 = _interopRequireDefault(_NewsItem);
 	
-	var NewsApp = _react2['default'].createClass({
-	  displayName: 'NewsApp',
+	var _NewsList = __webpack_require__(304);
 	
-	  mixins: [_news_view_mixinsJs.SetIntervalMixin],
-	  getInitialState: function getInitialState() {
-	    return {
+	var _NewsList2 = _interopRequireDefault(_NewsList);
+	
+	var _NewsCow = __webpack_require__(305);
+	
+	var _NewsCow2 = _interopRequireDefault(_NewsCow);
+	
+	var _HowCow = __webpack_require__(307);
+	
+	var _HowCow2 = _interopRequireDefault(_HowCow);
+	
+	__webpack_require__(308);
+	
+	var NewsApp = (function (_React$Component) {
+	  _inherits(NewsApp, _React$Component);
+	
+	  function NewsApp(props) {
+	    _classCallCheck(this, NewsApp);
+	
+	    _get(Object.getPrototypeOf(NewsApp.prototype), 'constructor', this).call(this, props);
+	    this.state = {
 	      filterText: '',
 	      filterTags: [],
 	      newsItems: (0, _client_model.getStateFromNewsItems)(),
@@ -165,146 +123,201 @@
 	      minutes: 0,
 	      showAbout: false
 	    };
-	  },
-	  tick: function tick() {
-	    this.setState({ minutes: this.state.minutes + 1 });
-	  },
-	  componentDidMount: function componentDidMount() {
-	    _client_model.newsItems.setChangeListener(this.onStorageChange);
-	    _client_model.numberOfReaders.setChangeListener(this.onReaderChange);
-	    _client_model.sourceList.setChangeListener(this.onSourceListChange);
-	    this.setInterval(this.tick, 60000);
-	    this.setState({ filteredNewsItems: this.state.newsItems.slice() });
-	  },
-	  onStorageChange: function onStorageChange() {
-	    var newNewsList = (0, _client_model.getStateFromNewsItems)();
-	    var tags = this.state.filterTags;
-	    if (this.state.filterText.length > 0) {
-	      tags = tags.concat(this.state.filterText);
+	  }
+	
+	  _createClass(NewsApp, [{
+	    key: 'tick',
+	    value: function tick() {
+	      this.setState({ minutes: this.state.minutes + 1 });
 	    }
-	    var newFilteredNewsList = this.filterListWithTags(newNewsList, tags);
-	    this.setState({ newsItems: newNewsList, filteredNewsItems: newFilteredNewsList }); //woop
-	  },
-	  onReaderChange: function onReaderChange() {
-	    this.setState({ numberOfReaders: (0, _client_model.getStateFromNumberOfReaders)() });
-	  },
-	  onSourceListChange: function onSourceListChange() {
-	    var s = (0, _client_model.getStateFromSourceList)();
-	    this.setState({ sourceList: s });
-	  },
-	  handleUserInput: function handleUserInput(filterText) {
-	
-	    var modFilterText = filterText.toLowerCase();
-	
-	    if (modFilterText[0] === '-') {
-	      this.setState({ filterText: filterText });
-	      return;
+	  }, {
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.intervals = [];
 	    }
-	    var tags = this.state.filterTags;
-	    if (modFilterText.length > 0) {
-	      tags = tags.concat(modFilterText);
-	    }
-	    var newFilteredNewsList = this.filterListWithTags(this.state.newsItems, tags);
-	
-	    this.setState({ filterText: filterText, filteredNewsItems: newFilteredNewsList });
-	  },
-	  handleSubmit: function handleSubmit(filterText) {
-	    var newTags;
-	    if (filterText === '') return;
-	
-	    if (filterText[0] !== '-') {
-	      newTags = this.state.filterTags.concat(filterText.toLowerCase());
-	      this.setState({ filterText: '', filterTags: newTags });
-	      return;
-	    } else {
-	      newTags = this.state.filterTags.concat(filterText.toLowerCase());
-	      var newFilteredNewsList = this.filterListWithTags(this.state.newsItems, newTags);
-	      this.setState({ filterText: '', filterTags: newTags, filteredNewsItems: newFilteredNewsList });
-	      return;
-	    }
-	  },
-	  handleTagClick: function handleTagClick(tagName) {
-	    var tags = this.state.filterTags.filter(function (x) {
-	      return x != tagName;
-	    });
-	
-	    if (this.state.filterText.length > 0) tags = tags.concat(this.state.filterText);
-	
-	    var newFilteredNewsList = this.filterListWithTags(this.state.newsItems, tags);
-	    this.setState({ filterTags: tags, filteredNewsItems: newFilteredNewsList });
-	  },
-	  filterListWithTags: function filterListWithTags(list, tags) {
-	    if (list.length === 0) {
-	      return [];
-	    } else if (tags.length === 0) {
-	      return list;
-	    } else if (tags[0] === '-') {
-	      /* move empty string check elsewhere */
-	      return this.filterListWithTags(list, tags.slice(1));
-	    } else {
-	
-	      var searchText = function searchText(x) {
-	        return ((x.title ? x.title : '') + (x.metatitle ? x.metatitle : '') + (x.metalink ? x.metalink : '')).toLowerCase();
-	      };
-	
-	      var filterContains = function filterContains(curTag, x) {
-	        return function (x) {
-	          var xt = searchText(x);
-	          return xt.indexOf(curTag) !== -1;
-	        };
-	      };
-	
-	      var filterContainsNot = function filterContainsNot(curTag, x) {
-	        return function (x) {
-	          var xt = searchText(x);
-	          return xt.indexOf(curTag) === -1;
-	        };
-	      };
-	
-	      var curTag = tags[0];
-	      var filteredList;
-	      if (curTag[0] === '-') {
-	        curTag = curTag.slice(1);
-	        filteredList = list.filter(filterContainsNot(curTag));
-	      } else {
-	        filteredList = list.filter(filterContains(curTag));
+	  }, {
+	    key: 'setInterval',
+	    value: (function (_setInterval) {
+	      function setInterval() {
+	        return _setInterval.apply(this, arguments);
 	      }
 	
-	      return this.filterListWithTags(filteredList, tags.slice(1));
+	      setInterval.toString = function () {
+	        return _setInterval.toString();
+	      };
+	
+	      return setInterval;
+	    })(function () {
+	      this.intervals.push(setInterval.apply(null, arguments));
+	    })
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      this.intervals.map(clearInterval);
 	    }
-	  },
-	  onCowClick: function onCowClick(e) {
-	    console.log('click');
-	    this.setState({ showAbout: !this.state.showAbout });
-	  },
-	  render: function render() {
-	    var main = this.state.showAbout ? _react2['default'].createElement(_news_view_about.HowCow, null) : _react2['default'].createElement(NewsList, { newsItems: this.state.filteredNewsItems, filterText: this.state.filterText.toLowerCase(), filterTags: this.state.filterTags });
-	    return _react2['default'].createElement(
-	      'div',
-	      { id: 'MainContent' },
-	      _react2['default'].createElement(
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      _client_model.newsItems.setChangeListener(this.onStorageChange.bind(this));
+	      _client_model.numberOfReaders.setChangeListener(this.onReaderChange.bind(this));
+	      _client_model.sourceList.setChangeListener(this.onSourceListChange.bind(this));
+	      this.setInterval(this.tick, 60000);
+	      this.setState({ filteredNewsItems: this.state.newsItems.slice() });
+	    }
+	  }, {
+	    key: 'onStorageChange',
+	    value: function onStorageChange() {
+	      var newNewsList = (0, _client_model.getStateFromNewsItems)();
+	      var tags = this.state.filterTags;
+	      if (this.state.filterText.length > 0) {
+	        tags = tags.concat(this.state.filterText);
+	      }
+	      var newFilteredNewsList = this.filterListWithTags(newNewsList, tags);
+	      this.setState({ newsItems: newNewsList, filteredNewsItems: newFilteredNewsList }); //woop
+	    }
+	  }, {
+	    key: 'onReaderChange',
+	    value: function onReaderChange() {
+	      this.setState({ numberOfReaders: (0, _client_model.getStateFromNumberOfReaders)() });
+	    }
+	  }, {
+	    key: 'onSourceListChange',
+	    value: function onSourceListChange() {
+	      var s = (0, _client_model.getStateFromSourceList)();
+	      this.setState({ sourceList: s });
+	    }
+	  }, {
+	    key: 'handleUserInput',
+	    value: function handleUserInput(filterText) {
+	
+	      var modFilterText = filterText.toLowerCase();
+	
+	      if (modFilterText[0] === '-') {
+	        this.setState({ filterText: filterText });
+	        return;
+	      }
+	      var tags = this.state.filterTags;
+	      if (modFilterText.length > 0) {
+	        tags = tags.concat(modFilterText);8;
+	      }
+	      var newFilteredNewsList = this.filterListWithTags(this.state.newsItems, tags);
+	
+	      this.setState({ filterText: filterText, filteredNewsItems: newFilteredNewsList });
+	    }
+	  }, {
+	    key: 'handleSubmit',
+	    value: function handleSubmit(filterText) {
+	      var newTags;
+	      if (filterText === '') return;
+	
+	      if (filterText[0] !== '-') {
+	        newTags = this.state.filterTags.concat(filterText.toLowerCase());
+	        this.setState({ filterText: '', filterTags: newTags });
+	        return;
+	      } else {
+	        newTags = this.state.filterTags.concat(filterText.toLowerCase());
+	        var newFilteredNewsList = this.filterListWithTags(this.state.newsItems, newTags);
+	        this.setState({ filterText: '', filterTags: newTags, filteredNewsItems: newFilteredNewsList });
+	        return;
+	      }
+	    }
+	  }, {
+	    key: 'handleTagClick',
+	    value: function handleTagClick(tagName) {
+	      var tags = this.state.filterTags.filter(function (x) {
+	        return x != tagName;
+	      });
+	
+	      if (this.state.filterText.length > 0) tags = tags.concat(this.state.filterText);
+	
+	      var newFilteredNewsList = this.filterListWithTags(this.state.newsItems, tags);
+	      this.setState({ filterTags: tags, filteredNewsItems: newFilteredNewsList });
+	    }
+	  }, {
+	    key: 'filterListWithTags',
+	    value: function filterListWithTags(list, tags) {
+	      if (list.length === 0) {
+	        return [];
+	      } else if (tags.length === 0) {
+	        return list;
+	      } else if (tags[0] === '-') {
+	        /* move empty string check elsewhere */
+	        return this.filterListWithTags(list, tags.slice(1));
+	      } else {
+	
+	        var searchText = function searchText(x) {
+	          return ((x.title ? x.title : '') + (x.metatitle ? x.metatitle : '') + (x.metalink ? x.metalink : '')).toLowerCase();
+	        };
+	
+	        var filterContains = function filterContains(curTag, x) {
+	          return function (x) {
+	            var xt = searchText(x);
+	            return xt.indexOf(curTag) !== -1;
+	          };
+	        };
+	
+	        var filterContainsNot = function filterContainsNot(curTag, x) {
+	          return function (x) {
+	            var xt = searchText(x);
+	            return xt.indexOf(curTag) === -1;
+	          };
+	        };
+	
+	        var curTag = tags[0];
+	        var filteredList;
+	        if (curTag[0] === '-') {
+	          curTag = curTag.slice(1);
+	          filteredList = list.filter(filterContainsNot(curTag));
+	        } else {
+	          filteredList = list.filter(filterContains(curTag));
+	        }
+	
+	        return this.filterListWithTags(filteredList, tags.slice(1));
+	      }
+	    }
+	  }, {
+	    key: 'onCowClick',
+	    value: function onCowClick(e) {
+	      console.log('click');
+	      this.setState({ showAbout: !this.state.showAbout });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var main = this.state.showAbout ? _react2['default'].createElement(_HowCow2['default'], null) : _react2['default'].createElement(_NewsList2['default'], { newsItems: this.state.filteredNewsItems, filterText: this.state.filterText.toLowerCase(), filterTags: this.state.filterTags });
+	      return _react2['default'].createElement(
 	        'div',
-	        { id: 'headerInfo' },
-	        _react2['default'].createElement(_news_view_header.NewsInfo, { itemcount: this.state.filteredNewsItems.length,
-	          minutes: this.state.minutes,
-	          others: this.state.numberOfReaders,
-	          sources: this.state.sourceList }),
-	        _react2['default'].createElement(_news_view_header.NewsCow, { onClickHandler: this.onCowClick }),
-	        _react2['default'].createElement(_news_view_header.NewsSearchBar, { onUserInput: this.handleUserInput, filterText: this.state.filterText, onFilterSubmit: this.handleSubmit }),
-	        _react2['default'].createElement(_news_view_header.NewsTagList, { filterTags: this.state.filterTags, onTagClick: this.handleTagClick })
-	      ),
-	      _react2['default'].createElement(
-	        'div',
-	        { id: 'mainList' },
-	        main
-	      )
-	    );
-	  }
-	});
+	        { id: 'MainContent' },
+	        _react2['default'].createElement(
+	          'div',
+	          { id: 'headerInfo' },
+	          _react2['default'].createElement(_NewsInfo2['default'], { itemcount: this.state.filteredNewsItems.length,
+	            minutes: this.state.minutes,
+	            others: this.state.numberOfReaders,
+	            sources: this.state.sourceList }),
+	          _react2['default'].createElement(_NewsCow2['default'], { onClickHandler: this.onCowClick.bind(this) }),
+	          _react2['default'].createElement(_NewsSearchBar2['default'], { onUserInput: this.handleUserInput.bind(this), filterText: this.state.filterText, onFilterSubmit: this.handleSubmit.bind(this) }),
+	          _react2['default'].createElement(_NewsTagList2['default'], { filterTags: this.state.filterTags, onTagClick: this.handleTagClick.bind(this) })
+	        ),
+	        _react2['default'].createElement(
+	          'div',
+	          { id: 'mainList' },
+	          main
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return NewsApp;
+	})(_react2['default'].Component);
+	
+	exports['default'] = NewsApp;
+	;
 	
 	_reactDom2['default'].render(_react2['default'].createElement(NewsApp, null), document.getElementById('ReactMountPoint'));
-	
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "news_view_list.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	module.exports = exports['default'];
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "NewsApp.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
 /* 1 */
@@ -31321,61 +31334,6 @@
 	
 	'use strict';
 	
-	var FormatURLMixin = {
-	  getBaseURL: function getBaseURL(url) {
-	    if (url.slice(0, 4) != 'http') {
-	      url = 'http://' + url;
-	    }
-	    var a = document.createElement('a');
-	    a.href = url;
-	    return a.hostname.replace(/^www./, '');
-	  }
-	};
-	
-	var RandomHelpMixin = {
-	  getRandomInteger: function getRandomInteger(min, max) {
-	    return Math.floor(Math.random() * (max - min)) + min;
-	  }
-	};
-	
-	var SetIntervalMixin = {
-	  componentWillMount: function componentWillMount() {
-	    this.intervals = [];
-	  },
-	  setInterval: (function (_setInterval) {
-	    function setInterval() {
-	      return _setInterval.apply(this, arguments);
-	    }
-	
-	    setInterval.toString = function () {
-	      return _setInterval.toString();
-	    };
-	
-	    return setInterval;
-	  })(function () {
-	    this.intervals.push(setInterval.apply(null, arguments));
-	  }),
-	  componentWillUnmount: function componentWillUnmount() {
-	    this.intervals.map(clearInterval);
-	  }
-	};
-	
-	module.exports = {
-	  FormatURLMixin: FormatURLMixin,
-	  SetIntervalMixin: SetIntervalMixin,
-	  RandomHelpMixin: RandomHelpMixin
-	};
-	
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "news_view_mixins.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-
-/***/ },
-/* 247 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-	
-	'use strict';
-	
 	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
@@ -31385,31 +31343,31 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _observablething = __webpack_require__(248);
+	var _ObservableThing = __webpack_require__(247);
 	
-	var _observablething2 = _interopRequireDefault(_observablething);
+	var _ObservableThing2 = _interopRequireDefault(_ObservableThing);
 	
-	var _socketIoClient = __webpack_require__(249);
+	var _socketIoClient = __webpack_require__(248);
 	
 	var _socketIoClient2 = _interopRequireDefault(_socketIoClient);
 	
 	var socket = (0, _socketIoClient2['default'])(("https://ruminator.herokuapp.com/"));
 	
-	var newsItems = new _observablething2['default']([]);
+	var newsItems = new _ObservableThing2['default']([]);
 	exports.newsItems = newsItems;
 	
 	function getStateFromNewsItems() {
 	  return newsItems.get();
 	}
 	
-	var numberOfReaders = new _observablething2['default'](Number(0));
+	var numberOfReaders = new _ObservableThing2['default'](Number(0));
 	exports.numberOfReaders = numberOfReaders;
 	
 	function getStateFromNumberOfReaders() {
 	  return numberOfReaders.get();
 	}
 	
-	var sourceList = new _observablething2['default']([]);
+	var sourceList = new _ObservableThing2['default']([]);
 	exports.sourceList = sourceList;
 	
 	function getStateFromSourceList() {
@@ -31435,14 +31393,10 @@
 	  sourceList.set(sources);
 	});
 	
-	// module.exports = {
-	//   getStateFromNewsItems: getStateFromNewsItems,
-	// }
-
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "client_model.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 248 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -31450,47 +31404,64 @@
 	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+		value: true
 	});
-	var ObservableThing = function ObservableThing(thing) {
-	  this.thing = thing;
-	  this.onChangeListener = null;
-	};
 	
-	ObservableThing.prototype.set = function (newValue) {
-	  this.thing = newValue;
-	  this.notify();
-	};
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
-	ObservableThing.prototype.get = function () {
-	  return this.thing;
-	};
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	ObservableThing.prototype.setChangeListener = function (listener) {
-	  this.onChangeListener = listener;
-	};
+	var ObservableThing = (function () {
+		function ObservableThing(thing) {
+			_classCallCheck(this, ObservableThing);
 	
-	ObservableThing.prototype.notify = function () {
-	  if (this.onChangeListener !== null) {
-	    this.onChangeListener();
-	  }
-	};
+			this.thing = thing;
+			this.onChangeListener = null;
+		}
+	
+		_createClass(ObservableThing, [{
+			key: "set",
+			value: function set(newValue) {
+				this.thing = newValue;
+				this.notify();
+			}
+		}, {
+			key: "get",
+			value: function get() {
+				return this.thing;
+			}
+		}, {
+			key: "setChangeListener",
+			value: function setChangeListener(listener) {
+				this.onChangeListener = listener;
+			}
+		}, {
+			key: "notify",
+			value: function notify() {
+				if (this.onChangeListener !== null) {
+					this.onChangeListener();
+				}
+			}
+		}]);
+	
+		return ObservableThing;
+	})();
 	
 	exports["default"] = ObservableThing;
 	module.exports = exports["default"];
 
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "observablething.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "ObservableThing.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 249 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	module.exports = __webpack_require__(250);
+	module.exports = __webpack_require__(249);
 
 
 /***/ },
-/* 250 */
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -31498,10 +31469,10 @@
 	 * Module dependencies.
 	 */
 	
-	var url = __webpack_require__(251);
-	var parser = __webpack_require__(254);
-	var Manager = __webpack_require__(261);
-	var debug = __webpack_require__(253)('socket.io-client');
+	var url = __webpack_require__(250);
+	var parser = __webpack_require__(253);
+	var Manager = __webpack_require__(260);
+	var debug = __webpack_require__(252)('socket.io-client');
 	
 	/**
 	 * Module exports.
@@ -31578,12 +31549,12 @@
 	 * @api public
 	 */
 	
-	exports.Manager = __webpack_require__(261);
-	exports.Socket = __webpack_require__(292);
+	exports.Manager = __webpack_require__(260);
+	exports.Socket = __webpack_require__(291);
 
 
 /***/ },
-/* 251 */
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -31591,8 +31562,8 @@
 	 * Module dependencies.
 	 */
 	
-	var parseuri = __webpack_require__(252);
-	var debug = __webpack_require__(253)('socket.io-client:url');
+	var parseuri = __webpack_require__(251);
+	var debug = __webpack_require__(252)('socket.io-client:url');
 	
 	/**
 	 * Module exports.
@@ -31663,7 +31634,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 252 */
+/* 251 */
 /***/ function(module, exports) {
 
 	/**
@@ -31694,7 +31665,7 @@
 
 
 /***/ },
-/* 253 */
+/* 252 */
 /***/ function(module, exports) {
 
 	
@@ -31837,7 +31808,7 @@
 
 
 /***/ },
-/* 254 */
+/* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -31845,12 +31816,12 @@
 	 * Module dependencies.
 	 */
 	
-	var debug = __webpack_require__(253)('socket.io-parser');
-	var json = __webpack_require__(255);
-	var isArray = __webpack_require__(257);
-	var Emitter = __webpack_require__(258);
-	var binary = __webpack_require__(259);
-	var isBuf = __webpack_require__(260);
+	var debug = __webpack_require__(252)('socket.io-parser');
+	var json = __webpack_require__(254);
+	var isArray = __webpack_require__(256);
+	var Emitter = __webpack_require__(257);
+	var binary = __webpack_require__(258);
+	var isBuf = __webpack_require__(259);
 	
 	/**
 	 * Protocol version.
@@ -32243,7 +32214,7 @@
 
 
 /***/ },
-/* 255 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*! JSON v3.2.6 | http://bestiejs.github.io/json3 | Copyright 2012-2013, Kit Cambridge | http://kit.mit-license.org */
@@ -32253,7 +32224,7 @@
 	
 	  // Detect the `define` function exposed by asynchronous module loaders. The
 	  // strict `define` check is necessary for compatibility with `r.js`.
-	  var isLoader = "function" === "function" && __webpack_require__(256);
+	  var isLoader = "function" === "function" && __webpack_require__(255);
 	
 	  // Detect native implementations.
 	  var nativeJSON = typeof JSON == "object" && JSON;
@@ -33110,7 +33081,7 @@
 
 
 /***/ },
-/* 256 */
+/* 255 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {module.exports = __webpack_amd_options__;
@@ -33118,7 +33089,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ },
-/* 257 */
+/* 256 */
 /***/ function(module, exports) {
 
 	module.exports = Array.isArray || function (arr) {
@@ -33127,7 +33098,7 @@
 
 
 /***/ },
-/* 258 */
+/* 257 */
 /***/ function(module, exports) {
 
 	
@@ -33297,7 +33268,7 @@
 
 
 /***/ },
-/* 259 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/*global Blob,File*/
@@ -33306,8 +33277,8 @@
 	 * Module requirements
 	 */
 	
-	var isArray = __webpack_require__(257);
-	var isBuf = __webpack_require__(260);
+	var isArray = __webpack_require__(256);
+	var isBuf = __webpack_require__(259);
 	
 	/**
 	 * Replaces every Buffer | ArrayBuffer in packet with a numbered placeholder.
@@ -33445,7 +33416,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 260 */
+/* 259 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -33465,7 +33436,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 261 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -33473,17 +33444,17 @@
 	 * Module dependencies.
 	 */
 	
-	var url = __webpack_require__(251);
-	var eio = __webpack_require__(262);
-	var Socket = __webpack_require__(292);
-	var Emitter = __webpack_require__(258);
-	var parser = __webpack_require__(254);
-	var on = __webpack_require__(294);
-	var bind = __webpack_require__(295);
-	var object = __webpack_require__(296);
-	var debug = __webpack_require__(253)('socket.io-client:manager');
-	var indexOf = __webpack_require__(289);
-	var Backoff = __webpack_require__(297);
+	var url = __webpack_require__(250);
+	var eio = __webpack_require__(261);
+	var Socket = __webpack_require__(291);
+	var Emitter = __webpack_require__(257);
+	var parser = __webpack_require__(253);
+	var on = __webpack_require__(293);
+	var bind = __webpack_require__(294);
+	var object = __webpack_require__(295);
+	var debug = __webpack_require__(252)('socket.io-client:manager');
+	var indexOf = __webpack_require__(288);
+	var Backoff = __webpack_require__(296);
 	
 	/**
 	 * Module exports
@@ -33974,19 +33945,19 @@
 
 
 /***/ },
+/* 261 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	module.exports =  __webpack_require__(262);
+
+
+/***/ },
 /* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	module.exports =  __webpack_require__(263);
-
-
-/***/ },
-/* 263 */
-/***/ function(module, exports, __webpack_require__) {
-
-	
-	module.exports = __webpack_require__(264);
+	module.exports = __webpack_require__(263);
 	
 	/**
 	 * Exports parser
@@ -33994,25 +33965,25 @@
 	 * @api public
 	 *
 	 */
-	module.exports.parser = __webpack_require__(272);
+	module.exports.parser = __webpack_require__(271);
 
 
 /***/ },
-/* 264 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Module dependencies.
 	 */
 	
-	var transports = __webpack_require__(265);
-	var Emitter = __webpack_require__(258);
-	var debug = __webpack_require__(283)('engine.io-client:socket');
-	var index = __webpack_require__(289);
-	var parser = __webpack_require__(272);
-	var parseuri = __webpack_require__(290);
-	var parsejson = __webpack_require__(291);
-	var parseqs = __webpack_require__(281);
+	var transports = __webpack_require__(264);
+	var Emitter = __webpack_require__(257);
+	var debug = __webpack_require__(282)('engine.io-client:socket');
+	var index = __webpack_require__(288);
+	var parser = __webpack_require__(271);
+	var parseuri = __webpack_require__(289);
+	var parsejson = __webpack_require__(290);
+	var parseqs = __webpack_require__(280);
 	
 	/**
 	 * Module exports.
@@ -34127,9 +34098,9 @@
 	 */
 	
 	Socket.Socket = Socket;
-	Socket.Transport = __webpack_require__(271);
-	Socket.transports = __webpack_require__(265);
-	Socket.parser = __webpack_require__(272);
+	Socket.Transport = __webpack_require__(270);
+	Socket.transports = __webpack_require__(264);
+	Socket.parser = __webpack_require__(271);
 	
 	/**
 	 * Creates transport of the given type.
@@ -34710,17 +34681,17 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 265 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Module dependencies
 	 */
 	
-	var XMLHttpRequest = __webpack_require__(266);
-	var XHR = __webpack_require__(269);
-	var JSONP = __webpack_require__(286);
-	var websocket = __webpack_require__(287);
+	var XMLHttpRequest = __webpack_require__(265);
+	var XHR = __webpack_require__(268);
+	var JSONP = __webpack_require__(285);
+	var websocket = __webpack_require__(286);
 	
 	/**
 	 * Export transports.
@@ -34770,11 +34741,11 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 266 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// browser shim for xmlhttprequest module
-	var hasCORS = __webpack_require__(267);
+	var hasCORS = __webpack_require__(266);
 	
 	module.exports = function(opts) {
 	  var xdomain = opts.xdomain;
@@ -34812,7 +34783,7 @@
 
 
 /***/ },
-/* 267 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -34820,7 +34791,7 @@
 	 * Module dependencies.
 	 */
 	
-	var global = __webpack_require__(268);
+	var global = __webpack_require__(267);
 	
 	/**
 	 * Module exports.
@@ -34841,7 +34812,7 @@
 
 
 /***/ },
-/* 268 */
+/* 267 */
 /***/ function(module, exports) {
 
 	
@@ -34855,18 +34826,18 @@
 
 
 /***/ },
-/* 269 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Module requirements.
 	 */
 	
-	var XMLHttpRequest = __webpack_require__(266);
-	var Polling = __webpack_require__(270);
-	var Emitter = __webpack_require__(258);
-	var inherit = __webpack_require__(282);
-	var debug = __webpack_require__(283)('engine.io-client:polling-xhr');
+	var XMLHttpRequest = __webpack_require__(265);
+	var Polling = __webpack_require__(269);
+	var Emitter = __webpack_require__(257);
+	var inherit = __webpack_require__(281);
+	var debug = __webpack_require__(282)('engine.io-client:polling-xhr');
 	
 	/**
 	 * Module exports.
@@ -35246,18 +35217,18 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 270 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Module dependencies.
 	 */
 	
-	var Transport = __webpack_require__(271);
-	var parseqs = __webpack_require__(281);
-	var parser = __webpack_require__(272);
-	var inherit = __webpack_require__(282);
-	var debug = __webpack_require__(283)('engine.io-client:polling');
+	var Transport = __webpack_require__(270);
+	var parseqs = __webpack_require__(280);
+	var parser = __webpack_require__(271);
+	var inherit = __webpack_require__(281);
+	var debug = __webpack_require__(282)('engine.io-client:polling');
 	
 	/**
 	 * Module exports.
@@ -35270,7 +35241,7 @@
 	 */
 	
 	var hasXHR2 = (function() {
-	  var XMLHttpRequest = __webpack_require__(266);
+	  var XMLHttpRequest = __webpack_require__(265);
 	  var xhr = new XMLHttpRequest({ xdomain: false });
 	  return null != xhr.responseType;
 	})();
@@ -35497,15 +35468,15 @@
 
 
 /***/ },
-/* 271 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Module dependencies.
 	 */
 	
-	var parser = __webpack_require__(272);
-	var Emitter = __webpack_require__(258);
+	var parser = __webpack_require__(271);
+	var Emitter = __webpack_require__(257);
 	
 	/**
 	 * Module exports.
@@ -35662,19 +35633,19 @@
 
 
 /***/ },
-/* 272 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Module dependencies.
 	 */
 	
-	var keys = __webpack_require__(273);
-	var hasBinary = __webpack_require__(274);
-	var sliceBuffer = __webpack_require__(276);
-	var base64encoder = __webpack_require__(277);
-	var after = __webpack_require__(278);
-	var utf8 = __webpack_require__(279);
+	var keys = __webpack_require__(272);
+	var hasBinary = __webpack_require__(273);
+	var sliceBuffer = __webpack_require__(275);
+	var base64encoder = __webpack_require__(276);
+	var after = __webpack_require__(277);
+	var utf8 = __webpack_require__(278);
 	
 	/**
 	 * Check if we are running an android browser. That requires us to use
@@ -35731,7 +35702,7 @@
 	 * Create a blob api even for blob builder when vendor prefixes exist
 	 */
 	
-	var Blob = __webpack_require__(280);
+	var Blob = __webpack_require__(279);
 	
 	/**
 	 * Encodes a packet.
@@ -36263,7 +36234,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 273 */
+/* 272 */
 /***/ function(module, exports) {
 
 	
@@ -36288,7 +36259,7 @@
 
 
 /***/ },
-/* 274 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -36296,7 +36267,7 @@
 	 * Module requirements.
 	 */
 	
-	var isArray = __webpack_require__(275);
+	var isArray = __webpack_require__(274);
 	
 	/**
 	 * Module exports.
@@ -36353,7 +36324,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 275 */
+/* 274 */
 /***/ function(module, exports) {
 
 	module.exports = Array.isArray || function (arr) {
@@ -36362,7 +36333,7 @@
 
 
 /***/ },
-/* 276 */
+/* 275 */
 /***/ function(module, exports) {
 
 	/**
@@ -36397,7 +36368,7 @@
 
 
 /***/ },
-/* 277 */
+/* 276 */
 /***/ function(module, exports) {
 
 	/*
@@ -36462,7 +36433,7 @@
 
 
 /***/ },
-/* 278 */
+/* 277 */
 /***/ function(module, exports) {
 
 	module.exports = after
@@ -36496,7 +36467,7 @@
 
 
 /***/ },
-/* 279 */
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/*! https://mths.be/utf8js v2.0.0 by @mathias */
@@ -36745,7 +36716,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(159)(module), (function() { return this; }())))
 
 /***/ },
-/* 280 */
+/* 279 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -36848,7 +36819,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 281 */
+/* 280 */
 /***/ function(module, exports) {
 
 	/**
@@ -36891,7 +36862,7 @@
 
 
 /***/ },
-/* 282 */
+/* 281 */
 /***/ function(module, exports) {
 
 	
@@ -36903,7 +36874,7 @@
 	};
 
 /***/ },
-/* 283 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -36913,7 +36884,7 @@
 	 * Expose `debug()` as the module.
 	 */
 	
-	exports = module.exports = __webpack_require__(284);
+	exports = module.exports = __webpack_require__(283);
 	exports.log = log;
 	exports.formatArgs = formatArgs;
 	exports.save = save;
@@ -37056,7 +37027,7 @@
 
 
 /***/ },
-/* 284 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -37072,7 +37043,7 @@
 	exports.disable = disable;
 	exports.enable = enable;
 	exports.enabled = enabled;
-	exports.humanize = __webpack_require__(285);
+	exports.humanize = __webpack_require__(284);
 	
 	/**
 	 * The currently active debug mode names, and names to skip.
@@ -37259,7 +37230,7 @@
 
 
 /***/ },
-/* 285 */
+/* 284 */
 /***/ function(module, exports) {
 
 	/**
@@ -37376,7 +37347,7 @@
 
 
 /***/ },
-/* 286 */
+/* 285 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -37384,8 +37355,8 @@
 	 * Module requirements.
 	 */
 	
-	var Polling = __webpack_require__(270);
-	var inherit = __webpack_require__(282);
+	var Polling = __webpack_require__(269);
+	var inherit = __webpack_require__(281);
 	
 	/**
 	 * Module exports.
@@ -37616,18 +37587,18 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 287 */
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Module dependencies.
 	 */
 	
-	var Transport = __webpack_require__(271);
-	var parser = __webpack_require__(272);
-	var parseqs = __webpack_require__(281);
-	var inherit = __webpack_require__(282);
-	var debug = __webpack_require__(283)('engine.io-client:websocket');
+	var Transport = __webpack_require__(270);
+	var parser = __webpack_require__(271);
+	var parseqs = __webpack_require__(280);
+	var inherit = __webpack_require__(281);
+	var debug = __webpack_require__(282)('engine.io-client:websocket');
 	
 	/**
 	 * `ws` exposes a WebSocket-compatible interface in
@@ -37635,7 +37606,7 @@
 	 * in the browser.
 	 */
 	
-	var WebSocket = __webpack_require__(288);
+	var WebSocket = __webpack_require__(287);
 	
 	/**
 	 * Module exports.
@@ -37860,7 +37831,7 @@
 
 
 /***/ },
-/* 288 */
+/* 287 */
 /***/ function(module, exports) {
 
 	
@@ -37909,7 +37880,7 @@
 
 
 /***/ },
-/* 289 */
+/* 288 */
 /***/ function(module, exports) {
 
 	
@@ -37924,7 +37895,7 @@
 	};
 
 /***/ },
-/* 290 */
+/* 289 */
 /***/ function(module, exports) {
 
 	/**
@@ -37969,7 +37940,7 @@
 
 
 /***/ },
-/* 291 */
+/* 290 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -38007,7 +37978,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 292 */
+/* 291 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -38015,13 +37986,13 @@
 	 * Module dependencies.
 	 */
 	
-	var parser = __webpack_require__(254);
-	var Emitter = __webpack_require__(258);
-	var toArray = __webpack_require__(293);
-	var on = __webpack_require__(294);
-	var bind = __webpack_require__(295);
-	var debug = __webpack_require__(253)('socket.io-client:socket');
-	var hasBin = __webpack_require__(274);
+	var parser = __webpack_require__(253);
+	var Emitter = __webpack_require__(257);
+	var toArray = __webpack_require__(292);
+	var on = __webpack_require__(293);
+	var bind = __webpack_require__(294);
+	var debug = __webpack_require__(252)('socket.io-client:socket');
+	var hasBin = __webpack_require__(273);
 	
 	/**
 	 * Module exports.
@@ -38398,7 +38369,7 @@
 
 
 /***/ },
-/* 293 */
+/* 292 */
 /***/ function(module, exports) {
 
 	module.exports = toArray
@@ -38417,7 +38388,7 @@
 
 
 /***/ },
-/* 294 */
+/* 293 */
 /***/ function(module, exports) {
 
 	
@@ -38447,7 +38418,7 @@
 
 
 /***/ },
-/* 295 */
+/* 294 */
 /***/ function(module, exports) {
 
 	/**
@@ -38476,7 +38447,7 @@
 
 
 /***/ },
-/* 296 */
+/* 295 */
 /***/ function(module, exports) {
 
 	
@@ -38565,7 +38536,7 @@
 	};
 
 /***/ },
-/* 297 */
+/* 296 */
 /***/ function(module, exports) {
 
 	
@@ -38656,6 +38627,82 @@
 
 
 /***/ },
+/* 297 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var _react = __webpack_require__(146);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var NewsSearchBar = (function (_React$Component) {
+	  _inherits(NewsSearchBar, _React$Component);
+	
+	  function NewsSearchBar(props) {
+	    _classCallCheck(this, NewsSearchBar);
+	
+	    _get(Object.getPrototypeOf(NewsSearchBar.prototype), 'constructor', this).call(this, props);
+	    this.state = { filterText: '' };
+	  }
+	
+	  _createClass(NewsSearchBar, [{
+	    key: 'handleChange',
+	    value: function handleChange() {
+	      this.props.onUserInput(this.refs.filterTextInput.value);
+	    }
+	  }, {
+	    key: 'handleSubmit',
+	    value: function handleSubmit(e) {
+	      e.preventDefault();
+	      var filterText = this.refs.filterTextInput.value;
+	      this.props.onFilterSubmit(filterText);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2['default'].createElement(
+	        'div',
+	        { id: 'filterBox' },
+	        _react2['default'].createElement(
+	          'form',
+	          { onSubmit: this.handleSubmit.bind(this) },
+	          _react2['default'].createElement('input', { id: 'filterTextInput',
+	            ref: 'filterTextInput',
+	            value: this.props.filterText,
+	            type: 'search',
+	            onChange: this.handleChange.bind(this),
+	            placeholder: 'Filter By...' })
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return NewsSearchBar;
+	})(_react2['default'].Component);
+	
+	exports['default'] = NewsSearchBar;
+	module.exports = exports['default'];
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "NewsSearchBar.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
 /* 298 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -38663,229 +38710,271 @@
 	
 	'use strict';
 	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var _react = __webpack_require__(146);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _news_view_mixinsJs = __webpack_require__(246);
+	var NewsTagList = (function (_React$Component) {
+	  _inherits(NewsTagList, _React$Component);
 	
-	var cowImg = __webpack_require__(299);
+	  function NewsTagList(props) {
+	    _classCallCheck(this, NewsTagList);
 	
-	var NewsCow = _react2['default'].createClass({
-	  displayName: 'NewsCow',
-	
-	  mixins: [_news_view_mixinsJs.RandomHelpMixin],
-	  getInitialState: function getInitialState() {
-	    var cowords = ["Udderly brilliant", "News that mooves you", "Hoofin' along"];
-	    return { cow: cowImg, cowords: cowords };
-	  },
-	  handleClick: function handleClick() {
-	    this.props.onClickHandler();
-	  },
-	  render: function render() {
-	    var randElt = this.getRandomInteger(0, this.state.cowords.length);
-	    var saying = this.state.cowords[randElt];
-	    return _react2['default'].createElement(
-	      'div',
-	      { id: 'cow', onClick: this.props.onClickHandler },
-	      _react2['default'].createElement('img', { src: this.state.cow, alt: 'A black and white cow', title: saying })
-	    );
+	    _get(Object.getPrototypeOf(NewsTagList.prototype), 'constructor', this).call(this, props);
 	  }
-	});
 	
-	var NewsReaderCount = _react2['default'].createClass({
-	  displayName: 'NewsReaderCount',
-	
-	  render: function render() {
-	    var text = '';
-	    switch (this.props.readerCount) {
-	      case 0:
-	        text = 'With No Others';break;
-	      case 1:
-	        text = 'With 1 Other';break;
-	      default:
-	        text = 'With ' + this.props.readerCount + ' Others';break;
+	  _createClass(NewsTagList, [{
+	    key: 'handleClick',
+	    value: function handleClick(e) {
+	      this.props.onTagClick(e.currentTarget.getAttribute('value'));
 	    }
-	    return _react2['default'].createElement(
-	      'span',
-	      { id: 'readerCount' },
-	      text
-	    );
-	  }
-	});
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this = this;
 	
-	var NewsItemCount = _react2['default'].createClass({
-	  displayName: 'NewsItemCount',
-	
-	  render: function render() {
-	    var itemCount = this.props.itemcount;
-	    var updateText = '';
-	    switch (itemCount) {
-	      case 0:
-	        updateText = 'No News';break;
-	      case 1:
-	        updateText = '1 Update';break;
-	      default:
-	        updateText = itemCount + ' Updates';break;
-	    }
-	    return _react2['default'].createElement(
-	      'span',
-	      { id: 'itemCount' },
-	      updateText
-	    );
-	  }
-	});
-	
-	var NewsSearchBar = _react2['default'].createClass({
-	  displayName: 'NewsSearchBar',
-	
-	  getInitialState: function getInitialState() {
-	    return { filterText: '' };
-	  },
-	  handleChange: function handleChange() {
-	    this.props.onUserInput(this.refs.filterTextInput.getDOMNode().value);
-	  },
-	  handleSubmit: function handleSubmit(e) {
-	    e.preventDefault();
-	    var filterText = this.refs.filterTextInput.getDOMNode().value;
-	    this.props.onFilterSubmit(filterText);
-	  },
-	  render: function render() {
-	    return _react2['default'].createElement(
-	      'div',
-	      { id: 'filterBox' },
-	      _react2['default'].createElement(
-	        'form',
-	        { onSubmit: this.handleSubmit },
-	        _react2['default'].createElement('input', { id: 'filterTextInput',
-	          ref: 'filterTextInput',
-	          value: this.props.filterText,
-	          type: 'search',
-	          onChange: this.handleChange,
-	          placeholder: 'Filter By...' })
-	      )
-	    );
-	  }
-	});
-	
-	var NewsTagList = _react2['default'].createClass({
-	  displayName: 'NewsTagList',
-	
-	  handleClick: function handleClick(e) {
-	    this.props.onTagClick(e.currentTarget.getAttribute('value'));
-	  },
-	  render: function render() {
-	    var that = this;
-	    var makeList = function makeList(x) {
-	      var className = "tagItem tagInclude";
-	      var text = x;
-	      if (x[0] === '-') {
-	        text = x.slice(1);
-	        className = "tagItem tagExclude";
-	      }
+	      var makeList = function makeList(x) {
+	        var className = "tagItem tagInclude";
+	        var text = x;
+	        if (x[0] === '-') {
+	          text = x.slice(1);
+	          className = "tagItem tagExclude";
+	        }
+	        return _react2['default'].createElement(
+	          'li',
+	          { key: x, className: className },
+	          _react2['default'].createElement(
+	            'button',
+	            { type: 'button', value: x, onClick: _this.handleClick.bind(_this) },
+	            text
+	          )
+	        );
+	      };
 	      return _react2['default'].createElement(
-	        'li',
-	        { key: x, className: className },
-	        _react2['default'].createElement(
-	          'button',
-	          { type: 'button', value: x, onClick: that.handleClick },
-	          text
-	        )
-	      );
-	    };
-	    return _react2['default'].createElement(
-	      'ul',
-	      { id: 'tagList' },
-	      this.props.filterTags.map(makeList)
-	    );
-	  }
-	});
-	
-	var NewsSources = _react2['default'].createClass({
-	  displayName: 'NewsSources',
-	
-	  mixins: [_news_view_mixinsJs.FormatURLMixin],
-	  getInitialState: function getInitialState() {
-	    return { showSources: false };
-	  },
-	  handleClick: function handleClick() {
-	    this.setState({ showSources: !this.state.showSources });
-	  },
-	  render: function render() {
-	    var that = this;
-	    var makeList = function makeList(x) {
-	      return _react2['default'].createElement(
-	        'li',
-	        { key: x, className: 'sourceItem' },
-	        x
-	      );
-	    };
-	    var elt = null;
-	    if (this.state.showSources) {
-	      elt = _react2['default'].createElement(
 	        'ul',
-	        null,
-	        this.props.sourceList.map(makeList)
+	        { id: 'tagList' },
+	        this.props.filterTags.map(makeList)
 	      );
 	    }
-	    return _react2['default'].createElement(
-	      'span',
-	      { id: 'sourceList', onClick: this.handleClick },
-	      'from ' + this.props.sourceList.length + ' Sources',
-	      elt
-	    );
-	  }
-	});
+	  }]);
 	
-	var NewsDuration = _react2['default'].createClass({
-	  displayName: 'NewsDuration',
+	  return NewsTagList;
+	})(_react2['default'].Component);
 	
-	  render: function render() {
-	    var duration = this.props.duration;
-	    var text = 'in ' + duration + (duration == 1 ? ' Minute' : ' Minutes');
-	    return _react2['default'].createElement(
-	      'span',
-	      null,
-	      text
-	    );
-	  }
-	});
-	
-	var NewsInfo = _react2['default'].createClass({
-	  displayName: 'NewsInfo',
-	
-	  render: function render() {
-	    return _react2['default'].createElement(
-	      'div',
-	      { id: 'newheader' },
-	      _react2['default'].createElement(NewsItemCount, { itemcount: this.props.itemcount }),
-	      ' ',
-	      _react2['default'].createElement(NewsDuration, { duration: this.props.minutes }),
-	      ' ',
-	      _react2['default'].createElement(NewsSources, { sourceList: this.props.sources })
-	    );
-	  }
-	});
-	
-	module.exports = {
-	  NewsInfo: NewsInfo,
-	  NewsSearchBar: NewsSearchBar,
-	  NewsTagList: NewsTagList,
-	  NewsCow: NewsCow
-	};
-	
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "news_view_header.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	exports['default'] = NewsTagList;
+	module.exports = exports['default'];
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "NewsTagList.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
 /* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "9d63b48adecdb0d0096cd2b843e69d49.png"
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var _react = __webpack_require__(146);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _NewsItemCount = __webpack_require__(300);
+	
+	var _NewsItemCount2 = _interopRequireDefault(_NewsItemCount);
+	
+	var _NewsDuration = __webpack_require__(301);
+	
+	var _NewsDuration2 = _interopRequireDefault(_NewsDuration);
+	
+	var _NewsSources = __webpack_require__(302);
+	
+	var _NewsSources2 = _interopRequireDefault(_NewsSources);
+	
+	var NewsInfo = (function (_React$Component) {
+	  _inherits(NewsInfo, _React$Component);
+	
+	  function NewsInfo() {
+	    _classCallCheck(this, NewsInfo);
+	
+	    _get(Object.getPrototypeOf(NewsInfo.prototype), 'constructor', this).apply(this, arguments);
+	  }
+	
+	  _createClass(NewsInfo, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2['default'].createElement(
+	        'div',
+	        { id: 'newheader' },
+	        _react2['default'].createElement(_NewsItemCount2['default'], { itemcount: this.props.itemcount }),
+	        ' ',
+	        _react2['default'].createElement(_NewsDuration2['default'], { duration: this.props.minutes }),
+	        ' ',
+	        _react2['default'].createElement(_NewsSources2['default'], { sourceList: this.props.sources })
+	      );
+	    }
+	  }]);
+	
+	  return NewsInfo;
+	})(_react2['default'].Component);
+	
+	exports['default'] = NewsInfo;
+	;
+	module.exports = exports['default'];
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "NewsInfo.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
 /* 300 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var _react = __webpack_require__(146);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var NewsItemCount = (function (_React$Component) {
+	  _inherits(NewsItemCount, _React$Component);
+	
+	  function NewsItemCount() {
+	    _classCallCheck(this, NewsItemCount);
+	
+	    _get(Object.getPrototypeOf(NewsItemCount.prototype), 'constructor', this).apply(this, arguments);
+	  }
+	
+	  _createClass(NewsItemCount, [{
+	    key: 'render',
+	    value: function render() {
+	      var itemCount = this.props.itemcount;
+	      var updateText = '';
+	      switch (itemCount) {
+	        case 0:
+	          updateText = 'No News';break;
+	        case 1:
+	          updateText = '1 Update';break;
+	        default:
+	          updateText = itemCount + ' Updates';break;
+	      }
+	      return _react2['default'].createElement(
+	        'span',
+	        { id: 'itemCount' },
+	        updateText
+	      );
+	    }
+	  }]);
+	
+	  return NewsItemCount;
+	})(_react2['default'].Component);
+	
+	exports['default'] = NewsItemCount;
+	;
+	module.exports = exports['default'];
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "NewsItemCount.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 301 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var _react = __webpack_require__(146);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var NewsDuration = (function (_React$Component) {
+	  _inherits(NewsDuration, _React$Component);
+	
+	  function NewsDuration() {
+	    _classCallCheck(this, NewsDuration);
+	
+	    _get(Object.getPrototypeOf(NewsDuration.prototype), 'constructor', this).apply(this, arguments);
+	  }
+	
+	  _createClass(NewsDuration, [{
+	    key: 'render',
+	    value: function render() {
+	      var duration = this.props.duration;
+	      var text = 'in ' + duration + (duration == 1 ? ' Minute' : ' Minutes');
+	      return _react2['default'].createElement(
+	        'span',
+	        null,
+	        text
+	      );
+	    }
+	  }]);
+	
+	  return NewsDuration;
+	})(_react2['default'].Component);
+	
+	exports['default'] = NewsDuration;
+	;
+	module.exports = exports['default'];
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "NewsDuration.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -38896,154 +38985,541 @@
 	  value: true
 	});
 	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var _react = __webpack_require__(146);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var HowCow = _react2["default"].createClass({
-	  displayName: "HowCow",
+	var NewsSources = (function (_React$Component) {
+	  _inherits(NewsSources, _React$Component);
 	
-	  render: function render() {
-	    return _react2["default"].createElement(
-	      "div",
-	      { id: "aboutCow" },
-	      _react2["default"].createElement(
-	        "h2",
-	        { id: "cowwhat" },
-	        "What?"
-	      ),
-	      _react2["default"].createElement(
-	        "p",
-	        null,
-	        "This is a world news feed. Give it a minute or two for items to be published."
-	      ),
-	      _react2["default"].createElement(
-	        "p",
-	        null,
-	        "It's very easy to search or filter by typing in the box. Instant actually. If you want to keep it, just hit enter and the term will be added to a tag list. You can stack filter tags on top of each other."
-	      ),
-	      _react2["default"].createElement(
-	        "ul",
-	        { className: "tutTags" },
-	        _react2["default"].createElement(
-	          "li",
-	          { className: "tagItem tagInclude" },
-	          _react2["default"].createElement(
-	            "button",
-	            { type: "button" },
-	            "Highland Cows"
-	          )
-	        ),
-	        _react2["default"].createElement(
-	          "li",
-	          { className: "tagItem tagInclude" },
-	          _react2["default"].createElement(
-	            "button",
-	            { type: "button" },
-	            "Mountain Goats"
-	          )
-	        )
-	      ),
-	      _react2["default"].createElement(
-	        "p",
-	        null,
-	        "As an extra, place a dash (-) at the beginning of the term and you can choose what not to see."
-	      ),
-	      _react2["default"].createElement(
-	        "ul",
-	        { className: "tutTags" },
-	        _react2["default"].createElement(
-	          "li",
-	          { className: "tagItem tagExclude" },
-	          _react2["default"].createElement(
-	            "button",
-	            { type: "button" },
-	            "Beef"
-	          )
-	        )
-	      ),
-	      _react2["default"].createElement(
-	        "p",
-	        null,
-	        "Tags are colour coded, (blue for included, red for excluded) so you will know how the list is being filtered. If you want to remove it, just click it. It's like they were never there. Magic."
-	      ),
-	      _react2["default"].createElement(
-	        "p",
-	        null,
-	        "Click the word 'Sources' (just above the cow) if you wish to see where the news comes from."
-	      ),
-	      _react2["default"].createElement(
-	        "p",
-	        null,
-	        "Take your time, the news will keep coming even as you read this."
-	      ),
-	      _react2["default"].createElement(
-	        "h2",
-	        { id: "cowwhy" },
-	        "Why?"
-	      ),
-	      _react2["default"].createElement(
-	        "p",
-	        null,
-	        "This feed is a little different. It is intended for slow movers and not those who find themselves in a hurry. It intentionally shows nothing when you load it, and from then it will only show news as it is published. It's about the present, at a speed you can work with."
-	      ),
-	      _react2["default"].createElement(
-	        "p",
-	        null,
-	        "You cannot set the source of the news, but you can curate with broad, simple strokes by tagging. Searching is fast too."
-	      ),
-	      _react2["default"].createElement(
-	        "h2",
-	        { id: "cowhow" },
-	        "How?"
-	      ),
-	      _react2["default"].createElement(
-	        "p",
-	        null,
-	        "Read the ",
-	        _react2["default"].createElement(
-	          "a",
-	          { href: "http://github.com/colw/nxws", target: "_blank" },
-	          "code"
-	        ),
-	        " if you're curious."
-	      ),
-	      _react2["default"].createElement(
-	        "h2",
-	        { id: "cowwho" },
-	        "Who?"
-	      ),
-	      _react2["default"].createElement(
-	        "p",
-	        { id: "smallwho" },
-	        "I can be reached ",
-	        _react2["default"].createElement(
-	          "a",
-	          { href: "mailto:colw@outlook.com" },
-	          "here"
-	        ),
-	        "."
-	      )
-	    );
+	  function NewsSources(props) {
+	    _classCallCheck(this, NewsSources);
+	
+	    _get(Object.getPrototypeOf(NewsSources.prototype), "constructor", this).call(this, props);
+	    this.state = { showSources: false };
 	  }
-	});
-	exports.HowCow = HowCow;
+	
+	  _createClass(NewsSources, [{
+	    key: "handleClick",
+	    value: function handleClick() {
+	      this.setState({ showSources: !this.state.showSources });
+	    }
+	  }, {
+	    key: "render",
+	    value: function render() {
+	      var that = this;
+	      var makeList = function makeList(x) {
+	        return _react2["default"].createElement(
+	          "li",
+	          { key: x, className: "sourceItem" },
+	          x
+	        );
+	      };
+	      var elt = null;
+	      if (this.state.showSources) {
+	        elt = _react2["default"].createElement(
+	          "ul",
+	          null,
+	          this.props.sourceList.map(makeList)
+	        );
+	      }
+	      return _react2["default"].createElement(
+	        "span",
+	        { id: "sourceList", onClick: this.handleClick },
+	        'from ' + this.props.sourceList.length + ' Sources',
+	        elt
+	      );
+	    }
+	  }]);
+	
+	  return NewsSources;
+	})(_react2["default"].Component);
+	
+	exports["default"] = NewsSources;
+	module.exports = exports["default"];
 
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "news_view_about.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "NewsSources.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 301 */
+/* 303 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var _react = __webpack_require__(146);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _moment = __webpack_require__(158);
+	
+	var _moment2 = _interopRequireDefault(_moment);
+	
+	var NewsItem = (function (_React$Component) {
+	  _inherits(NewsItem, _React$Component);
+	
+	  function NewsItem(props) {
+	    _classCallCheck(this, NewsItem);
+	
+	    _get(Object.getPrototypeOf(NewsItem.prototype), 'constructor', this).call(this, props);
+	    this.state = { formattedTimeSince: (0, _moment2['default'])(this.props.info.fetchDate).fromNow() };
+	  }
+	
+	  _createClass(NewsItem, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.setInterval(this.updateTime, 30000);
+	    }
+	  }, {
+	    key: 'updateTime',
+	    value: function updateTime() {
+	      this.setState({ formattedTimeSince: (0, _moment2['default'])(this.props.info.fetchDate).fromNow() });
+	    }
+	  }, {
+	    key: 'getBaseURL',
+	    value: function getBaseURL(url) {
+	      if (url.slice(0, 4) != 'http') {
+	        url = 'http://' + url;
+	      }
+	      var a = document.createElement('a');
+	      a.href = url;
+	      return a.hostname.replace(/^www./, '');
+	    }
+	  }, {
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.intervals = [];
+	    }
+	  }, {
+	    key: 'setInterval',
+	    value: (function (_setInterval) {
+	      function setInterval() {
+	        return _setInterval.apply(this, arguments);
+	      }
+	
+	      setInterval.toString = function () {
+	        return _setInterval.toString();
+	      };
+	
+	      return setInterval;
+	    })(function () {
+	      this.intervals.push(setInterval.apply(null, arguments));
+	    })
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      this.intervals.map(clearInterval);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var hosturl = this.getBaseURL(this.props.info.metalink);
+	      return _react2['default'].createElement(
+	        'div',
+	        { className: 'newsItem' },
+	        _react2['default'].createElement(
+	          'a',
+	          { href: this.props.info.link, target: '_blank' },
+	          _react2['default'].createElement(
+	            'div',
+	            { className: 'headTitle' },
+	            this.props.info.title
+	          )
+	        ),
+	        _react2['default'].createElement(
+	          'div',
+	          { className: 'subTitle' },
+	          hosturl,
+	          ', ',
+	          _react2['default'].createElement(
+	            'span',
+	            { className: 'subTime' },
+	            this.state.formattedTimeSince
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return NewsItem;
+	})(_react2['default'].Component);
+	
+	exports['default'] = NewsItem;
+	;
+	module.exports = exports['default'];
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "NewsItem.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 304 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var _react = __webpack_require__(146);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _moment = __webpack_require__(158);
+	
+	var _moment2 = _interopRequireDefault(_moment);
+	
+	var _NewsItem = __webpack_require__(303);
+	
+	var _NewsItem2 = _interopRequireDefault(_NewsItem);
+	
+	var NewsList = (function (_React$Component) {
+	  _inherits(NewsList, _React$Component);
+	
+	  function NewsList() {
+	    _classCallCheck(this, NewsList);
+	
+	    _get(Object.getPrototypeOf(NewsList.prototype), "constructor", this).apply(this, arguments);
+	  }
+	
+	  _createClass(NewsList, [{
+	    key: "render",
+	    value: function render() {
+	      if (this.props.newsItems.length === 0) {
+	        return _react2["default"].createElement(
+	          "div",
+	          { id: "emptyList" },
+	          _react2["default"].createElement(
+	            "p",
+	            null,
+	            "Please wait for some news to be published. Shan't be long."
+	          ),
+	          _react2["default"].createElement(
+	            "p",
+	            { id: "nogoodnews" },
+	            "No news is good moos, right?"
+	          )
+	        );
+	      } else {
+	        var makeList = function makeList(x) {
+	          return _react2["default"].createElement(
+	            "li",
+	            { key: x.guid },
+	            _react2["default"].createElement(_NewsItem2["default"], { info: x })
+	          );
+	        };
+	        return _react2["default"].createElement(
+	          "ul",
+	          null,
+	          this.props.newsItems.map(makeList)
+	        );
+	      }
+	    }
+	  }]);
+	
+	  return NewsList;
+	})(_react2["default"].Component);
+	
+	exports["default"] = NewsList;
+	;
+	module.exports = exports["default"];
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "NewsList.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 305 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var _react = __webpack_require__(146);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var NewsCow = (function (_React$Component) {
+	  _inherits(NewsCow, _React$Component);
+	
+	  function NewsCow(props) {
+	    _classCallCheck(this, NewsCow);
+	
+	    _get(Object.getPrototypeOf(NewsCow.prototype), "constructor", this).call(this, props);
+	    var cowords = ["Udderly brilliant", "News that mooves you", "Hoofin' along"];
+	    var cowImg = __webpack_require__(306);
+	    this.state = { cow: cowImg, cowords: cowords };
+	  }
+	
+	  _createClass(NewsCow, [{
+	    key: "handleClick",
+	    value: function handleClick() {
+	      this.props.onClickHandler();
+	    }
+	  }, {
+	    key: "getRandomInteger",
+	    value: function getRandomInteger(min, max) {
+	      return Math.floor(Math.random() * (max - min)) + min;
+	    }
+	  }, {
+	    key: "render",
+	    value: function render() {
+	      var randElt = this.getRandomInteger(0, this.state.cowords.length);
+	      var saying = this.state.cowords[randElt];
+	      return _react2["default"].createElement(
+	        "div",
+	        { id: "cow", onClick: this.props.onClickHandler },
+	        _react2["default"].createElement("img", { src: this.state.cow, alt: "A black and white cow", title: saying })
+	      );
+	    }
+	  }]);
+	
+	  return NewsCow;
+	})(_react2["default"].Component);
+	
+	exports["default"] = NewsCow;
+	;
+	module.exports = exports["default"];
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "NewsCow.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 306 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "9d63b48adecdb0d0096cd2b843e69d49.png"
+
+/***/ },
+/* 307 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var _react = __webpack_require__(146);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var HowCow = (function (_React$Component) {
+	  _inherits(HowCow, _React$Component);
+	
+	  function HowCow() {
+	    _classCallCheck(this, HowCow);
+	
+	    _get(Object.getPrototypeOf(HowCow.prototype), "constructor", this).apply(this, arguments);
+	  }
+	
+	  _createClass(HowCow, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2["default"].createElement(
+	        "div",
+	        { id: "aboutCow" },
+	        _react2["default"].createElement(
+	          "h2",
+	          { id: "cowwhat" },
+	          "What?"
+	        ),
+	        _react2["default"].createElement(
+	          "p",
+	          null,
+	          "This is a world news feed. Give it a minute or two for items to be published."
+	        ),
+	        _react2["default"].createElement(
+	          "p",
+	          null,
+	          "It's very easy to search or filter by typing in the box. Instant actually. If you want to keep it, just hit enter and the term will be added to a tag list. You can stack filter tags on top of each other."
+	        ),
+	        _react2["default"].createElement(
+	          "ul",
+	          { className: "tutTags" },
+	          _react2["default"].createElement(
+	            "li",
+	            { className: "tagItem tagInclude" },
+	            _react2["default"].createElement(
+	              "button",
+	              { type: "button" },
+	              "Highland Cows"
+	            )
+	          ),
+	          _react2["default"].createElement(
+	            "li",
+	            { className: "tagItem tagInclude" },
+	            _react2["default"].createElement(
+	              "button",
+	              { type: "button" },
+	              "Mountain Goats"
+	            )
+	          )
+	        ),
+	        _react2["default"].createElement(
+	          "p",
+	          null,
+	          "As an extra, place a dash (-) at the beginning of the term and you can choose what not to see."
+	        ),
+	        _react2["default"].createElement(
+	          "ul",
+	          { className: "tutTags" },
+	          _react2["default"].createElement(
+	            "li",
+	            { className: "tagItem tagExclude" },
+	            _react2["default"].createElement(
+	              "button",
+	              { type: "button" },
+	              "Beef"
+	            )
+	          )
+	        ),
+	        _react2["default"].createElement(
+	          "p",
+	          null,
+	          "Tags are colour coded, (blue for included, red for excluded) so you will know how the list is being filtered. If you want to remove it, just click it. It's like they were never there. Magic."
+	        ),
+	        _react2["default"].createElement(
+	          "p",
+	          null,
+	          "Click the word 'Sources' (just above the cow) if you wish to see where the news comes from."
+	        ),
+	        _react2["default"].createElement(
+	          "p",
+	          null,
+	          "Take your time, the news will keep coming even as you read this."
+	        ),
+	        _react2["default"].createElement(
+	          "h2",
+	          { id: "cowwhy" },
+	          "Why?"
+	        ),
+	        _react2["default"].createElement(
+	          "p",
+	          null,
+	          "This feed is a little different. It is intended for slow movers and not those who find themselves in a hurry. It intentionally shows nothing when you load it, and from then it will only show news as it is published. It's about the present, at a speed you can work with."
+	        ),
+	        _react2["default"].createElement(
+	          "p",
+	          null,
+	          "You cannot set the source of the news, but you can curate with broad, simple strokes by tagging. Searching is fast too."
+	        ),
+	        _react2["default"].createElement(
+	          "h2",
+	          { id: "cowhow" },
+	          "How?"
+	        ),
+	        _react2["default"].createElement(
+	          "p",
+	          null,
+	          "Read the ",
+	          _react2["default"].createElement(
+	            "a",
+	            { href: "http://github.com/colw/nxws", target: "_blank" },
+	            "code"
+	          ),
+	          " if you're curious."
+	        ),
+	        _react2["default"].createElement(
+	          "h2",
+	          { id: "cowwho" },
+	          "Who?"
+	        ),
+	        _react2["default"].createElement(
+	          "p",
+	          { id: "smallwho" },
+	          "I can be reached ",
+	          _react2["default"].createElement(
+	            "a",
+	            { href: "mailto:colw@outlook.com" },
+	            "here"
+	          ),
+	          "."
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return HowCow;
+	})(_react2["default"].Component);
+	
+	exports["default"] = HowCow;
+	;
+	module.exports = exports["default"];
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "HowCow.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 308 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(302);
+	var content = __webpack_require__(309);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(304)(content, {});
+	var update = __webpack_require__(311)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -39060,10 +39536,10 @@
 	}
 
 /***/ },
-/* 302 */
+/* 309 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(303)();
+	exports = module.exports = __webpack_require__(310)();
 	// imports
 	
 	
@@ -39074,7 +39550,7 @@
 
 
 /***/ },
-/* 303 */
+/* 310 */
 /***/ function(module, exports) {
 
 	/*
@@ -39130,7 +39606,7 @@
 
 
 /***/ },
-/* 304 */
+/* 311 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*

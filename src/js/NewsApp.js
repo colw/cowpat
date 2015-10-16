@@ -2,65 +2,28 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import moment from 'moment';
 
-import {FormatURLMixin, SetIntervalMixin} from './news_view_mixins.js';
-import {newsItems, numberOfReaders, sourceList, getStateFromNewsItems, getStateFromNumberOfReaders, getStateFromSourceList} from './client_model';
-import {NewsInfo, NewsCow, NewsSearchBar, NewsTagList} from './news_view_header';
-import {HowCow} from './news_view_about';
+import {newsItems,
+        numberOfReaders,
+        sourceList,
+        getStateFromNewsItems,
+        getStateFromNumberOfReaders,
+        getStateFromSourceList} from './client_model';
+
+import NewsSearchBar from './NewsSearchBar';
+import NewsTagList from './NewsTagList';
+import NewsInfo from "./NewsInfo";
+import NewsItem from "./NewsItem";
+import NewsList from "./NewsList";
+import NewsCow from "./NewsCow";
+import HowCow from './HowCow';
 
 require('../scss/style.scss');
 
-var NewsItem = React.createClass({
-  mixins: [FormatURLMixin, SetIntervalMixin],
-  getInitialState: function() {
-    return {formattedTimeSince: moment(this.props.info.fetchDate).fromNow()};
-  },
-  componentDidMount: function() {
-    this.setInterval(this.updateTime, 30000);
-  },
-  updateTime: function() {
-    this.setState({formattedTimeSince: moment(this.props.info.fetchDate).fromNow()});
-  },
-	render: function() {
-    var hosturl = this.getBaseURL(this.props.info.metalink);
-		return (
-			<div className="newsItem">
-				<a href={this.props.info.link} target="_blank">
-					<div className="headTitle">
-            {this.props.info.title}
-					</div>
-        </a>
-        <div className="subTitle">{hosturl}, <span className="subTime">{this.state.formattedTimeSince}</span></div>
-			</div>
-		);
-	}
-});
+export default class NewsApp extends React.Component {
 
-var NewsList = React.createClass({ 
-	render: function() {
-    if (this.props.newsItems.length === 0) {
-      return (
-        <div id="emptyList">
-          <p>Please wait for some news to be published. Shan't be long.</p>
-          <p id="nogoodnews">No news is good moos, right?</p>
-        </div>
-      );
-    } else {
-      var makeList = function(x) {
-        return (<li key={x.guid}><NewsItem info={x} /></li>);
-      };
-      return (
-  			<ul>
-          { this.props.newsItems.map(makeList) }
-  			</ul>
-  		);
-    }
-	}
-});
-
-var NewsApp = React.createClass({
-  mixins: [SetIntervalMixin],
-  getInitialState: function() {
-    return {
+  constructor(props) {
+    super(props);
+    this.state = {
         filterText: ''
       , filterTags: []
       , newsItems: getStateFromNewsItems()
@@ -70,18 +33,33 @@ var NewsApp = React.createClass({
       , minutes: 0
       , showAbout: false
     };
-  },
-  tick: function() {
+  }
+
+  tick() {
     this.setState({minutes: this.state.minutes + 1});
-  },
-  componentDidMount: function() {
-    newsItems.setChangeListener(this.onStorageChange);
-    numberOfReaders.setChangeListener(this.onReaderChange);
-    sourceList.setChangeListener(this.onSourceListChange);
+  }
+
+  componentWillMount () {
+    this.intervals = [];
+  }
+
+  setInterval () {
+    this.intervals.push(setInterval.apply(null, arguments));
+  } 
+
+  componentWillUnmount () {
+    this.intervals.map(clearInterval);
+  }
+
+  componentDidMount () {
+    newsItems.setChangeListener(this.onStorageChange.bind(this));
+    numberOfReaders.setChangeListener(this.onReaderChange.bind(this));
+    sourceList.setChangeListener(this.onSourceListChange.bind(this));
     this.setInterval(this.tick, 60000);
     this.setState({filteredNewsItems: this.state.newsItems.slice()});
-  },
-  onStorageChange: function() {
+  }
+
+  onStorageChange () {
     var newNewsList = getStateFromNewsItems();
     var tags = this.state.filterTags;
     if (this.state.filterText.length > 0) {
@@ -89,15 +67,18 @@ var NewsApp = React.createClass({
     }
     var newFilteredNewsList = this.filterListWithTags(newNewsList, tags);
     this.setState({newsItems: newNewsList, filteredNewsItems: newFilteredNewsList}); //woop
-  },
-  onReaderChange: function() {
+  }
+
+  onReaderChange () {
     this.setState({numberOfReaders: getStateFromNumberOfReaders()});
-  },
-  onSourceListChange: function() {
+  }
+
+  onSourceListChange () {
     var s = getStateFromSourceList();
     this.setState({sourceList: s});
-  },
-	handleUserInput: function (filterText) {
+  }
+
+	handleUserInput (filterText) {
     
     var modFilterText = filterText.toLowerCase();
     
@@ -107,13 +88,14 @@ var NewsApp = React.createClass({
     }
     var tags = this.state.filterTags;
     if (modFilterText.length > 0) {
-      tags = tags.concat(modFilterText);
+      tags = tags.concat(modFilterText);8
     }
     var newFilteredNewsList = this.filterListWithTags(this.state.newsItems, tags);
     
 		this.setState({filterText: filterText, filteredNewsItems: newFilteredNewsList});
-	},
-  handleSubmit: function(filterText) {
+	}
+
+  handleSubmit (filterText) {
     var newTags;  
     if(filterText === '')
       return;
@@ -128,8 +110,9 @@ var NewsApp = React.createClass({
       this.setState({filterText: '', filterTags: newTags, filteredNewsItems: newFilteredNewsList});
       return;
     }
-  },
-  handleTagClick: function(tagName) {
+  }
+
+  handleTagClick (tagName) {
     var tags = this.state.filterTags.filter(function(x) {return x != tagName;});
     
     if (this.state.filterText.length > 0)
@@ -137,8 +120,9 @@ var NewsApp = React.createClass({
     
     var newFilteredNewsList = this.filterListWithTags(this.state.newsItems, tags);
     this.setState({filterTags: tags, filteredNewsItems: newFilteredNewsList});
-  }, 
-  filterListWithTags: function(list, tags) {
+  }
+
+  filterListWithTags (list, tags) {
     if (list.length === 0) {
       return [];
     } else if (tags.length === 0) { 
@@ -178,12 +162,14 @@ var NewsApp = React.createClass({
             
       return this.filterListWithTags(filteredList, tags.slice(1));
     }
-  },
-  onCowClick: function(e) {
+  }
+
+  onCowClick (e) {
     console.log('click');
     this.setState({showAbout: !this.state.showAbout});
-  },
-	render: function() {
+  }
+
+	render() {
     var main = this.state.showAbout ? <HowCow /> : (<NewsList newsItems={this.state.filteredNewsItems} filterText={this.state.filterText.toLowerCase()} filterTags={this.state.filterTags}/>);
     return (
       <div id="MainContent">
@@ -192,9 +178,9 @@ var NewsApp = React.createClass({
                     minutes={this.state.minutes}
                     others={this.state.numberOfReaders}
                     sources={this.state.sourceList} />
-          <NewsCow onClickHandler={this.onCowClick}/>
-          <NewsSearchBar onUserInput={ this.handleUserInput } filterText={this.state.filterText} onFilterSubmit={this.handleSubmit}/>      
-          <NewsTagList filterTags={ this.state.filterTags} onTagClick={this.handleTagClick}/>
+          <NewsCow onClickHandler={this.onCowClick.bind(this)}/>
+          <NewsSearchBar onUserInput={ this.handleUserInput.bind(this) } filterText={this.state.filterText} onFilterSubmit={this.handleSubmit.bind(this)}/>      
+          <NewsTagList filterTags={this.state.filterTags} onTagClick={this.handleTagClick.bind(this)}/>
         </div>
         <div id="mainList">
                     {main}
@@ -202,6 +188,6 @@ var NewsApp = React.createClass({
       </div>
 		);
 	}
-});
+};
 
 ReactDOM.render(<NewsApp />, document.getElementById('ReactMountPoint'));
