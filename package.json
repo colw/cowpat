@@ -4,7 +4,7 @@
   "description": "A simple news aggregator.",
   "main": "app.js",
   "scripts": {
-    "start": "webpack -p && EMIT_NOW=true node app.js",
+    "start": "webpack && EMIT_NOW=true node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "engines": {
