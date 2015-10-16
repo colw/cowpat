@@ -193,4 +193,4 @@ var NewsApp = React.createClass({
 	}
 });
 
-React.render(<NewsApp />, document.getElementById('ReactMountPoint'));
+ReactDOM.render(<NewsApp />, document.getElementById('ReactMountPoint'));

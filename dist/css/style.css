@@ -58,7 +58,7 @@ body {
           color: #333;
           font-size: larger; }
         #mainList ul .newsItem .subTitle {
-          font-family: 'Bitstream Vera Sans';
+          font-family: "Bitstream Vera Sans";
           color: #888;
           margin-top: 0.2em;
           margin-left: 2em;
@@ -147,7 +147,7 @@ body {
         color: #333;
         font-size: 48px; }
       #mainList ul .newsItem .subTitle {
-        font-family: 'Bitstream Vera Sans';
+        font-family: "Bitstream Vera Sans";
         color: #888;
         margin-top: 0.2em;
         margin-left: 2em;
