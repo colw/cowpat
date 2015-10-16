@@ -58,35 +58,57 @@ socket.on('nxws sources', function(jsonSources) {
   sourceList.set(sources);
 });
 
-var FormatURLMixin = {
-  getBaseURL: function(url) {
-    if (url.slice(0,4) != 'http') {
-      url = 'http://' + url;
-    }
-    var a = document.createElement('a');
-    a.href = url;
-    return a.hostname.replace(/^www./, '');
-  }
-};
+var HowCow = React.createClass({displayName: "HowCow",
+	render: function() {
+		return (
+			React.createElement("div", {id: "aboutCow"}, 
 
-var RandomHelpMixin = {
-  getRandomInteger: function(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-  }
-};
+        React.createElement("h2", {id: "cowwhat"}, "What?"), 
+          
+        React.createElement("p", null, "This is a world news feed. Give it a minute or two for items to be published."), 
+                    
+        React.createElement("p", null, "It's very easy to search or filter by typing in the box. Instant actually. If you want to keep it," + ' ' +
+        "just hit enter and the term will be added to a tag list. You can stack filter tags on top of each other."), 
+          
+        React.createElement("ul", {className: "tutTags"}, 
+          React.createElement("li", {className: "tagItem tagInclude"}, React.createElement("button", {type: "button"}, "Highland Cows")), 
+          React.createElement("li", {className: "tagItem tagInclude"}, React.createElement("button", {type: "button"}, "Mountain Goats"))
+        ), 
 
-var SetIntervalMixin = {
-  componentWillMount: function() {
-    this.intervals = [];
-  },
-  setInterval: function() {
-    this.intervals.push(setInterval.apply(null, arguments));
-  },
-  componentWillUnmount: function() {
-    this.intervals.map(clearInterval);
-  }
-};
+        React.createElement("p", null, "As an extra, place a dash (-) at the beginning of the term and you can choose what not to see."), 
+          
+        React.createElement("ul", {className: "tutTags"}, 
+          React.createElement("li", {className: "tagItem tagExclude"}, React.createElement("button", {type: "button"}, "Beef"))
+        ), 
 
+        React.createElement("p", null, "Tags are colour coded, (blue for included, red for excluded) so you will know how the list is being filtered. If you want to remove it, just click" + ' ' +
+        "it. It's like they were never there. Magic."), 
+              
+        React.createElement("p", null, "Click the word 'Sources' (just above the cow) if you wish to see where the news comes from."), 
+
+        React.createElement("p", null, "Take your time, the news will keep coming even as you read this."), 
+      
+        React.createElement("h2", {id: "cowwhy"}, "Why?"), 
+            
+        React.createElement("p", null, "This feed is a little different. It is intended for slow movers and not those who find themselves in a hurry. It intentionally" + ' ' +
+        "shows nothing when you load it, and from then it will only show news as it is published. It's about the" + ' ' +
+        "present, at a speed you can work with."), 
+
+        React.createElement("p", null, "You cannot set the source of the news, but you can curate with broad, simple strokes by tagging." + ' ' +
+        "Searching is fast too."), 
+
+        React.createElement("h2", {id: "cowhow"}, "How?"), 
+      
+        React.createElement("p", null, "Read the ", React.createElement("a", {href: "http://github.com/colw/nxws", target: "_blank"}, "code"), " if you're curious."), 
+        
+        React.createElement("h2", {id: "cowwho"}, "Who?"), 
+        
+        React.createElement("p", {id: "smallwho"}, "I can be reached ", React.createElement("a", {href: "mailto:colw@outlook.com"}, "here"), ".")
+
+      )
+		);
+	}
+});
 var NewsCow = React.createClass({displayName: "NewsCow",
   mixins: [RandomHelpMixin],
   getInitialState: function() {
@@ -245,57 +267,6 @@ var NewsInfo = React.createClass({displayName: "NewsInfo",
 
 
 
-var HowCow = React.createClass({displayName: "HowCow",
-	render: function() {
-		return (
-			React.createElement("div", {id: "aboutCow"}, 
-
-        React.createElement("h2", {id: "cowwhat"}, "What?"), 
-          
-        React.createElement("p", null, "This is a world news feed. Give it a minute or two for items to be published."), 
-                    
-        React.createElement("p", null, "It's very easy to search or filter by typing in the box. Instant actually. If you want to keep it," + ' ' +
-        "just hit enter and the term will be added to a tag list. You can stack filter tags on top of each other."), 
-          
-        React.createElement("ul", {className: "tutTags"}, 
-          React.createElement("li", {className: "tagItem tagInclude"}, React.createElement("button", {type: "button"}, "Highland Cows")), 
-          React.createElement("li", {className: "tagItem tagInclude"}, React.createElement("button", {type: "button"}, "Mountain Goats"))
-        ), 
-
-        React.createElement("p", null, "As an extra, place a dash (-) at the beginning of the term and you can choose what not to see."), 
-          
-        React.createElement("ul", {className: "tutTags"}, 
-          React.createElement("li", {className: "tagItem tagExclude"}, React.createElement("button", {type: "button"}, "Beef"))
-        ), 
-
-        React.createElement("p", null, "Tags are colour coded, (blue for included, red for excluded) so you will know how the list is being filtered. If you want to remove it, just click" + ' ' +
-        "it. It's like they were never there. Magic."), 
-              
-        React.createElement("p", null, "Click the word 'Sources' (just above the cow) if you wish to see where the news comes from."), 
-
-        React.createElement("p", null, "Take your time, the news will keep coming even as you read this."), 
-      
-        React.createElement("h2", {id: "cowwhy"}, "Why?"), 
-            
-        React.createElement("p", null, "This feed is a little different. It is intended for slow movers and not those who find themselves in a hurry. It intentionally" + ' ' +
-        "shows nothing when you load it, and from then it will only show news as it is published. It's about the" + ' ' +
-        "present, at a speed you can work with."), 
-
-        React.createElement("p", null, "You cannot set the source of the news, but you can curate with broad, simple strokes by tagging." + ' ' +
-        "Searching is fast too."), 
-
-        React.createElement("h2", {id: "cowhow"}, "How?"), 
-      
-        React.createElement("p", null, "Read the ", React.createElement("a", {href: "http://github.com/colw/nxws", target: "_blank"}, "code"), " if you're curious."), 
-        
-        React.createElement("h2", {id: "cowwho"}, "Who?"), 
-        
-        React.createElement("p", {id: "smallwho"}, "I can be reached ", React.createElement("a", {href: "mailto:colw@outlook.com"}, "here"), ".")
-
-      )
-		);
-	}
-});
 var NewsItem = React.createClass({displayName: "NewsItem",
   mixins: [FormatURLMixin, SetIntervalMixin],
   getInitialState: function() {
@@ -492,3 +463,32 @@ var NewsApp = React.createClass({displayName: "NewsApp",
 });
 
 ReactDOM.render(React.createElement(NewsApp, null), document.getElementById('ReactMountPoint'));
+
+var FormatURLMixin = {
+  getBaseURL: function(url) {
+    if (url.slice(0,4) != 'http') {
+      url = 'http://' + url;
+    }
+    var a = document.createElement('a');
+    a.href = url;
+    return a.hostname.replace(/^www./, '');
+  }
+};
+
+var RandomHelpMixin = {
+  getRandomInteger: function(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+};
+
+var SetIntervalMixin = {
+  componentWillMount: function() {
+    this.intervals = [];
+  },
+  setInterval: function() {
+    this.intervals.push(setInterval.apply(null, arguments));
+  },
+  componentWillUnmount: function() {
+    this.intervals.map(clearInterval);
+  }
+};

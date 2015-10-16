@@ -21,3 +21,6 @@ ObservableThing.prototype.notify = function() {
     this.onChangeListener();
   }
 };
+
+
+export default ObservableThing;

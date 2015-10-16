@@ -1,4 +1,6 @@
-var HowCow = React.createClass({
+import React from 'react';
+
+export var HowCow = React.createClass({
 	render: function() {
 		return (
 			<div id="aboutCow">

@@ -1,17 +1,20 @@
+import ObservableThing from './observablething';
+import io from "socket.io-client";
+
 var socket = io();
 
-var newsItems = new ObservableThing([]);
-function getStateFromNewsItems() {
+export var newsItems = new ObservableThing([]);
+export function getStateFromNewsItems() {
   return newsItems.get();
 }
 
-var numberOfReaders = new ObservableThing(Number(0));
-function getStateFromNumberOfReaders() {
+export var numberOfReaders = new ObservableThing(Number(0));
+export function getStateFromNumberOfReaders() {
   return numberOfReaders.get();
 }
 
-var sourceList = new ObservableThing([]);
-function getStateFromSourceList() {
+export var sourceList = new ObservableThing([]);
+export function getStateFromSourceList() {
   return sourceList.get();
 }
 
@@ -33,3 +36,7 @@ socket.on('nxws sources', function(jsonSources) {
   var sources = JSON.parse(jsonSources);
   sourceList.set(sources);
 });
+
+// module.exports = {
+//   getStateFromNewsItems: getStateFromNewsItems,
+// }

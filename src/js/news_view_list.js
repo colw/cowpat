@@ -1,3 +1,12 @@
+import ReactDOM from 'react-dom';
+import React from 'react';
+
+import {FormatURLMixin, SetIntervalMixin} from './news_view_mixins.js';
+import {newsItems, numberOfReaders, sourceList, getStateFromNewsItems, getStateFromNumberOfReaders, getStateFromSourceList} from './client_model';
+
+import {NewsInfo, NewsCow, NewsSearchBar, NewsTagList} from './news_view_header';
+import {HowCow} from './news_view_about';
+
 var NewsItem = React.createClass({
   mixins: [FormatURLMixin, SetIntervalMixin],
   getInitialState: function() {

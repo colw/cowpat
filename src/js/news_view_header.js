@@ -1,3 +1,7 @@
+import React from 'react';
+
+import {FormatURLMixin, RandomHelpMixin} from './news_view_mixins.js';
+
 var NewsCow = React.createClass({
   mixins: [RandomHelpMixin],
   getInitialState: function() {
@@ -154,4 +158,9 @@ var NewsInfo = React.createClass({
   }
 });
 
-
+module.exports = {
+  NewsInfo: NewsInfo,
+  NewsSearchBar: NewsSearchBar,
+  NewsTagList: NewsTagList,
+  NewsCow: NewsCow,
+}

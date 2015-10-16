@@ -21,13 +21,13 @@ gulp.task('react', function() {
   /* Why? It's easier to ignore the intermediate .js files entirely. 
      Sure, react() is run twice, (once for lint and again for production),
      but the cost is negligible. */      
-  return gulp.src('jsx/*.jsx')
+  return gulp.src('js/*.jsx')
     .pipe(react())
     .pipe(gulp.dest(DEST_TMPJS));
 });
 
 gulp.task('lint', function() {
-  return gulp.src('src/js*/*.js*')
+  return gulp.src('src/js/*.js*')
     .pipe(react())
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
@@ -42,10 +42,10 @@ gulp.task('sass', function() {
 gulp.task('scripts', function() {
   return gulp.src(['src/js/observablething.js'
                   , 'src/js/!(observablething)*.js'
-                  , 'src/jsx/news_view_mixins.jsx'
-                  , 'src/jsx/news_view_header.jsx'
-                  , 'src/jsx/news_view_about.jsx'
-                  , 'src/jsx/news_view_list.jsx'
+                  , 'src/js/news_view_mixins.jsx'
+                  , 'src/js/news_view_header.jsx'
+                  , 'src/js/news_view_about.jsx'
+                  , 'src/js/news_view_list.jsx'
                   ])
     .pipe(react())
     .pipe(concat('all.js'))
@@ -56,7 +56,7 @@ gulp.task('scripts', function() {
 });
 
 gulp.task('index', function(){
-  return gulp.src('src/index.html')
+  return gulp.src(['src/index.html', 'src/bundle.js'])
     .pipe(gulp.dest(DEST));
 });
 
@@ -74,7 +74,7 @@ gulp.task('watch', function() {
   gulp.watch('src/index.html', ['index']);
   gulp.watch('lib/*.*', ['libraries']);
   gulp.watch('images/*.*', ['images']);
-  gulp.watch('src/js*/*.js*', ['lint', 'scripts']);
+  gulp.watch('src/js/*.js*', ['lint', 'scripts']);
   gulp.watch('src/scss/*.scss', ['sass']);
 });
 
