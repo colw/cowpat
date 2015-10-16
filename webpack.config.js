@@ -1,4 +1,11 @@
 var path = require('path');
+var webpack = require('webpack');
+
+var constants = new webpack.DefinePlugin({
+    ENVIRONMENT: JSON.stringify(process.env.NODE_ENV),
+    FEEDS: JSON.stringify(process.env.NODE_ENV === 'production' ?
+      'https://ruminator.herokuapp.com/' : 'http://localhost:9000/'),
+});
 
 module.exports = {
   context: __dirname + '/src',
@@ -36,5 +43,6 @@ module.exports = {
     // you can now require('file') instead of require('file.coffee')
     extensions: ['', '.js', '.json', '.coffee']
   },
-  devtool: "#source-map"
+  devtool: "#source-map",
+  plugins: [constants]
 };

@@ -1,7 +1,7 @@
 import ObservableThing from './observablething';
 import io from "socket.io-client";
 
-var socket = io('http://localhost:9000/');
+var  socket = io(FEEDS);
 
 export var newsItems = new ObservableThing([]);
 export function getStateFromNewsItems() {

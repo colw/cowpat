@@ -31393,7 +31393,7 @@
 	
 	var _socketIoClient2 = _interopRequireDefault(_socketIoClient);
 	
-	var socket = (0, _socketIoClient2['default'])('http://localhost:9000/');
+	var socket = (0, _socketIoClient2['default'])(("https://ruminator.herokuapp.com/"));
 	
 	var newsItems = new _observablething2['default']([]);
 	exports.newsItems = newsItems;
