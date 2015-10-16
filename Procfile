@@ -1,1 +1,1 @@
-web: node app.js
+web: EMIT_NOW=true node app.js
