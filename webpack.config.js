@@ -10,7 +10,7 @@ var constants = new webpack.DefinePlugin({
 module.exports = {
   context: __dirname + '/src',
   entry: {
-    javascript: './js/NewsApp.js',
+    javascript: './js/Main.js',
     html: './index.html'
   },
   output: {

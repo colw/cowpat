@@ -9,7 +9,7 @@ export default class NewsItem extends React.Component {
   }
 
   componentDidMount () {
-    this.setInterval(this.updateTime, 30000);
+    this.setInterval(this.updateTime.bind(this), 30000);
   }
 
   updateTime () {

@@ -1,4 +1,3 @@
-import ReactDOM from 'react-dom';
 import React from 'react';
 import moment from 'moment';
 
@@ -55,7 +54,7 @@ export default class NewsApp extends React.Component {
     newsItems.setChangeListener(this.onStorageChange.bind(this));
     numberOfReaders.setChangeListener(this.onReaderChange.bind(this));
     sourceList.setChangeListener(this.onSourceListChange.bind(this));
-    this.setInterval(this.tick, 60000);
+    this.setInterval(this.tick.bind(this), 60000);
     this.setState({filteredNewsItems: this.state.newsItems.slice()});
   }
 
@@ -165,7 +164,6 @@ export default class NewsApp extends React.Component {
   }
 
   onCowClick (e) {
-    console.log('click');
     this.setState({showAbout: !this.state.showAbout});
   }
 
@@ -189,5 +187,3 @@ export default class NewsApp extends React.Component {
 		);
 	}
 };
-
-ReactDOM.render(<NewsApp />, document.getElementById('ReactMountPoint'));
