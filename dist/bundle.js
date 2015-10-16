@@ -68,7 +68,9 @@
 	
 	var _news_view_header = __webpack_require__(298);
 	
-	var _news_view_about = __webpack_require__(299);
+	var _news_view_about = __webpack_require__(300);
+	
+	__webpack_require__(301);
 	
 	var NewsItem = _react2['default'].createClass({
 	  displayName: 'NewsItem',
@@ -38669,13 +38671,15 @@
 	
 	var _news_view_mixinsJs = __webpack_require__(246);
 	
+	var cowImg = __webpack_require__(299);
+	
 	var NewsCow = _react2['default'].createClass({
 	  displayName: 'NewsCow',
 	
 	  mixins: [_news_view_mixinsJs.RandomHelpMixin],
 	  getInitialState: function getInitialState() {
 	    var cowords = ["Udderly brilliant", "News that mooves you", "Hoofin' along"];
-	    return { cow: './images/Guernsey_cow.png', cowords: cowords };
+	    return { cow: cowImg, cowords: cowords };
 	  },
 	  handleClick: function handleClick() {
 	    this.props.onClickHandler();
@@ -38878,6 +38882,12 @@
 /* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
+	module.exports = __webpack_require__.p + "9d63b48adecdb0d0096cd2b843e69d49.png"
+
+/***/ },
+/* 300 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 	
 	"use strict";
@@ -39022,6 +39032,327 @@
 	exports.HowCow = HowCow;
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/colin/GitHub/nxws/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "news_view_about.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 301 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(302);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(304)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./style.scss", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./style.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 302 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(303)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "@charset \"UTF-8\";\nbody {\n  background-color: #FDFDFD;\n  font-family: \"Gill Sans MT\", \"Gill Sans\", \"Gill Sans Std\", Verdana, \"Bitstream Vera Sans\";\n  color: #333; }\n\n#emptyList {\n  text-align: center; }\n\n#nogoodnews {\n  margin: 2em;\n  color: gray;\n  font-size: smaller; }\n\n#headerInfo {\n  font-family: \"Gill Sans MT\", \"Gill Sans\", \"Gill Sans Std\", Verdana, \"Bitstream Vera Sans\"; }\n\n#aboutCow {\n  font-size: smaller; }\n  #aboutCow .tutTags {\n    margin-top: 0.5em;\n    list-style: none outside none;\n    display: block; }\n    #aboutCow .tutTags .tagItem {\n      margin-top: 3px;\n      margin-bottom: 3px; }\n    #aboutCow .tutTags .tagItem button {\n      display: block;\n      border: none; }\n    #aboutCow .tutTags .tagInclude button {\n      color: white;\n      background: cornFlowerBlue; }\n    #aboutCow .tutTags .tagExclude button {\n      color: white;\n      background: lightCoral; }\n\n@media only screen and (min-width: 1024px), only screen and (max-width: 1023px) {\n  body {\n    font-size: large; }\n  #MainContent {\n    max-width: 900px;\n    margin: 0 auto;\n    padding: 1em; }\n  #mainList {\n    display: inline-block;\n    width: 75%; }\n    #mainList ul {\n      list-style-type: circle;\n      list-style-position: outside;\n      list-style-image: none; }\n      #mainList ul .newsItem {\n        margin-top: 1em;\n        margin-bottom: 1em;\n        text-align: left; }\n        #mainList ul .newsItem a {\n          text-decoration: none; }\n        #mainList ul .newsItem .headTitle {\n          color: #333;\n          font-size: larger; }\n        #mainList ul .newsItem .subTitle {\n          font-family: \"Bitstream Vera Sans\";\n          color: #888;\n          margin-top: 0.2em;\n          margin-left: 2em;\n          text-align: left;\n          font-size: small;\n          content: \"\\2013   \"; }\n        #mainList ul .newsItem .subTitle:before {\n          content: \"\\2013   \"; }\n  #headerInfo {\n    font-size: large; }\n    #headerInfo p {\n      margin: 0; }\n    #headerInfo #cow {\n      cursor: pointer;\n      display: block; }\n      #headerInfo #cow img {\n        padding: 20px 0 10px 0;\n        max-width: 100px; }\n    #headerInfo #filterBox {\n      margin-top: 0.5em; }\n    #headerInfo #filterTextInput {\n      width: 100px; }\n    #headerInfo #sourceList {\n      cursor: pointer; }\n      #headerInfo #sourceList ul {\n        list-style-type: none;\n        list-style-position: outside;\n        list-style-type: none;\n        padding: 0;\n        margin: 0;\n        font-size: small;\n        color: gray; }\n    #headerInfo #tagList {\n      margin-top: 0.5em;\n      padding: 0; }\n      #headerInfo #tagList li {\n        margin-left: 3px;\n        margin-right: 3px; }\n      #headerInfo #tagList .tagItem button {\n        border: none; }\n      #headerInfo #tagList .tagItem button:hover:before, #headerInfo #tagList .tagItem button:focus:before {\n        content: \"x \"; }\n      #headerInfo #tagList .tagInclude button {\n        color: white;\n        background: cornFlowerBlue; }\n      #headerInfo #tagList .tagExclude button {\n        color: white;\n        background: lightCoral; } }\n\n@media only screen and (min-width: 1024px) {\n  #headerInfo {\n    float: right;\n    /*desktop*/ }\n    #headerInfo #newheader span {\n      display: block;\n      /*desktop*/ }\n    #headerInfo #tagList .tagItem button:hover:before, #headerInfo #tagList .tagItem button:focus:before {\n      content: \"x \"; }\n    #headerInfo #tagList li {\n      display: block; } }\n\n@media only screen and (max-width: 1023px) {\n  body {\n    font-size: large; }\n  #mainList {\n    width: 95%; }\n    #mainList ul {\n      list-style-type: none; }\n  #headerInfo #tagList li {\n    display: inline-block; } }\n\n@media only screen and (max-device-width: 480px) {\n  body {\n    font-size: xx-large; }\n  #mainList ul {\n    list-style-type: none;\n    list-style-position: outside;\n    list-style-image: none; }\n    #mainList ul .newsItem {\n      margin-top: 1em;\n      margin-bottom: 1em;\n      text-align: left; }\n      #mainList ul .newsItem a {\n        text-decoration: none; }\n      #mainList ul .newsItem .headTitle {\n        color: #333;\n        font-size: 48px; }\n      #mainList ul .newsItem .subTitle {\n        font-family: \"Bitstream Vera Sans\";\n        color: #888;\n        margin-top: 0.2em;\n        margin-left: 2em;\n        text-align: left;\n        font-size: smaller;\n        content: \"\\2013   \"; }\n      #mainList ul .newsItem .subTitle:before {\n        content: \"\\2013   \"; }\n  #headerInfo {\n    font-size: larger; }\n    #headerInfo p {\n      margin: 0; }\n    #headerInfo #cow {\n      display: none; }\n    #headerInfo #filterBox {\n      margin-top: 0.5em;\n      margin-bottom: 0.5em; }\n    #headerInfo #filterTextInput {\n      width: 200px;\n      font-size: 24px; }\n    #headerInfo #tagList {\n      font-size: 24px;\n      margin-top: 0.5em;\n      padding: 0; }\n      #headerInfo #tagList li {\n        display: inline-block;\n        margin-left: 3px;\n        margin-right: 3px;\n        list-style-type: none;\n        list-style-position: outside;\n        list-style-image: none; }\n      #headerInfo #tagList .tagItem button {\n        font-size: 24px;\n        border: none; }\n      #headerInfo #tagList .tagInclude button {\n        color: white;\n        background: cornFlowerBlue; }\n      #headerInfo #tagList .tagExclude button {\n        color: white;\n        background: lightCoral; } }\n", ""]);
+	
+	// exports
+
+
+/***/ },
+/* 303 */
+/***/ function(module, exports) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	// css base code, injected by the css-loader
+	module.exports = function() {
+		var list = [];
+	
+		// return the list of modules as css string
+		list.toString = function toString() {
+			var result = [];
+			for(var i = 0; i < this.length; i++) {
+				var item = this[i];
+				if(item[2]) {
+					result.push("@media " + item[2] + "{" + item[1] + "}");
+				} else {
+					result.push(item[1]);
+				}
+			}
+			return result.join("");
+		};
+	
+		// import a list of modules into the list
+		list.i = function(modules, mediaQuery) {
+			if(typeof modules === "string")
+				modules = [[null, modules, ""]];
+			var alreadyImportedModules = {};
+			for(var i = 0; i < this.length; i++) {
+				var id = this[i][0];
+				if(typeof id === "number")
+					alreadyImportedModules[id] = true;
+			}
+			for(i = 0; i < modules.length; i++) {
+				var item = modules[i];
+				// skip already imported module
+				// this implementation is not 100% perfect for weird media query combinations
+				//  when a module is imported multiple times with different media queries.
+				//  I hope this will never occur (Hey this way we have smaller bundles)
+				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+					if(mediaQuery && !item[2]) {
+						item[2] = mediaQuery;
+					} else if(mediaQuery) {
+						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+					}
+					list.push(item);
+				}
+			}
+		};
+		return list;
+	};
+
+
+/***/ },
+/* 304 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	var stylesInDom = {},
+		memoize = function(fn) {
+			var memo;
+			return function () {
+				if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+				return memo;
+			};
+		},
+		isOldIE = memoize(function() {
+			return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
+		}),
+		getHeadElement = memoize(function () {
+			return document.head || document.getElementsByTagName("head")[0];
+		}),
+		singletonElement = null,
+		singletonCounter = 0;
+	
+	module.exports = function(list, options) {
+		if(false) {
+			if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+		}
+	
+		options = options || {};
+		// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+		// tags it will allow on a page
+		if (typeof options.singleton === "undefined") options.singleton = isOldIE();
+	
+		var styles = listToStyles(list);
+		addStylesToDom(styles, options);
+	
+		return function update(newList) {
+			var mayRemove = [];
+			for(var i = 0; i < styles.length; i++) {
+				var item = styles[i];
+				var domStyle = stylesInDom[item.id];
+				domStyle.refs--;
+				mayRemove.push(domStyle);
+			}
+			if(newList) {
+				var newStyles = listToStyles(newList);
+				addStylesToDom(newStyles, options);
+			}
+			for(var i = 0; i < mayRemove.length; i++) {
+				var domStyle = mayRemove[i];
+				if(domStyle.refs === 0) {
+					for(var j = 0; j < domStyle.parts.length; j++)
+						domStyle.parts[j]();
+					delete stylesInDom[domStyle.id];
+				}
+			}
+		};
+	}
+	
+	function addStylesToDom(styles, options) {
+		for(var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+			if(domStyle) {
+				domStyle.refs++;
+				for(var j = 0; j < domStyle.parts.length; j++) {
+					domStyle.parts[j](item.parts[j]);
+				}
+				for(; j < item.parts.length; j++) {
+					domStyle.parts.push(addStyle(item.parts[j], options));
+				}
+			} else {
+				var parts = [];
+				for(var j = 0; j < item.parts.length; j++) {
+					parts.push(addStyle(item.parts[j], options));
+				}
+				stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+			}
+		}
+	}
+	
+	function listToStyles(list) {
+		var styles = [];
+		var newStyles = {};
+		for(var i = 0; i < list.length; i++) {
+			var item = list[i];
+			var id = item[0];
+			var css = item[1];
+			var media = item[2];
+			var sourceMap = item[3];
+			var part = {css: css, media: media, sourceMap: sourceMap};
+			if(!newStyles[id])
+				styles.push(newStyles[id] = {id: id, parts: [part]});
+			else
+				newStyles[id].parts.push(part);
+		}
+		return styles;
+	}
+	
+	function createStyleElement() {
+		var styleElement = document.createElement("style");
+		var head = getHeadElement();
+		styleElement.type = "text/css";
+		head.appendChild(styleElement);
+		return styleElement;
+	}
+	
+	function createLinkElement() {
+		var linkElement = document.createElement("link");
+		var head = getHeadElement();
+		linkElement.rel = "stylesheet";
+		head.appendChild(linkElement);
+		return linkElement;
+	}
+	
+	function addStyle(obj, options) {
+		var styleElement, update, remove;
+	
+		if (options.singleton) {
+			var styleIndex = singletonCounter++;
+			styleElement = singletonElement || (singletonElement = createStyleElement());
+			update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
+			remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
+		} else if(obj.sourceMap &&
+			typeof URL === "function" &&
+			typeof URL.createObjectURL === "function" &&
+			typeof URL.revokeObjectURL === "function" &&
+			typeof Blob === "function" &&
+			typeof btoa === "function") {
+			styleElement = createLinkElement();
+			update = updateLink.bind(null, styleElement);
+			remove = function() {
+				styleElement.parentNode.removeChild(styleElement);
+				if(styleElement.href)
+					URL.revokeObjectURL(styleElement.href);
+			};
+		} else {
+			styleElement = createStyleElement();
+			update = applyToTag.bind(null, styleElement);
+			remove = function() {
+				styleElement.parentNode.removeChild(styleElement);
+			};
+		}
+	
+		update(obj);
+	
+		return function updateStyle(newObj) {
+			if(newObj) {
+				if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
+					return;
+				update(obj = newObj);
+			} else {
+				remove();
+			}
+		};
+	}
+	
+	var replaceText = (function () {
+		var textStore = [];
+	
+		return function (index, replacement) {
+			textStore[index] = replacement;
+			return textStore.filter(Boolean).join('\n');
+		};
+	})();
+	
+	function applyToSingletonTag(styleElement, index, remove, obj) {
+		var css = remove ? "" : obj.css;
+	
+		if (styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = replaceText(index, css);
+		} else {
+			var cssNode = document.createTextNode(css);
+			var childNodes = styleElement.childNodes;
+			if (childNodes[index]) styleElement.removeChild(childNodes[index]);
+			if (childNodes.length) {
+				styleElement.insertBefore(cssNode, childNodes[index]);
+			} else {
+				styleElement.appendChild(cssNode);
+			}
+		}
+	}
+	
+	function applyToTag(styleElement, obj) {
+		var css = obj.css;
+		var media = obj.media;
+		var sourceMap = obj.sourceMap;
+	
+		if(media) {
+			styleElement.setAttribute("media", media)
+		}
+	
+		if(styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = css;
+		} else {
+			while(styleElement.firstChild) {
+				styleElement.removeChild(styleElement.firstChild);
+			}
+			styleElement.appendChild(document.createTextNode(css));
+		}
+	}
+	
+	function updateLink(linkElement, obj) {
+		var css = obj.css;
+		var media = obj.media;
+		var sourceMap = obj.sourceMap;
+	
+		if(sourceMap) {
+			// http://stackoverflow.com/a/26603875
+			css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+		}
+	
+		var blob = new Blob([css], { type: "text/css" });
+	
+		var oldSrc = linkElement.href;
+	
+		linkElement.href = URL.createObjectURL(blob);
+	
+		if(oldSrc)
+			URL.revokeObjectURL(oldSrc);
+	}
+
 
 /***/ }
 /******/ ]);

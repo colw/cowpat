@@ -7,6 +7,8 @@ import {newsItems, numberOfReaders, sourceList, getStateFromNewsItems, getStateF
 import {NewsInfo, NewsCow, NewsSearchBar, NewsTagList} from './news_view_header';
 import {HowCow} from './news_view_about';
 
+require('../scss/style.scss');
+
 var NewsItem = React.createClass({
   mixins: [FormatURLMixin, SetIntervalMixin],
   getInitialState: function() {

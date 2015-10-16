@@ -2,6 +2,8 @@ import React from 'react';
 
 import {FormatURLMixin, RandomHelpMixin} from './news_view_mixins.js';
 
+var cowImg = require('../images/Guernsey_cow.png');
+
 var NewsCow = React.createClass({
   mixins: [RandomHelpMixin],
   getInitialState: function() {
@@ -10,7 +12,7 @@ var NewsCow = React.createClass({
       , "News that mooves you"
       , "Hoofin' along"      
     ];
-    return {cow: './images/Guernsey_cow.png', cowords: cowords};
+    return {cow: cowImg, cowords: cowords};
   },
   handleClick: function() {
     this.props.onClickHandler();
