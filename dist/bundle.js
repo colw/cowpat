@@ -39054,7 +39054,7 @@
 	      }
 	      return _react2["default"].createElement(
 	        "span",
-	        { id: "sourceList", onClick: this.handleClick },
+	        { id: "sourceList", onClick: this.handleClick.bind(this) },
 	        'from ' + this.props.sourceList.length + ' Sources',
 	        elt
 	      );
@@ -39336,7 +39336,7 @@
 	      var saying = this.state.cowords[randElt];
 	      return _react2["default"].createElement(
 	        "div",
-	        { id: "cow", onClick: this.props.onClickHandler },
+	        { id: "cow", onClick: this.handleClick.bind(this) },
 	        _react2["default"].createElement("img", { src: this.state.cow, alt: "A black and white cow", title: saying })
 	      );
 	    }
