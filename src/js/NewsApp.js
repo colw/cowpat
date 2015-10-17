@@ -112,8 +112,8 @@ export default class NewsApp extends React.Component {
   }
 
   handleTagClick (tagName) {
-    var tags = this.state.filterTags.filter(function(x) {return x != tagName;});
-    
+    var tags = this.state.filterTags.filter(x => x != tagName);
+
     if (this.state.filterText.length > 0)
       tags = tags.concat(this.state.filterText);
     
@@ -130,21 +130,21 @@ export default class NewsApp extends React.Component {
       return this.filterListWithTags(list, tags.slice(1));
     } else { 
       
-      var searchText = function(x) {
+      var searchText = x => {
         return  ((x.title?x.title:'') 
                 + (x.metatitle?x.metatitle:'')
                 + (x.metalink?x.metalink:'')).toLowerCase();
       }
       
-      var filterContains = function(curTag, x) {
-        return function(x) {
+      var filterContains = (curTag, x) => {
+        return x => {
           var xt = searchText(x);
           return xt.indexOf(curTag) !== -1
         };
       };
   
-      var filterContainsNot = function(curTag, x) {
-        return function(x) {
+      var filterContainsNot = (curTag, x) => {
+        return x => {
           var xt = searchText(x);
           return xt.indexOf(curTag) === -1
         };

@@ -12,9 +12,7 @@ export default class NewsSources extends React.Component {
 
   render () {
     var that = this;
-    var makeList = function(x) {
-      return (<li key={x} className="sourceItem">{x}</li>);
-    };
+    var makeList = x => <li key={x} className="sourceItem">{x}</li>;
     var elt = null;
     if (this.state.showSources) {
       elt = (<ul>{ this.props.sourceList.map(makeList) }</ul>);

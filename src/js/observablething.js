@@ -1,7 +1,7 @@
 export default class ObservableThing {
 	constructor(thing) {
 	  this.thing = thing;
-    this.onChangeListener = null;
+      this.onChangeListener = null;
 	}
 
 	set(newValue) {

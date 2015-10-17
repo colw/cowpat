@@ -13,9 +13,7 @@ export default class NewsList extends React.Component {
         </div>
       );
     } else {
-      var makeList = function(x) {
-        return (<li key={x.guid}><NewsItem info={x} /></li>);
-      };
+      var makeList = x => <li key={x.guid}><NewsItem info={x}/></li>;
       return (
   			<ul>
           { this.props.newsItems.map(makeList) }

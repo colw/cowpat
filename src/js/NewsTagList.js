@@ -6,7 +6,7 @@ export default class NewsTagList extends React.Component {
   }
 
   handleClick (e) {
-      this.props.onTagClick(e.currentTarget.getAttribute('value'));
+    this.props.onTagClick(e.currentTarget.getAttribute('value'));
   }
 
   render () {
