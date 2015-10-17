@@ -24,7 +24,7 @@ export default class NewsCow extends React.Component {
     var randElt = this.getRandomInteger(0, this.state.cowords.length);
     var saying = this.state.cowords[randElt];
 		return (
-      <div id="cow" onClick={this.props.onClickHandler}>
+      <div id="cow" onClick={this.handleClick.bind(this)}>
         <img src={this.state.cow} alt="A black and white cow" title={saying} />
       </div>
 		);

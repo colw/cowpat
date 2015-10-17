@@ -20,7 +20,7 @@ export default class NewsSources extends React.Component {
       elt = (<ul>{ this.props.sourceList.map(makeList) }</ul>);
     }
     return (
-      <span id="sourceList" onClick={this.handleClick}>
+      <span id="sourceList" onClick={this.handleClick.bind(this)}>
         {'from ' + this.props.sourceList.length + ' Sources' }
         {elt}
       </span>
