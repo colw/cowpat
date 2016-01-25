@@ -3,8 +3,7 @@ var webpack = require('webpack');
 
 var constants = new webpack.DefinePlugin({
     ENVIRONMENT: JSON.stringify(process.env.NODE_ENV),
-    FEEDS: JSON.stringify(process.env.NODE_ENV === 'production' ?
-      'https://ruminator.herokuapp.com/' : 'http://localhost:9000/'),
+    FEEDSRC: JSON.stringify(process.env.NODE_ENV === 'production' ? 'https://ruminator.herokuapp.com/' : 'http://localhost:9000/')
 });
 
 module.exports = {
@@ -20,9 +19,11 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.js$/,
-        loaders: ['react-hot-loader', 'babel-loader'],
-        include: path.join(__dirname, 'src')
+        test: /\.js?$/,
+        include: path.join(__dirname, 'src'),
+        exclude: /(node_modules|bower_components)/,
+        loader: 'babel', // 'babel-loader' is also a legal name to reference    
+        cacheDirectory: true
       },
       {
         test: /\.scss$/,
@@ -43,6 +44,5 @@ module.exports = {
     // you can now require('file') instead of require('file.coffee')
     extensions: ['', '.js', '.json', '.coffee']
   },
-  devtool: "#source-map",
   plugins: [constants]
 };

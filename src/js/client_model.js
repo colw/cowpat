@@ -1,7 +1,8 @@
 import ObservableThing from './ObservableThing';
-import io from "socket.io-client";
 
-var  socket = io(FEEDS);
+var io = require("socket.io-client");
+
+var  socket = io(FEEDSRC);
 
 export var newsItems = new ObservableThing([]);
 export function getStateFromNewsItems() {
