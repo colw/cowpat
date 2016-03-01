@@ -22,13 +22,17 @@ module.exports = {
         test: /\.js?$/,
         include: path.join(__dirname, 'src'),
         exclude: /(node_modules|bower_components)/,
-        loader: 'babel', // 'babel-loader' is also a legal name to reference    
+        loader: 'babel', // 'babel-loader' is also a legal name to reference
         cacheDirectory: true
       },
       {
         test: /\.scss$/,
         loaders: ['style', 'css', 'sass'],
         include: path.join(__dirname, 'src/scss')
+      },
+      {
+        test: /\.css$/,
+        loader: "style-loader!css-loader"
       },
       {
         test: /\.(png|jpg)$/,

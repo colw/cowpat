@@ -18,6 +18,7 @@ import NewsCow from "./NewsCow";
 import HowCow from './HowCow';
 
 require('../scss/style.scss');
+require('purecss/build/pure.css');
 
 export default class NewsApp extends React.Component {
 
