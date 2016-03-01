@@ -177,6 +177,7 @@ export default class NewsApp extends React.Component {
           <NewsTagList filterTags={this.state.filterTags} onTagClick={this.handleTagClick.bind(this)}/>
         </div>
         <div id="mainList">
+          {this.props.children}
           <NewsList newsItems={this.state.filteredNewsItems} filterText={this.state.filterText.toLowerCase()} filterTags={this.state.filterTags}/>
         </div>
       </div>
