@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import { Link } from 'react-router';
 
 import {newsItems,
         numberOfReaders,
@@ -44,7 +45,7 @@ export default class NewsApp extends React.Component {
 
   setInterval () {
     this.intervals.push(setInterval.apply(null, arguments));
-  } 
+  }
 
   componentWillUnmount () {
     this.intervals.map(clearInterval);
@@ -78,9 +79,9 @@ export default class NewsApp extends React.Component {
   }
 
 	handleUserInput (filterText) {
-    
+
     var modFilterText = filterText.toLowerCase();
-    
+
     if (modFilterText[0] === '-') {
       this.setState({filterText: filterText});
       return;
@@ -90,16 +91,16 @@ export default class NewsApp extends React.Component {
       tags = tags.concat(modFilterText);8
     }
     var newFilteredNewsList = this.filterListWithTags(this.state.newsItems, tags);
-    
+
 		this.setState({filterText: filterText, filteredNewsItems: newFilteredNewsList});
 	}
 
   handleSubmit (filterText) {
-    var newTags;  
+    var newTags;
     if(filterText === '')
       return;
-    
-    if (filterText[0] !== '-') {    
+
+    if (filterText[0] !== '-') {
       newTags = this.state.filterTags.concat(filterText.toLowerCase());
       this.setState({filterText: '', filterTags: newTags});
       return;
@@ -116,7 +117,7 @@ export default class NewsApp extends React.Component {
 
     if (this.state.filterText.length > 0)
       tags = tags.concat(this.state.filterText);
-    
+
     var newFilteredNewsList = this.filterListWithTags(this.state.newsItems, tags);
     this.setState({filterTags: tags, filteredNewsItems: newFilteredNewsList});
   }
@@ -124,25 +125,25 @@ export default class NewsApp extends React.Component {
   filterListWithTags (list, tags) {
     if (list.length === 0) {
       return [];
-    } else if (tags.length === 0) { 
-      return list;      
+    } else if (tags.length === 0) {
+      return list;
     } else if (tags[0] === '-') { /* move empty string check elsewhere */
       return this.filterListWithTags(list, tags.slice(1));
-    } else { 
-      
+    } else {
+
       var searchText = x => {
-        return  ((x.title?x.title:'') 
+        return  ((x.title?x.title:'')
                 + (x.metatitle?x.metatitle:'')
                 + (x.metalink?x.metalink:'')).toLowerCase();
       }
-      
+
       var filterContains = (curTag, x) => {
         return x => {
           var xt = searchText(x);
           return xt.indexOf(curTag) !== -1
         };
       };
-  
+
       var filterContainsNot = (curTag, x) => {
         return x => {
           var xt = searchText(x);
@@ -151,24 +152,19 @@ export default class NewsApp extends React.Component {
       };
 
       var curTag = tags[0];
-      var filteredList;      
+      var filteredList;
       if (curTag[0] === '-') {
         curTag = curTag.slice(1);
         filteredList = list.filter(filterContainsNot(curTag));
       } else {
         filteredList = list.filter(filterContains(curTag));
       }
-            
+
       return this.filterListWithTags(filteredList, tags.slice(1));
     }
   }
 
-  onCowClick (e) {
-    this.setState({showAbout: !this.state.showAbout});
-  }
-
 	render() {
-    var main = this.state.showAbout ? <HowCow /> : (<NewsList newsItems={this.state.filteredNewsItems} filterText={this.state.filterText.toLowerCase()} filterTags={this.state.filterTags}/>);
     return (
       <div id="MainContent">
         <div id="headerInfo">
@@ -176,12 +172,12 @@ export default class NewsApp extends React.Component {
                     minutes={this.state.minutes}
                     others={this.state.numberOfReaders}
                     sources={this.state.sourceList} />
-          <NewsCow onClickHandler={this.onCowClick.bind(this)}/>
-          <NewsSearchBar onUserInput={ this.handleUserInput.bind(this) } filterText={this.state.filterText} onFilterSubmit={this.handleSubmit.bind(this)}/>      
+          <Link to="/about"><NewsCow /></Link>
+          <NewsSearchBar onUserInput={ this.handleUserInput.bind(this) } filterText={this.state.filterText} onFilterSubmit={this.handleSubmit.bind(this)}/>
           <NewsTagList filterTags={this.state.filterTags} onTagClick={this.handleTagClick.bind(this)}/>
         </div>
         <div id="mainList">
-                    {main}
+          <NewsList newsItems={this.state.filteredNewsItems} filterText={this.state.filterText.toLowerCase()} filterTags={this.state.filterTags}/>
         </div>
       </div>
 		);
