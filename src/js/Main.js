@@ -1,5 +1,14 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-import NewsApp from './NewsApp';
+import { Router, Route, hashHistory } from 'react-router'
 
-ReactDOM.render(<NewsApp />, document.getElementById('ReactMountPoint'));
+import NewsApp from './NewsApp';
+import HowCow from './HowCow'
+
+
+ReactDOM.render((
+  <Router history={hashHistory}>
+    <Route path='/' component={NewsApp} />
+    <Route path='/about' component={HowCow} />
+  </Router>
+), document.getElementById('ReactMountPoint'));
