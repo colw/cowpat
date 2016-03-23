@@ -112,7 +112,7 @@ export default class NewsApp extends React.Component {
                                       // a top tag. Usually this is called
                                       // as a user types.
                                       // It also means it is run twice
-                                      // if a user types new tag in.    
+                                      // if a user types new tag in.
     var newTags;
     if(filterText === '')
       return;
@@ -197,8 +197,10 @@ export default class NewsApp extends React.Component {
           <NewsWordList wordList={this.state.topWords} onTagClick={this.handleSubmit.bind(this)}/>
         </div>
         <div id="mainList">
-          {this.props.children}
-          <NewsList newsItems={this.state.filteredNewsItems} filterText={this.state.filterText.toLowerCase()} filterTags={this.state.filterTags}/>
+          {this.props.children ?
+            this.props.children :
+            <NewsList newsItems={this.state.filteredNewsItems} filterText={this.state.filterText.toLowerCase()} filterTags={this.state.filterTags}/>
+          }
         </div>
       </div>
 		);
