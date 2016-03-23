@@ -11,11 +11,11 @@ export default class NewsTagList extends React.Component {
 
   render () {
     var makeList = (x) => {
-      var className="tagItem tagInclude";
+      var className="tagItem tagInclude actionRemoveTag";
       var text = x;
       if (x[0] === '-') {
         text = x.slice(1);
-        className="tagItem tagExclude";
+        className="tagItem tagExclude actionRemoveTag";
       }
       return (
         <li key={x} className={className}>

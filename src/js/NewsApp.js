@@ -5,12 +5,16 @@ import { Link } from 'react-router';
 import {newsItems,
         numberOfReaders,
         sourceList,
+        topWords,
         getStateFromNewsItems,
         getStateFromNumberOfReaders,
-        getStateFromSourceList} from './client_model';
+        getStateFromSourceList,
+        getStateFromTopWords,
+      } from './client_model';
 
 import NewsSearchBar from './NewsSearchBar';
 import NewsTagList from './NewsTagList';
+import NewsWordList from './NewsWordList';
 import NewsInfo from "./NewsInfo";
 import NewsItem from "./NewsItem";
 import NewsList from "./NewsList";
@@ -18,7 +22,7 @@ import NewsCow from "./NewsCow";
 import HowCow from './HowCow';
 
 require('../scss/style.scss');
-require('purecss/build/pure.css');
+// require('purecss/build/pure.css');
 
 export default class NewsApp extends React.Component {
 
@@ -31,6 +35,7 @@ export default class NewsApp extends React.Component {
       , filteredNewsItems: []
       , numberOfReaders: getStateFromNumberOfReaders()
       , sourceList: getStateFromSourceList()
+      , topWords: getStateFromTopWords()
       , minutes: 0
       , showAbout: false
     };
@@ -56,6 +61,7 @@ export default class NewsApp extends React.Component {
     newsItems.setChangeListener(this.onStorageChange.bind(this));
     numberOfReaders.setChangeListener(this.onReaderChange.bind(this));
     sourceList.setChangeListener(this.onSourceListChange.bind(this));
+    topWords.setChangeListener(this.onTopWordsChange.bind(this));
     this.setInterval(this.tick.bind(this), 60000);
     this.setState({filteredNewsItems: this.state.newsItems.slice()});
   }
@@ -79,6 +85,11 @@ export default class NewsApp extends React.Component {
     this.setState({sourceList: s});
   }
 
+  onTopWordsChange () {
+    var s = getStateFromTopWords();
+    this.setState({topWords: s});
+  }
+
 	handleUserInput (filterText) {
 
     var modFilterText = filterText.toLowerCase();
@@ -97,9 +108,16 @@ export default class NewsApp extends React.Component {
 	}
 
   handleSubmit (filterText) {
+    this.handleUserInput(filterText); // FIX This is here in case a user clicks
+                                      // a top tag. Usually this is called
+                                      // as a user types.
+                                      // It also means it is run twice
+                                      // if a user types new tag in.    
     var newTags;
     if(filterText === '')
       return;
+
+    console.debug(filterText);
 
     if (filterText[0] !== '-') {
       newTags = this.state.filterTags.concat(filterText.toLowerCase());
@@ -176,6 +194,7 @@ export default class NewsApp extends React.Component {
           <Link to="/about"><NewsCow /></Link>
           <NewsSearchBar onUserInput={ this.handleUserInput.bind(this) } filterText={this.state.filterText} onFilterSubmit={this.handleSubmit.bind(this)}/>
           <NewsTagList filterTags={this.state.filterTags} onTagClick={this.handleTagClick.bind(this)}/>
+          <NewsWordList wordList={this.state.topWords} onTagClick={this.handleSubmit.bind(this)}/>
         </div>
         <div id="mainList">
           {this.props.children}
