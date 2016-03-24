@@ -14,12 +14,18 @@ export default class NewsWordList extends React.Component {
   }
 
   render () {
+
+    if (!this.props.wordList.length) {
+      return <div></div>;
+    }
+
     var makeList = (x) => (
       <li key={x.word} className="tagItem tagPopular actionAddTag">
         <button type="button" value={x.word} onClick={this.handleClick.bind(this)}>{x.word.toLowerCase()}</button>
         <button type="button" value={x.word} onClick={this.handleRemoveClick.bind(this)}></button>
       </li>
     );
+
     return (
       <div>
         <div>Trending</div>
