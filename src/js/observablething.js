@@ -1,14 +1,14 @@
 export default class ObservableThing {
 	constructor(thing) {
 	  this.thing = thing;
-      this.onChangeListener = null;
+    this.onChangeListener = null;
 	}
 
 	set(newValue) {
 	  this.thing = newValue;
 	  this.notify();
 	}
-	
+
 	get() {
 	  return this.thing;
 	}

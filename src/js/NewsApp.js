@@ -117,8 +117,6 @@ export default class NewsApp extends React.Component {
     if(filterText === '')
       return;
 
-    console.debug(filterText);
-
     if (filterText[0] !== '-') {
       newTags = this.state.filterTags.concat(filterText.toLowerCase());
       this.setState({filterText: '', filterTags: newTags});

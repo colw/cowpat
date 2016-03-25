@@ -25,14 +25,34 @@ export function getStateFromTopWords() {
 }
 
 
+function isinArray(arr, elt) {
+  if (!arr) {
+    return false;
+  }
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i].guid === elt.guid) {
+      return true;
+    }
+  }
+  return false;
+}
+
+
 socket.on('nxws items', function(msg) {
 	var newItem = JSON.parse(msg);
+  // console.debug(typeof newItem, newItem.guid);
+
+  if (isinArray(newsItems.get(), newItem)) {
+    console.debug('not a new item');
+    return;
+  }
+
   newItem.date = new Date(newItem.date);
-  if (newItem.constructor == Object) newItem = [newItem];
-  newItem[0].fetchDate = new Date();
-  var currentNews = newsItems.get();
-  var totalNews = newItem.concat(currentNews);
-  newsItems.set(totalNews);
+  newItem.fetchDate = new Date();
+
+  var currentNews = newsItems.get() || [];
+  currentNews.push(newItem);
+  newsItems.set(currentNews);
 });
 
 socket.on('nxws readers', function(msg) {
