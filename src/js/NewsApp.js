@@ -185,10 +185,6 @@ export default class NewsApp extends React.Component {
     return (
       <div id="MainContent">
         <div id="headerInfo">
-          <NewsInfo itemcount={this.state.filteredNewsItems.length}
-                    minutes={this.state.minutes}
-                    others={this.state.numberOfReaders}
-                    sources={this.state.sourceList} />
           <Link to="/about"><NewsCow /></Link>
           <NewsSearchBar onUserInput={ this.handleUserInput.bind(this) } filterText={this.state.filterText} onFilterSubmit={this.handleSubmit.bind(this)}/>
           <NewsTagList filterTags={this.state.filterTags} onTagClick={this.handleTagClick.bind(this)}/>
