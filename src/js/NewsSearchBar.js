@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 export default class NewsSearchBar extends React.Component {
   constructor(props) {
@@ -16,6 +17,10 @@ export default class NewsSearchBar extends React.Component {
     e.preventDefault();
     var filterText = this.refs.filterTextInput.value;
     this.props.onFilterSubmit(filterText);
+  }
+
+  componentDidMount () {
+    ReactDOM.findDOMNode(this.refs.filterTextInput).focus();
   }
 
   render () {
