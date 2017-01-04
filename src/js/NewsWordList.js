@@ -25,7 +25,7 @@ export default class NewsWordList extends React.Component {
         <button type="button" value={x.word} onClick={this.handleRemoveClick.bind(this)}></button>
       </li>
     );
-
+    console.debug(this.props.wordList);
     return (
       <div>
         <div>Trending</div>

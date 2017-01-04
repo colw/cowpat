@@ -40,6 +40,8 @@ function isinArray(arr, elt) {
 
 socket.on('nxws items', function(msg) {
 	var newItem = JSON.parse(msg);
+  console.debug('items', msg);
+
   // console.debug(typeof newItem, newItem.guid);
 
   if (isinArray(newsItems.get(), newItem)) {
@@ -65,6 +67,7 @@ socket.on('nxws sources', function(jsonSources) {
 });
 
 socket.on('nxws top10', function(msg) {
+  console.debug('top10', msg);
 	var newTopWords = JSON.parse(msg);
   topWords.set(newTopWords);
 });
