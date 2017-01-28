@@ -20,9 +20,9 @@ export default class NewsWordList extends React.Component {
     }
 
     var makeList = (x) => (
-      <li key={x.word} className="tagItem tagPopular actionAddTag">
-        <button type="button" value={x.word} onClick={this.handleClick.bind(this)}>{x.word.toLowerCase()}</button>
-        <button type="button" value={x.word} onClick={this.handleRemoveClick.bind(this)}></button>
+      <li key={x} className="tagItem tagPopular actionAddTag">
+        <button type="button" value={x} onClick={this.handleClick.bind(this)}>{x.toLowerCase()}</button>
+        <button type="button" value={x} onClick={this.handleRemoveClick.bind(this)}></button>
       </li>
     );
 

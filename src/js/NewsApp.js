@@ -2,15 +2,15 @@ import React from 'react';
 import moment from 'moment';
 import { Link } from 'react-router';
 
-import {newsItems,
-        numberOfReaders,
-        sourceList,
-        topWords,
-        getStateFromNewsItems,
-        getStateFromNumberOfReaders,
-        getStateFromSourceList,
-        getStateFromTopWords,
-      } from './client_model';
+// import {newsItems,
+//         numberOfReaders,
+//         sourceList,
+//         topWords,
+//         getStateFromNewsItems,
+//         getStateFromNumberOfReaders,
+//         getStateFromSourceList,
+//         getStateFromTopWords,
+//       } from './client_model';
 
 import NewsSearchBar from './NewsSearchBar';
 import NewsTagList from './NewsTagList';
@@ -28,14 +28,10 @@ export default class NewsApp extends React.Component {
 
   constructor(props) {
     super(props);
+    console.debug(props);
     this.state = {
         filterText: ''
       , filterTags: []
-      , newsItems: getStateFromNewsItems()
-      , filteredNewsItems: []
-      , numberOfReaders: getStateFromNumberOfReaders()
-      , sourceList: getStateFromSourceList()
-      , topWords: getStateFromTopWords()
       , minutes: 0
       , showAbout: false
     };
@@ -43,6 +39,17 @@ export default class NewsApp extends React.Component {
 
   tick() {
     this.setState({minutes: this.state.minutes + 1});
+  }
+
+  fetchItems(tag) {
+      // const lastID = this.props.store.items[this.props.store.items.length-1].itemID;
+      this.props.store.fetchItems(null, tag);
+  }
+
+  componentWillUpdate(nextProps) {
+    if (nextProps.params.tag !== this.props.params.tag) {
+      this.fetchItems(this.props.params.tag);
+    }
   }
 
   componentWillMount () {
@@ -58,36 +65,7 @@ export default class NewsApp extends React.Component {
   }
 
   componentDidMount () {
-    newsItems.setChangeListener(this.onStorageChange.bind(this));
-    numberOfReaders.setChangeListener(this.onReaderChange.bind(this));
-    sourceList.setChangeListener(this.onSourceListChange.bind(this));
-    topWords.setChangeListener(this.onTopWordsChange.bind(this));
-    this.setInterval(this.tick.bind(this), 60000);
-    this.setState({filteredNewsItems: this.state.newsItems.slice()});
-  }
-
-  onStorageChange () {
-    var newNewsList = getStateFromNewsItems();
-    var tags = this.state.filterTags;
-    if (this.state.filterText.length > 0) {
-      tags = tags.concat(this.state.filterText);
-    }
-    var newFilteredNewsList = this.filterListWithTags(newNewsList, tags);
-    this.setState({newsItems: newNewsList, filteredNewsItems: newFilteredNewsList}); //woop
-  }
-
-  onReaderChange () {
-    this.setState({numberOfReaders: getStateFromNumberOfReaders()});
-  }
-
-  onSourceListChange () {
-    var s = getStateFromSourceList();
-    this.setState({sourceList: s});
-  }
-
-  onTopWordsChange () {
-    var s = getStateFromTopWords();
-    this.setState({topWords: s});
+   this.fetchItems();
   }
 
 	handleUserInput (filterText) {
@@ -135,7 +113,7 @@ export default class NewsApp extends React.Component {
     if (this.state.filterText.length > 0)
       tags = tags.concat(this.state.filterText);
 
-    var newFilteredNewsList = this.filterListWithTags(this.state.newsItems, tags);
+    var newFilteredNewsList = this.filterListWithTags(this.props.store.items, tags);
     this.setState({filterTags: tags, filteredNewsItems: newFilteredNewsList});
   }
 
@@ -188,12 +166,12 @@ export default class NewsApp extends React.Component {
           <NewsCow />
           <NewsSearchBar onUserInput={ this.handleUserInput.bind(this) } filterText={this.state.filterText} onFilterSubmit={this.handleSubmit.bind(this)}/>
           <NewsTagList filterTags={this.state.filterTags} onTagClick={this.handleTagClick.bind(this)}/>
-          <NewsWordList wordList={this.state.topWords} onTagClick={this.handleSubmit.bind(this)}/>
+          <NewsWordList wordList={this.props.store.tags} onTagClick={this.handleSubmit.bind(this)}/>
         </div>
         <div id="mainList">
           {this.props.children ?
             this.props.children :
-            <NewsList newsItems={this.state.filteredNewsItems} filterText={this.state.filterText.toLowerCase()} filterTags={this.state.filterTags}/>
+            <NewsList newsItems={this.props.store.items} filterText={this.state.filterText.toLowerCase()} filterTags={this.state.filterTags}/>
           }
         </div>
       </div>
