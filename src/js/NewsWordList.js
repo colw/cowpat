@@ -1,16 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router';
+
+const NavLink = (props) => (
+  <Link {...props} activeClassName="active" />
+)
 
 export default class NewsWordList extends React.Component {
   constructor(props) {
     super(props);
-  }
-
-  handleClick (e) {
-    this.props.onTagClick(e.currentTarget.getAttribute('value'));
-  }
-
-  handleRemoveClick (e) {
-    this.props.onTagClick('-' + e.currentTarget.getAttribute('value'));
   }
 
   render () {
@@ -20,15 +17,19 @@ export default class NewsWordList extends React.Component {
     }
 
     var makeList = (x) => (
-      <li key={x} className="tagItem tagPopular actionAddTag">
-        <button type="button" value={x} onClick={this.handleClick.bind(this)}>{x.toLowerCase()}</button>
-        <button type="button" value={x} onClick={this.handleRemoveClick.bind(this)}></button>
+      <li key={x} className="pure-menu-item">
+        <Link className="pure-menu-link" to={`/items/${x}`}>{x}</Link>
       </li>
     );
 
     return (
-      <div>
-        <ul id="tagList">{ this.props.wordList.map(makeList) }</ul>
+      <div className="pure-menu pure-menu-horizontal">
+        <ul className="pure-menu-list">
+          <li key={'/'} className="pure-menu-item">
+            <NavLink className="pure-menu-link" to="/"><i className="fa fa-home" aria-hidden="true"></i></NavLink>
+          </li>
+          { this.props.wordList.map(makeList) }
+        </ul>
       </div>
     );
   }
