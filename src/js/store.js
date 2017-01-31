@@ -40,11 +40,10 @@ class Store {
 			currentTag: this.currentTag,
 		}
 	}
-	fetchItems(fetchTag) {
-		fetchTag = fetchTag || '';
-		const path =  window.location.pathname.split('/');
+	fetchItems(fetchTag, oldestID) {
+		fetchTag = fetchTag || this.currentTag;
+		oldestID = oldestID || null;
 		let tag = fetchTag;//getTagFromPath();
-		let oldestID = null;
 
 		fetch(`http://localhost:9000${tag ? '/items/' + tag + '' : ''}${oldestID ? '?&oldest=' + oldestID: ''}`)
 		  .then(res => res.json())
@@ -66,6 +65,13 @@ class Store {
 		  	}
 			this.notify();
 		  });
+	}
+	fetchMore() {
+		let oldestID = null;
+		if (this.items.length) {
+			oldestID = this.items[this.items.length-1].itemID;
+		}
+		this.fetchItems(this.currentTag, oldestID);
 	}
 }
 

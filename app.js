@@ -4,10 +4,10 @@ var app = express();
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/dist'));
 
-app.get('/items/*.png', function(req, res) {
-	console.log('img', req.url)
-	res.sendFile(__dirname + '/dist/' + req.url.split('/')[2]);
-})
+// app.get('/dist/icons/*', function(req, res) {
+// 	console.log('img', req.url)
+// 	res.sendFile(__dirname + '/dist/icons/' + req.url.split('/')[2]);
+// })
 
 app.get('/dist/bundle.js', function(req, res) {
 	console.log('tag req')

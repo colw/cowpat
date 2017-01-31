@@ -1,437 +1,550 @@
+// $bgcolor: #FFFFFF;
+// $primary-color: #000080;
+// $max-width: 900px;
+// $column-width: 290px;//$max-width / 3;
+// $tile-height: 200px;
+
+
+// body {
+//   font-family: "Open Sans", "sans-erif";
+//   font-weight: 800;
+//   line-height: 1.5;
+//   font-size: larger;
+//   background-color: $bgcolor;
+//   box-sizing: border-box;
+// }
+
+// #MainContent {
+//   max-width: $max-width;
+// }
+
+// // li {
+// //   list-style: none;
+// //   // margin-bottom: 1em;
+// //   padding: 0.5em;
+// // }
+
+// .pure-menu-link, a, a:visited {
+//   color: $primary-color;
+//   text-decoration: none;
+//   padding: 0.2em 1em;
+// }
+
+// .pure-menu-horizontal {
+//   white-space: normal;
+// }
+
+// .newsWrapper {
+//   width: 100%;
+// }
+
+// .newsItemWrapper {
+//   // padding: 6px;
+//   border: 1px solid $primary-color;
+//   height: $tile-height;
+//   width: $column-width;
+//   max-width: $column-width;
+//   display: inline-block;
+//   float: left;
+// }
+
+// .newsItem {
+//   margin: 6px;
+// }
+
+// .newsItem .subTitle {
+//   // background-color: #eee;
+//   font-size: 0.5em;
+//   display: inline-block;
+//   font-weight: 400;
+//   margin-left: 3em;
+// }
+
+// .subTime {
+//   display: none;
+// }
+
+// .example-enter {
+//   opacity: 0.01;
+// }
+
+// .example-enter.example-enter-active {
+//   opacity: 1;
+//   transition: opacity 500ms ease-in;
+// }
+
+// .example-leave {
+//   opacity: 1;
+// }
+
+// .example-leave.example-leave-active {
+//   opacity: 0.01;
+//   transition: opacity 300ms ease-in;
+// }
+
+// .example-appear {
+//   opacity: 0.01;
+// }
+
+// .example-appear.example-appear-active {
+//   opacity: 1;
+//   transition: opacity .5s ease-in;
+// }
+
+$font-stack: "Gill Sans MT", "Gill Sans", "Gill Sans Std", Verdana, "Bitstream Vera Sans";
+$subfont-stack: 'Roboto';
+$font-size-desktop: large;
+$font-size-mobile: xx-large;
+
+$bgcolour: #FDFDFD;
+$primary-color: #333;
+$subtitle-color: #888;
+$nogoodnews: gray;
+
+$maxwidth: 900px;
+
+$tag-color-include: white;
+$tag-color-exclude: white;
+$tag-color-popular: white;
+
+$tag-bg-include: cornFlowerBlue;
+$tag-bg-exclude: lightCoral;
+$tag-bg-popular: greenPeas;
+
+
+$normal: "only screen and (min-width: 1024px)";
+$smallerwindow: "only screen and (max-width: 1023px)";
+$tinywindow: "only screen and (max-device-width: 480px)";
+$retina: "only screen and (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)";
+
 body {
-  font-family: "Open Sans", "sans-erif";
-  font-weight: 800;
-  line-height: 1.5;
-  font-size: larger;
+  background-color: $bgcolour;
+  font-family: $subfont-stack;
+  color: $primary-color;
 }
 
-li {
-  list-style: none;
-  margin-bottom: 1em;
+#emptyList {
+  text-align: center;
 }
 
-a {
-  color: #333;
+#nogoodnews {
+  margin: 2em;
+  color: $nogoodnews;
+  font-size: smaller;
+}
+
+#headerInfo {
+  font-family: $subfont-stack;
+}
+
+#aboutCow {
+  font-size: smaller;
+
+   .tutTags {
+     margin-top: 0.5em;
+     list-style: none outside none;
+     display: block;
+
+     .tagItem {
+       margin-top: 3px;
+       margin-bottom: 3px;
+     }
+
+    .tagItem button {
+      display: block;
+      border: none;
+
+    }
+
+    .tagInclude button {
+      color: $tag-color-include;
+      background: $tag-bg-include;
+    }
+
+    .tagExclude button {
+      color: $tag-color-exclude;
+      background: $tag-bg-exclude;
+    }
+
+    .tagPopular button {
+      color: $tag-color-popular;
+      background: $tag-bg-popular;
+    }
+  }
+
+
+}
+
+@media #{$normal}, #{$smallerwindow} {
+  body {
+    font-size: $font-size-desktop;
+  }
+
+  #MainContent {
+    max-width: $maxwidth;
+    margin: 0 auto;
+    padding: 1em;
+  }
+
+  #mainList {
+
+    display: inline-block;
+    width: 75%;
+
+    ul {
+      list-style-type: circle;
+      list-style-position: outside;
+      list-style-image: none;
+
+      .newsItem {
+        margin-top: 1em;
+        margin-bottom: 1em;
+        text-align: left;
+
+        a {
+          text-decoration: none;
+        }
+
+        .headTitle {
+          color: $primary-color;
+          font-size: larger;
+        }
+
+        .subTitle {
+          font-family: $subfont-stack;
+          color: $subtitle-color;
+          margin-top: 0.2em;
+          margin-left: 2em;
+          text-align: left;
+          font-size: small;
+          content: "– ";
+        }
+        .subTitle:before {
+          content: "– ";
+        }
+      }
+
+    }
+  }
+
+  #headerInfo {
+
+    font-size: large;
+    p {
+      margin: 0;
+    }
+
+    #cow {
+      display: block;
+      img {
+        padding: 20px 0 10px 0;
+        max-width: 100px;
+      }
+    }
+
+    #filterBox {
+      margin-top: 0.5em;
+    }
+
+    #filterTextInput {
+      width: 100px;
+    }
+
+    #sourceList  {
+      cursor: pointer;
+
+      ul {
+        list-style-type: none;
+        list-style-position: outside;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        font-size: small;
+        color: gray;
+      }
+    }
+
+    #tagList {
+      margin-top: 0.5em;
+      padding: 0;
+
+      li {
+        margin-left: 3px;
+        margin-right: 3px;
+        margin-top: 6px;
+      }
+
+      .tagItem {
+      }
+
+      .tagItem button {
+        cursor: pointer;
+        border: none;
+      }
+
+      // .tagItem.actionRemoveTag:hover,  .tagItem.actionRemoveTag:focus {
+      //   button:before {
+      //     content: "x ";
+      //   }
+      // }
+
+      .tagItem.actionAddTag, .tagItem.actionAddTag {
+        button:last-child {
+          display: none;
+        }
+      }
+
+      // .tagItem.actionAddTag:hover, .tagItem.actionAddTag:focus {
+      //   button:first-child:before {
+      //     content: "o ";
+      //   }
+      //   button:last-child {
+      //     display: inline-block;
+      //   }
+      //   button:last-child:before {
+      //     content: "x";
+      //   }
+      // }
+
+      .tagInclude button {
+        color: $tag-color-include;
+        background: $tag-bg-include;
+      }
+
+      .tagExclude button {
+        color: $tag-color-exclude;
+        background: $tag-bg-exclude;
+      }
+
+      .tagPopular button {
+        color: $tag-color-popular;
+        background: $tag-bg-popular;
+      }
+
+    }
+
+  }
+
+}
+
+@media #{$normal} {
+
+  #headerInfo {
+    float: right; /*desktop*/
+
+    #newheader {
+      span {
+        display: block; /*desktop*/
+      }
+    }
+
+    #tagList {
+      // .tagItem.actionRemoveTag:hover,  .tagItem.actionRemoveTag:focus {
+      //   button:before {
+      //     content: "x ";
+      //   }
+      // }
+
+      .tagItem.actionAddTag, .tagItem.actionAddTag {
+        button:last-child {
+          display: none;
+        }
+      }
+
+      // .tagItem.actionAddTag:hover, .tagItem.actionAddTag:focus {
+      //   button:first-child:before {
+      //     content: "o ";
+      //   }
+      //   button:last-child {
+      //     display: inline-block;
+      //   }
+      //   button:last-child:before {
+      //     content: "x";
+      //   }
+      // }
+
+      li {
+        display: block;
+      }
+    }
+  }
+}
+
+@media #{$smallerwindow} {
+
+  body {
+    font-size: $font-size-desktop;
+  }
+
+  #mainList {
+    width: 95%;
+
+    ul {
+      list-style-type: none;
+    }
+  }
+
+  #headerInfo {
+
+    #tagList {
+
+      li {
+        display: inline-block;
+      }
+    }
+  }
+}
+
+@media #{$tinywindow} {
+
+  body {
+    font-size: $font-size-mobile;
+  }
+
+  #mainList {
+    ul {
+      list-style-type: none;
+      list-style-position: outside;
+      list-style-image: none;
+
+      .newsItem {
+        margin-top: 1em;
+        margin-bottom: 1em;
+        text-align: left;
+
+        a {
+          text-decoration: none;
+        }
+
+        .headTitle {
+          color: $primary-color;
+          font-size: 48px;
+        }
+
+        .subTitle {
+          font-family: $subfont-stack;
+          color: $subtitle-color;
+          margin-top: 0.2em;
+          margin-left: 2em;
+          text-align: left;
+          font-size: smaller;
+          content: "– ";
+        }
+        .subTitle:before {
+          content: "– ";
+        }
+      }
+    }
+  }
+
+  #headerInfo {
+    font-size: larger;
+    p {
+      margin: 0;
+    }
+
+    #cow {
+      display: none;
+    }
+
+    #filterBox {
+      margin-top: 0.5em;
+      margin-bottom: 0.5em;
+    }
+
+    #filterTextInput {
+      width: 200px;
+      font-size: 24px;
+    }
+
+    #tagList {
+      font-size: 24px;
+      margin-top: 0.5em;
+      padding: 0;
+
+      li {
+        display: inline-block;
+        margin-left: 3px;
+        margin-right: 3px;
+        list-style-type: none;
+        list-style-position: outside;
+        list-style-image: none;
+      }
+
+      .tagItem button {
+        font-size: 24px;
+        border: none;
+      }
+
+      .tagInclude button {
+        color: $tag-color-include;
+        background: $tag-bg-include;
+      }
+
+      .tagExclude button {
+        color: $tag-color-exclude;
+        background: $tag-bg-exclude;
+      }
+
+      .tagPopular button {
+        color: $tag-color-popular;
+        background: $tag-bg-popular;
+      }
+
+    }
+
+  }
+}
+
+.subTitle {
+  a, a:visited {
+    color: gray;
+  }
+}
+
+.tagItem {
+  padding: 2px;
+  margin: 10px;
+}
+
+.tagItem a {
+  background-color: lighten($subtitle-color, 20%);
+  color: white;
+}
+
+.tagItem a:hover {
+  background-color: #333;
+  color: white;
+}
+
+.tagItem a {
+  margin: 4px;
+  padding: 4px;
   text-decoration: none;
 }
 
-.newsItem {
+.load-more-wrapper {
+  text-align: center;
+  margin-top: 2em;
+}
+
+$load-more-size: 1.5em;
+
+.load-more-button {
+  background-color: #bbbbbb;
+  font-size: 1.5em;
+  color: white;
+  margin: 2px;
+  padding: 2px;
+  text-decoration: none;
+  width: $load-more-size;
+  height: $load-more-size;
+  line-height: $load-more-size;
+  cursor: pointer;
   display: inline-block;
 }
 
-.newsItem .subTitle {
-  background-color: #eee;
-  font-size: 0.5em;
-  display: inline-block;
-  font-weight: 400;
-  margin-left: 3em;
+.load-more-button:hover {
+  background-color: #333;
+  color: white;
 }
-
-.subTime {
-  display: none;
-}
-
-// $font-stack: "Gill Sans MT", "Gill Sans", "Gill Sans Std", Verdana, "Bitstream Vera Sans";
-// $subfont-stack: 'Roboto';
-// $font-size-desktop: large;
-// $font-size-mobile: xx-large;
-
-// $bgcolour: #FDFDFD;
-// $primary-color: #333;
-// $subtitle-color: #888;
-// $nogoodnews: gray;
-
-// $maxwidth: 900px;
-
-// $tag-color-include: white;
-// $tag-color-exclude: white;
-// $tag-color-popular: white;
-
-// $tag-bg-include: cornFlowerBlue;
-// $tag-bg-exclude: lightCoral;
-// $tag-bg-popular: greenPeas;
-
-
-// $normal: "only screen and (min-width: 1024px)";
-// $smallerwindow: "only screen and (max-width: 1023px)";
-// $tinywindow: "only screen and (max-device-width: 480px)";
-// $retina: "only screen and (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)";
-
-// body {
-//   background-color: $bgcolour;
-//   font-family: $subfont-stack;
-//   color: $primary-color;
-// }
-
-// #emptyList {
-//   text-align: center;
-// }
-
-// #nogoodnews {
-//   margin: 2em;
-//   color: $nogoodnews;
-//   font-size: smaller;
-// }
-
-// #headerInfo {
-//   font-family: $subfont-stack;
-// }
-
-// #aboutCow {
-//   font-size: smaller;
-
-//    .tutTags {
-//      margin-top: 0.5em;
-//      list-style: none outside none;
-//      display: block;
-
-//      .tagItem {
-//        margin-top: 3px;
-//        margin-bottom: 3px;
-//      }
-
-//     .tagItem button {
-//       display: block;
-//       border: none;
-
-//     }
-
-//     .tagInclude button {
-//       color: $tag-color-include;
-//       background: $tag-bg-include;
-//     }
-
-//     .tagExclude button {
-//       color: $tag-color-exclude;
-//       background: $tag-bg-exclude;
-//     }
-
-//     .tagPopular button {
-//       color: $tag-color-popular;
-//       background: $tag-bg-popular;
-//     }
-//   }
-
-
-// }
-
-// @media #{$normal}, #{$smallerwindow} {
-//   body {
-//     font-size: $font-size-desktop;
-//   }
-
-//   #MainContent {
-//     max-width: $maxwidth;
-//     margin: 0 auto;
-//     padding: 1em;
-//   }
-
-//   #mainList {
-
-//     display: inline-block;
-//     width: 75%;
-
-//     ul {
-//       list-style-type: circle;
-//       list-style-position: outside;
-//       list-style-image: none;
-
-//       .newsItem {
-//         margin-top: 1em;
-//         margin-bottom: 1em;
-//         text-align: left;
-
-//         a {
-//           text-decoration: none;
-//         }
-
-//         .headTitle {
-//           color: $primary-color;
-//           font-size: larger;
-//         }
-
-//         .subTitle {
-//           font-family: $subfont-stack;
-//           color: $subtitle-color;
-//           margin-top: 0.2em;
-//           margin-left: 2em;
-//           text-align: left;
-//           font-size: small;
-//           content: "– ";
-//         }
-//         .subTitle:before {
-//           content: "– ";
-//         }
-//       }
-
-//     }
-//   }
-
-//   #headerInfo {
-
-//     font-size: large;
-//     p {
-//       margin: 0;
-//     }
-
-//     #cow {
-//       display: block;
-//       img {
-//         padding: 20px 0 10px 0;
-//         max-width: 100px;
-//       }
-//     }
-
-//     #filterBox {
-//       margin-top: 0.5em;
-//     }
-
-//     #filterTextInput {
-//       width: 100px;
-//     }
-
-//     #sourceList  {
-//       cursor: pointer;
-
-//       ul {
-//         list-style-type: none;
-//         list-style-position: outside;
-//         list-style-type: none;
-//         padding: 0;
-//         margin: 0;
-//         font-size: small;
-//         color: gray;
-//       }
-//     }
-
-//     #tagList {
-//       margin-top: 0.5em;
-//       padding: 0;
-
-//       li {
-//         margin-left: 3px;
-//         margin-right: 3px;
-//         margin-top: 6px;
-//       }
-
-//       .tagItem {
-//       }
-
-//       .tagItem button {
-//         cursor: pointer;
-//         border: none;
-//       }
-
-//       // .tagItem.actionRemoveTag:hover,  .tagItem.actionRemoveTag:focus {
-//       //   button:before {
-//       //     content: "x ";
-//       //   }
-//       // }
-
-//       .tagItem.actionAddTag, .tagItem.actionAddTag {
-//         button:last-child {
-//           display: none;
-//         }
-//       }
-
-//       // .tagItem.actionAddTag:hover, .tagItem.actionAddTag:focus {
-//       //   button:first-child:before {
-//       //     content: "o ";
-//       //   }
-//       //   button:last-child {
-//       //     display: inline-block;
-//       //   }
-//       //   button:last-child:before {
-//       //     content: "x";
-//       //   }
-//       // }
-
-//       .tagInclude button {
-//         color: $tag-color-include;
-//         background: $tag-bg-include;
-//       }
-
-//       .tagExclude button {
-//         color: $tag-color-exclude;
-//         background: $tag-bg-exclude;
-//       }
-
-//       .tagPopular button {
-//         color: $tag-color-popular;
-//         background: $tag-bg-popular;
-//       }
-
-//     }
-
-//   }
-
-// }
-
-// @media #{$normal} {
-
-//   #headerInfo {
-//     float: right; /*desktop*/
-
-//     #newheader {
-//       span {
-//         display: block; /*desktop*/
-//       }
-//     }
-
-//     #tagList {
-//       // .tagItem.actionRemoveTag:hover,  .tagItem.actionRemoveTag:focus {
-//       //   button:before {
-//       //     content: "x ";
-//       //   }
-//       // }
-
-//       .tagItem.actionAddTag, .tagItem.actionAddTag {
-//         button:last-child {
-//           display: none;
-//         }
-//       }
-
-//       // .tagItem.actionAddTag:hover, .tagItem.actionAddTag:focus {
-//       //   button:first-child:before {
-//       //     content: "o ";
-//       //   }
-//       //   button:last-child {
-//       //     display: inline-block;
-//       //   }
-//       //   button:last-child:before {
-//       //     content: "x";
-//       //   }
-//       // }
-
-//       li {
-//         display: block;
-//       }
-//     }
-//   }
-// }
-
-// @media #{$smallerwindow} {
-
-//   body {
-//     font-size: $font-size-desktop;
-//   }
-
-//   #mainList {
-//     width: 95%;
-
-//     ul {
-//       list-style-type: none;
-//     }
-//   }
-
-//   #headerInfo {
-
-//     #tagList {
-
-//       li {
-//         display: inline-block;
-//       }
-//     }
-//   }
-// }
-
-// @media #{$tinywindow} {
-
-//   body {
-//     font-size: $font-size-mobile;
-//   }
-
-//   #mainList {
-//     ul {
-//       list-style-type: none;
-//       list-style-position: outside;
-//       list-style-image: none;
-
-//       .newsItem {
-//         margin-top: 1em;
-//         margin-bottom: 1em;
-//         text-align: left;
-
-//         a {
-//           text-decoration: none;
-//         }
-
-//         .headTitle {
-//           color: $primary-color;
-//           font-size: 48px;
-//         }
-
-//         .subTitle {
-//           font-family: $subfont-stack;
-//           color: $subtitle-color;
-//           margin-top: 0.2em;
-//           margin-left: 2em;
-//           text-align: left;
-//           font-size: smaller;
-//           content: "– ";
-//         }
-//         .subTitle:before {
-//           content: "– ";
-//         }
-//       }
-//     }
-//   }
-
-//   #headerInfo {
-//     font-size: larger;
-//     p {
-//       margin: 0;
-//     }
-
-//     #cow {
-//       display: none;
-//     }
-
-//     #filterBox {
-//       margin-top: 0.5em;
-//       margin-bottom: 0.5em;
-//     }
-
-//     #filterTextInput {
-//       width: 200px;
-//       font-size: 24px;
-//     }
-
-//     #tagList {
-//       font-size: 24px;
-//       margin-top: 0.5em;
-//       padding: 0;
-
-//       li {
-//         display: inline-block;
-//         margin-left: 3px;
-//         margin-right: 3px;
-//         list-style-type: none;
-//         list-style-position: outside;
-//         list-style-image: none;
-//       }
-
-//       .tagItem button {
-//         font-size: 24px;
-//         border: none;
-//       }
-
-//       .tagInclude button {
-//         color: $tag-color-include;
-//         background: $tag-bg-include;
-//       }
-
-//       .tagExclude button {
-//         color: $tag-color-exclude;
-//         background: $tag-bg-exclude;
-//       }
-
-//       .tagPopular button {
-//         color: $tag-color-popular;
-//         background: $tag-bg-popular;
-//       }
-
-//     }
-
-//   }
-// }

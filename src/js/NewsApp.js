@@ -13,6 +13,16 @@ import 'purecss/build/pure-min.css';
 require('../scss/style.scss');
 require('../scss/fa/scss/font-awesome.scss');
 
+function getTagFromPath() {
+  const path =  window.location.pathname.split('/');
+  console.log(path, window.location.href, window.location.pathname);
+  let tag = null;
+  if (path.length > 2 ) {
+    tag = path[2];
+  }
+  return tag;
+}
+
 export default class NewsApp extends React.Component {
 
   constructor(props) {
@@ -40,7 +50,8 @@ export default class NewsApp extends React.Component {
   }
 
   componentDidMount () {
-   this.fetchItems(this.props.store.currentTag);
+    const t = getTagFromPath();
+    this.fetchItems(t);
   }
 
 	handleUserInput (filterText) {
@@ -145,12 +156,13 @@ export default class NewsApp extends React.Component {
           // <NewsSearchBar onUserInput={ this.handleUserInput.bind(this) } filterText={this.state.filterText} onFilterSubmit={this.handleSubmit.bind(this)}/>
 
     return (
-      <div id="MainContent" className="pure-g">
-        <div id="headerInfo" className="pure-u-1-1">
+      <div id="MainContent">
+        <div id="headerInfo">
           <NewsWordList wordList={this.props.store.tags} />
         </div>
-        <div id="mainList" className="pure-u-1-1">
+        <div id="mainList">
           <NewsList loading={this.state.loading} newsItems={this.props.store.items} filterText={this.state.filterText.toLowerCase()} filterTags={this.state.filterTags}/>
+          <div className="load-more-wrapper" onClick={this.props.store.fetchMore.bind(this.props.store)}><span className="load-more-button"><i className="fa fa-plus"></i></span></div>
         </div>
       </div>
 		);
