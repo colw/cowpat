@@ -45,7 +45,7 @@ class Store {
 		oldestID = oldestID || null;
 		let tag = fetchTag;//getTagFromPath();
 
-		fetch(`http://localhost:9000${tag ? '/items/' + tag + '' : ''}${oldestID ? '?&oldest=' + oldestID: ''}`)
+		fetch(`${FEEDSRC}${tag ? '/items/' + tag + '' : ''}${oldestID ? '?&oldest=' + oldestID: ''}`)
 		  .then(res => res.json())
 		  .then(json => {
 		    json.items = json.items.map(x => {

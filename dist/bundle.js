@@ -26768,7 +26768,18 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      // <NewsSearchBar onUserInput={ this.handleUserInput.bind(this) } filterText={this.state.filterText} onFilterSubmit={this.handleSubmit.bind(this)}/>
+	      var loadMore = null;
+	      if (this.props.store.items.length) {
+	        loadMore = _react2.default.createElement(
+	          'div',
+	          { className: 'load-more-wrapper', onClick: this.props.store.fetchMore.bind(this.props.store) },
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'load-more-button' },
+	            _react2.default.createElement('i', { className: 'fa fa-plus' })
+	          )
+	        );
+	      }
 	
 	      return _react2.default.createElement(
 	        'div',
@@ -26782,15 +26793,7 @@
 	          'div',
 	          { id: 'mainList' },
 	          _react2.default.createElement(_NewsList2.default, { loading: this.state.loading, newsItems: this.props.store.items, filterText: this.state.filterText.toLowerCase(), filterTags: this.state.filterTags }),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'load-more-wrapper', onClick: this.props.store.fetchMore.bind(this.props.store) },
-	            _react2.default.createElement(
-	              'span',
-	              { className: 'load-more-button' },
-	              _react2.default.createElement('i', { className: 'fa fa-plus' })
-	            )
-	          )
+	          loadMore
 	        )
 	      );
 	    }
@@ -44929,7 +44932,7 @@
 
 /***/ },
 /* 381 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -45005,7 +45008,7 @@
 				oldestID = oldestID || null;
 				var tag = fetchTag; //getTagFromPath();
 	
-				fetch('http://localhost:9000' + (tag ? '/items/' + tag + '' : '') + (oldestID ? '?&oldest=' + oldestID : '')).then(function (res) {
+				fetch('' + ("https://ruminator.herokuapp.com/") + (tag ? '/items/' + tag + '' : '') + (oldestID ? '?&oldest=' + oldestID : '')).then(function (res) {
 					return res.json();
 				}).then(function (json) {
 					json.items = json.items.map(function (x) {

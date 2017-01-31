@@ -3,7 +3,7 @@ var webpack = require('webpack');
 
 var constants = new webpack.DefinePlugin({
     ENVIRONMENT: JSON.stringify(process.env.NODE_ENV),
-    FEEDSRC: JSON.stringify(process.env.NODE_ENV === 'production' ? 'https://www.ruminant.press/' : 'http://localhost:9000/')
+    FEEDSRC: JSON.stringify(process.env.NODE_ENV === 'production' ? 'https://ruminator.herokuapp.com/' : 'http://localhost:9000/')
 });
 
 module.exports = {

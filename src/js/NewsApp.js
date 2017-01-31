@@ -153,7 +153,10 @@ export default class NewsApp extends React.Component {
 
 
   render() {
-          // <NewsSearchBar onUserInput={ this.handleUserInput.bind(this) } filterText={this.state.filterText} onFilterSubmit={this.handleSubmit.bind(this)}/>
+    let loadMore = null;
+    if (this.props.store.items.length) {
+      loadMore = <div className="load-more-wrapper" onClick={this.props.store.fetchMore.bind(this.props.store)}><span className="load-more-button"><i className="fa fa-plus"></i></span></div>;
+    }
 
     return (
       <div id="MainContent">
@@ -162,7 +165,7 @@ export default class NewsApp extends React.Component {
         </div>
         <div id="mainList">
           <NewsList loading={this.state.loading} newsItems={this.props.store.items} filterText={this.state.filterText.toLowerCase()} filterTags={this.state.filterTags}/>
-          <div className="load-more-wrapper" onClick={this.props.store.fetchMore.bind(this.props.store)}><span className="load-more-button"><i className="fa fa-plus"></i></span></div>
+          {loadMore}
         </div>
       </div>
 		);
