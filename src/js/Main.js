@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-import { Router, Route, hashHistory } from 'react-router'
+import { Router, Route, browserHistory } from 'react-router'
 
 import NewsApp from './NewsApp';
 import HowCow from './HowCow'
@@ -12,15 +12,18 @@ store.setListener(mainRender);
 
 function mainRender() {
 
-	const createComponent = (serverProps) => {
+	const createComponent = (store) => {
+
+      // let props = store.getState();
+
 	  return function(Component, props) {
-		console.debug(props);
-	    return <Component {...serverProps} {...props} />
+	    return <Component {...store} {...props} />
 	  }
 	}
 	ReactDOM.render((
-	  <Router history={hashHistory} routes={routes} createElement={createComponent({store: store})} />
+	  <Router history={browserHistory} routes={routes} createElement={createComponent({store: store})} />
 	), document.getElementById('ReactMountPoint'));
 }
+
 
 mainRender();

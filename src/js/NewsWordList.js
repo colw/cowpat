@@ -28,7 +28,6 @@ export default class NewsWordList extends React.Component {
 
     return (
       <div>
-        <div>Trending</div>
         <ul id="tagList">{ this.props.wordList.map(makeList) }</ul>
       </div>
     );

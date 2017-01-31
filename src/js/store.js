@@ -40,11 +40,11 @@ class Store {
 			currentTag: this.currentTag,
 		}
 	}
-	fetchItems(oldestID, fetchTag) {
-		console.log(oldestID, fetchTag, this.currentTag);
+	fetchItems(fetchTag) {
 		fetchTag = fetchTag || '';
 		const path =  window.location.pathname.split('/');
-		let tag = getTagFromPath();
+		let tag = fetchTag;//getTagFromPath();
+		let oldestID = null;
 
 		fetch(`http://localhost:9000${tag ? '/items/' + tag + '' : ''}${oldestID ? '?&oldest=' + oldestID: ''}`)
 		  .then(res => res.json())

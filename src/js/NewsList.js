@@ -5,6 +5,12 @@ import NewsItem from "./NewsItem";
 
 export default class NewsList extends React.Component {
   render () {
+
+    if (this.props.loading) {
+      return <div>Loading</div>
+    }
+
+
     if (this.props.newsItems.length === 0) {
       return (
         <div id="emptyList">
