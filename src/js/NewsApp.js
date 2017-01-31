@@ -145,11 +145,11 @@ export default class NewsApp extends React.Component {
           // <NewsSearchBar onUserInput={ this.handleUserInput.bind(this) } filterText={this.state.filterText} onFilterSubmit={this.handleSubmit.bind(this)}/>
 
     return (
-      <div id="MainContent">
-        <div id="headerInfo">
+      <div id="MainContent" className="pure-g">
+        <div id="headerInfo" className="pure-u-1-1">
           <NewsWordList wordList={this.props.store.tags} />
         </div>
-        <div id="mainList">
+        <div id="mainList" className="pure-u-1-1">
           <NewsList loading={this.state.loading} newsItems={this.props.store.items} filterText={this.state.filterText.toLowerCase()} filterTags={this.state.filterTags}/>
         </div>
       </div>

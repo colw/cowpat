@@ -26761,15 +26761,15 @@
 	
 	      return _react2.default.createElement(
 	        'div',
-	        { id: 'MainContent' },
+	        { id: 'MainContent', className: 'pure-g' },
 	        _react2.default.createElement(
 	          'div',
-	          { id: 'headerInfo' },
+	          { id: 'headerInfo', className: 'pure-u-1-1' },
 	          _react2.default.createElement(_NewsWordList2.default, { wordList: this.props.store.tags })
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { id: 'mainList' },
+	          { id: 'mainList', className: 'pure-u-1-1' },
 	          _react2.default.createElement(_NewsList2.default, { loading: this.state.loading, newsItems: this.props.store.items, filterText: this.state.filterText.toLowerCase(), filterTags: this.state.filterTags })
 	        )
 	      );
@@ -41875,6 +41875,10 @@
 	
 	var _NewsItem2 = _interopRequireDefault(_NewsItem);
 	
+	var _NewsCow = __webpack_require__(349);
+	
+	var _NewsCow2 = _interopRequireDefault(_NewsCow);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -41911,12 +41915,7 @@
 	          _react2.default.createElement(
 	            "p",
 	            null,
-	            "Please wait for some news to be published. Shan't be long."
-	          ),
-	          _react2.default.createElement(
-	            "p",
-	            { id: "nogoodnews" },
-	            "No news is good moos, right?"
+	            "A black and white cow"
 	          )
 	        );
 	      } else {
@@ -42047,10 +42046,11 @@
 	          'div',
 	          { className: 'subTitle' },
 	          hosturl,
-	          ', ',
+	          ' ',
 	          _react2.default.createElement(
 	            'span',
 	            { className: 'subTime' },
+	            ' ',
 	            this.state.formattedTimeSince
 	          )
 	        )
@@ -42555,7 +42555,7 @@
 	
 	
 	// module
-	exports.push([module.id, "", ""]);
+	exports.push([module.id, "body {\n  font-family: \"Open Sans\", \"sans-erif\";\n  font-weight: 800;\n  line-height: 1.5;\n  font-size: larger; }\n\nli {\n  list-style: none;\n  margin-bottom: 1em; }\n\na {\n  color: #333;\n  text-decoration: none; }\n\n.newsItem {\n  display: inline-block; }\n\n.newsItem .subTitle {\n  background-color: #eee;\n  font-size: 0.5em;\n  display: inline-block;\n  font-weight: 400;\n  margin-left: 3em; }\n\n.subTime {\n  display: none; }\n", ""]);
 	
 	// exports
 

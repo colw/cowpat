@@ -46,7 +46,7 @@ export default class NewsItem extends React.Component {
             {this.props.info.title}
 					</div>
         </a>
-        <div className="subTitle">{hosturl}, <span className="subTime">{this.state.formattedTimeSince}</span></div>
+        <div className="subTitle">{hosturl} <span className="subTime"> {this.state.formattedTimeSince}</span></div>
 			</div>
 		);
 	}

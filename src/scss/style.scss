@@ -1,3 +1,36 @@
+body {
+  font-family: "Open Sans", "sans-erif";
+  font-weight: 800;
+  line-height: 1.5;
+  font-size: larger;
+}
+
+li {
+  list-style: none;
+  margin-bottom: 1em;
+}
+
+a {
+  color: #333;
+  text-decoration: none;
+}
+
+.newsItem {
+  display: inline-block;
+}
+
+.newsItem .subTitle {
+  background-color: #eee;
+  font-size: 0.5em;
+  display: inline-block;
+  font-weight: 400;
+  margin-left: 3em;
+}
+
+.subTime {
+  display: none;
+}
+
 // $font-stack: "Gill Sans MT", "Gill Sans", "Gill Sans Std", Verdana, "Bitstream Vera Sans";
 // $subfont-stack: 'Roboto';
 // $font-size-desktop: large;
