@@ -44093,13 +44093,15 @@
 /* 361 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	var _react = __webpack_require__(177);
 	
@@ -44117,6 +44119,10 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	var LinkExt = function LinkExt(props) {
+	  return _react2.default.createElement("a", _extends({}, props, { target: "_blank" }));
+	};
+	
 	var NewsItem = function (_React$Component) {
 	  _inherits(NewsItem, _React$Component);
 	
@@ -44130,17 +44136,17 @@
 	  }
 	
 	  _createClass(NewsItem, [{
-	    key: 'componentDidMount',
+	    key: "componentDidMount",
 	    value: function componentDidMount() {
 	      this.setInterval(this.updateTime.bind(this), 30000);
 	    }
 	  }, {
-	    key: 'updateTime',
+	    key: "updateTime",
 	    value: function updateTime() {
 	      this.setState({ formattedTimeSince: (0, _moment2.default)(this.props.info.fetchDate).fromNow() });
 	    }
 	  }, {
-	    key: 'getBaseURL',
+	    key: "getBaseURL",
 	    value: function getBaseURL(url) {
 	      if (url.slice(0, 4) != 'http') {
 	        url = 'http://' + url;
@@ -44150,12 +44156,12 @@
 	      return a.hostname.replace(/^www./, '');
 	    }
 	  }, {
-	    key: 'componentWillMount',
+	    key: "componentWillMount",
 	    value: function componentWillMount() {
 	      this.intervals = [];
 	    }
 	  }, {
-	    key: 'setInterval',
+	    key: "setInterval",
 	    value: function (_setInterval) {
 	      function setInterval() {
 	        return _setInterval.apply(this, arguments);
@@ -44170,32 +44176,32 @@
 	      this.intervals.push(setInterval.apply(null, arguments));
 	    })
 	  }, {
-	    key: 'componentWillUnmount',
+	    key: "componentWillUnmount",
 	    value: function componentWillUnmount() {
 	      this.intervals.map(clearInterval);
 	    }
 	  }, {
-	    key: 'render',
+	    key: "render",
 	    value: function render() {
 	      var hosturl = this.getBaseURL(this.props.info.metalink);
 	      return _react2.default.createElement(
-	        'div',
-	        { className: 'newsItem' },
+	        "div",
+	        { className: "newsItem" },
 	        _react2.default.createElement(
-	          'a',
-	          { href: this.props.info.link, target: '_blank' },
+	          LinkExt,
+	          { href: this.props.info.link },
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'headTitle' },
+	            "div",
+	            { className: "headTitle" },
 	            this.props.info.title
 	          )
 	        ),
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'subTitle' },
+	          "div",
+	          { className: "subTitle" },
 	          _react2.default.createElement(
-	            'a',
-	            { href: '#' },
+	            LinkExt,
+	            { href: this.props.info.sitelink },
 	            hosturl
 	          )
 	        )
