@@ -45008,7 +45008,7 @@
 				oldestID = oldestID || null;
 				var tag = fetchTag; //getTagFromPath();
 	
-				fetch('' + ("https://ruminator.herokuapp.com/") + (tag ? '/items/' + tag + '' : '') + (oldestID ? '?&oldest=' + oldestID : '')).then(function (res) {
+				fetch('' + ("https://ruminator.herokuapp.com") + (tag ? '/items/' + tag + '' : '') + (oldestID ? '?&oldest=' + oldestID : '')).then(function (res) {
 					return res.json();
 				}).then(function (json) {
 					json.items = json.items.map(function (x) {
