@@ -28,7 +28,7 @@ export default class NewsList extends React.Component {
         </div>
       );
     } else {
-      var makeList = x => <li key={x.guid} className="newsItemWrapper"><NewsItem info={x}/></li>;
+      var makeList = x => <li key={x.itemID} className="newsItemWrapper"><NewsItem info={x}/></li>;
 
       return (
           <ReactCSSTransitionGroup component="ul" className="newsWrapper"
