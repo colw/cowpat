@@ -512,7 +512,7 @@ body {
   color: white;
 }
 
-.tagItem a:hover {
+.tagItem a:hover, .tagItem a.active {
   background-color: #333;
   color: white;
 }
