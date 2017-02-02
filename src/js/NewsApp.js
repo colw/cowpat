@@ -2,7 +2,8 @@ import React from 'react';
 import moment from 'moment';
 import { Link } from 'react-router';
 
-import NewsSearchBar from './NewsSearchBar';
+import Menu from './menu';
+// import NewsSearchBar from './NewsSearchBar';
 import NewsWordList from './NewsWordList';
 import NewsList from "./NewsList";
 import NewsCow from "./NewsCow";
@@ -161,7 +162,7 @@ export default class NewsApp extends React.Component {
     return (
       <div id="MainContent">
         <div id="headerInfo">
-          <NewsWordList wordList={this.props.store.tags} />
+          <Menu items={this.props.store.tags} />
         </div>
         <div id="mainList">
           <NewsList loading={this.state.loading} newsItems={this.props.store.items} filterText={this.state.filterText.toLowerCase()} filterTags={this.state.filterTags}/>

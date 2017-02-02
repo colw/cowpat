@@ -31,6 +31,7 @@
   },
   "homepage": "https://github.com/colw/nxws",
   "dependencies": {
+    "classnames": "^2.2.5",
     "express": "^4.13.3",
     "material-ui": "^0.16.7",
     "moment": "^2.10.6",
