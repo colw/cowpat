@@ -1,7 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router';
-import { withRouter } from 'react-router'
 
 
 require('../scss/header.scss');
@@ -35,14 +34,10 @@ class Header extends React.Component {
     this.setState({open: false}, 
       () => {console.debug(this.state.open)});
   }
-  componentDidMount() {
-    console.debug(this.props.route);
-  }
-
   render() {
     let makeList = (x,y) => (
       <li key={y}>
-        <Link to={`/items/${x}`} activeClassName="active" onClick={this.closeMenu}>
+        <Link to={`/items/${x}`} activeClassName="active" onClick={this.closeMenu} onlyActiveOnIndex={true}>
           {capitalise(x)}
         </Link>
       </li>
@@ -54,10 +49,15 @@ class Header extends React.Component {
           <span className="menu-icon left" onClick={this.toggle}>
             <i className={"fa " + (this.state.open ? "fa-close" : "fa-bars")} aria-hidden="true"></i>
           </span>
-          <h1 className="header-title">{this.props.current ? `‘${this.props.current}’` : this.props.title}</h1>
+          <h1 className="header-title">{this.props.title}</h1>
         </div>
         <div className={"menu-container " + (this.state.open ? "open" : "")}>
           <ul>
+            <li key={this.props.items.length}>
+              <Link to={`/`} activeClassName="active" onClick={this.closeMenu}  onlyActiveOnIndex={true}>
+                Home
+              </Link>
+            </li>
             {
               this.props.items.map(makeList)
             }

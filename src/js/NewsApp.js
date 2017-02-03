@@ -45,9 +45,10 @@ export default class NewsApp extends React.Component {
   }
 
   componentWillUpdate(nextProps) {
-    console.debug(this.props, nextProps)
+    // console.debug(this.props, nextProps)
     if (nextProps.params.tag !== this.props.params.tag) {
-      this.fetchItems(nextProps.params.tag);
+      console.debug(nextProps.params.tag || '');
+      this.fetchItems(nextProps.params.tag || '');
     }
   }
 
@@ -67,7 +68,7 @@ export default class NewsApp extends React.Component {
     return (
       <div id="MainContent">
         <div id="headerInfo">
-          <Header router={this.props.router} title={"Ruminant"} open={this.state.menuOpen} items={this.props.store.tags} current={this.props.store.currentTag} selectItem={this.handleSelectItem} iconToggle={this.toggleIcon} />
+          <Header title={this.props.store.currentTag == '' ? 'Ruminant' : `‘${this.props.store.currentTag}’`} open={this.state.menuOpen} items={this.props.store.tags} current={this.props.store.currentTag} selectItem={this.handleSelectItem} iconToggle={this.toggleIcon} />
         </div>
         <div id="mainList">
         {!this.props.store.fetching ? 

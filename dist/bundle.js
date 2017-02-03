@@ -26657,9 +26657,10 @@
 	  }, {
 	    key: 'componentWillUpdate',
 	    value: function componentWillUpdate(nextProps) {
-	      console.debug(this.props, nextProps);
+	      // console.debug(this.props, nextProps)
 	      if (nextProps.params.tag !== this.props.params.tag) {
-	        this.fetchItems(nextProps.params.tag);
+	        console.debug(nextProps.params.tag || '');
+	        this.fetchItems(nextProps.params.tag || '');
 	      }
 	    }
 	  }, {
@@ -26690,7 +26691,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { id: 'headerInfo' },
-	          _react2.default.createElement(_Header2.default, { router: this.props.router, title: "Ruminant", open: this.state.menuOpen, items: this.props.store.tags, current: this.props.store.currentTag, selectItem: this.handleSelectItem, iconToggle: this.toggleIcon })
+	          _react2.default.createElement(_Header2.default, { title: this.props.store.currentTag == '' ? 'Ruminant' : '\u2018' + this.props.store.currentTag + '\u2019', open: this.state.menuOpen, items: this.props.store.tags, current: this.props.store.currentTag, selectItem: this.handleSelectItem, iconToggle: this.toggleIcon })
 	        ),
 	        _react2.default.createElement(
 	          'div',
@@ -42214,11 +42215,6 @@
 	      });
 	    }
 	  }, {
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      console.debug(this.props.route);
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this4 = this;
@@ -42229,7 +42225,7 @@
 	          { key: y },
 	          _react2.default.createElement(
 	            _reactRouter.Link,
-	            { to: '/items/' + x, activeClassName: 'active', onClick: _this4.closeMenu },
+	            { to: '/items/' + x, activeClassName: 'active', onClick: _this4.closeMenu, onlyActiveOnIndex: true },
 	            capitalise(x)
 	          )
 	        );
@@ -42249,7 +42245,7 @@
 	          _react2.default.createElement(
 	            'h1',
 	            { className: 'header-title' },
-	            this.props.current ? '\u2018' + this.props.current + '\u2019' : this.props.title
+	            this.props.title
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -42258,6 +42254,15 @@
 	          _react2.default.createElement(
 	            'ul',
 	            null,
+	            _react2.default.createElement(
+	              'li',
+	              { key: this.props.items.length },
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '/', activeClassName: 'active', onClick: this.closeMenu, onlyActiveOnIndex: true },
+	                'Home'
+	              )
+	            ),
 	            this.props.items.map(makeList)
 	          )
 	        )
@@ -42305,7 +42310,7 @@
 	
 	
 	// module
-	exports.push([module.id, ".header-container {\n  position: relative;\n  margin: 0;\n  width: 100%; }\n\n.header-bar {\n  width: 100%;\n  text-align: center; }\n\nh1.header-title {\n  margin: 0.5rem auto; }\n\n.menu-icon {\n  font-size: 2em;\n  padding-left: 5px;\n  position: absolute;\n  top: 3px;\n  left: 10px;\n  cursor: pointer; }\n\n.menu-icon.left {\n  float: left; }\n\n.menu-container {\n  position: absolute;\n  background-color: #FDFDFD;\n  width: 100%;\n  transition: 0.5s;\n  left: -100%; }\n\n.menu-container.open {\n  transition: 0.5s;\n  left: 0;\n  box-shadow: 0 5px 5px rgba(182, 182, 182, 0.75); }\n\n.menu-container ul {\n  font-size: 1.5em;\n  list-style-type: none; }\n  .menu-container ul li {\n    margin-bottom: 10px; }\n  .menu-container ul a, .menu-container ul a:visited {\n    color: #333;\n    text-decoration: none; }\n", ""]);
+	exports.push([module.id, ".header-container {\n  position: relative;\n  margin: 0;\n  width: 100%; }\n\n.header-bar {\n  width: 100%;\n  text-align: center; }\n\nh1.header-title {\n  margin: 0.5rem auto; }\n\n.menu-icon {\n  font-size: 2em;\n  padding-left: 5px;\n  position: absolute;\n  top: 3px;\n  left: 10px;\n  cursor: pointer; }\n\n.menu-icon.left {\n  float: left; }\n\n.menu-container {\n  position: absolute;\n  background-color: #FDFDFD;\n  width: 100%;\n  transition: 0.5s;\n  left: -100%; }\n\n.menu-container.open {\n  transition: 0.5s;\n  left: 0;\n  box-shadow: 0 5px 5px rgba(182, 182, 182, 0.75); }\n\n.menu-container ul {\n  font-size: 1.5em;\n  list-style-type: none; }\n  .menu-container ul li {\n    margin-bottom: 10px; }\n  .menu-container ul a, .menu-container ul a:visited {\n    color: #333;\n    text-decoration: none; }\n  .menu-container ul a.active {\n    font-weight: bold; }\n", ""]);
 	
 	// exports
 
@@ -45147,7 +45152,6 @@
 				this.tags = obj.tags || [];
 				this.currentTag = obj.currentTag || '';
 				this.fetching = false;
-				this.notify();
 			}
 		}, {
 			key: 'update',
@@ -45156,12 +45160,11 @@
 				this.tags = data.tags || [];
 				this.currentTag = data.currentTag;
 				this.fetching = false;
-				this.notify();
 			}
 		}, {
 			key: 'notify',
 			value: function notify() {
-				this.listener({ items: this.items, tags: this.tags, currentTag: this.currentTag });
+				this.listener();
 			}
 		}, {
 			key: 'setListener',
@@ -45182,11 +45185,10 @@
 			value: function fetchItems(fetchTag, oldestID) {
 				var _this = this;
 	
-				fetchTag = fetchTag || this.currentTag;
+				fetchTag = fetchTag || '';
 				oldestID = oldestID || null;
-				var tag = fetchTag; //getTagFromPath();
 				this.fetching = true;
-				fetch('' + ("https://ruminator.herokuapp.com") + (tag ? '/items/' + tag + '' : '') + (oldestID ? '?&oldest=' + oldestID : '')).then(function (res) {
+				fetch('' + ("https://ruminator.herokuapp.com") + (fetchTag ? '/items/' + fetchTag + '' : '') + (oldestID ? '?&oldest=' + oldestID : '')).then(function (res) {
 					return res.json();
 				}).then(function (json) {
 					json.items = json.items.map(function (x) {

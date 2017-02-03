@@ -21,17 +21,15 @@ class Store {
 		this.tags = obj.tags || [];
 		this.currentTag = obj.currentTag || '';
 		this.fetching = false;
-		this.notify();
 	}
 	update(data) {
 	  	this.items = this.items.concat(data.items);
 	  	this.tags = data.tags || [];
 	  	this.currentTag = data.currentTag;
 		this.fetching = false;
-		this.notify();
 	}
 	notify() {
-		this.listener({items: this.items, tags: this.tags, currentTag: this.currentTag});
+		this.listener();
 	}
 	setListener(fn) {
 		this.listener = fn;
@@ -44,11 +42,10 @@ class Store {
 		}
 	}
 	fetchItems(fetchTag, oldestID) {
-		fetchTag = fetchTag || this.currentTag;
+		fetchTag = fetchTag || '';
 		oldestID = oldestID || null;
-		let tag = fetchTag;//getTagFromPath();
 		this.fetching = true;
-		fetch(`${FEEDSRC}${tag ? '/items/' + tag + '' : ''}${oldestID ? '?&oldest=' + oldestID: ''}`)
+		fetch(`${FEEDSRC}${fetchTag ? '/items/' + fetchTag + '' : ''}${oldestID ? '?&oldest=' + oldestID: ''}`)
 		  .then(res => res.json())
 		  .then(json => {
 		    json.items = json.items.map(x => {
