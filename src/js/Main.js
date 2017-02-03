@@ -1,17 +1,29 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-import { Router, Route, hashHistory } from 'react-router'
+import { Router, Route, browserHistory } from 'react-router'
 
 import NewsApp from './NewsApp';
 import HowCow from './HowCow'
 
+import store from './store';
+import routes from './routes';
 
-// ReactDOM.render((
-//   <Router history={hashHistory}>
-//     <Route path='/' component={NewsApp}>
-//       <Route path='/about' component={HowCow} />
-//     </Route>
-//   </Router>
-// ), document.getElementById('ReactMountPoint'));
+store.setListener(mainRender);
 
-ReactDOM.render(React.createElement(NewsApp), document.getElementById('ReactMountPoint'));
+function mainRender() {
+
+	const createComponent = (store) => {
+
+      // let props = store.getState();
+
+	  return function(Component, props) {
+	    return <Component {...store} {...props} />
+	  }
+	}
+	ReactDOM.render((
+	  <Router history={browserHistory} routes={routes} createElement={createComponent({store: store})} />
+	), document.getElementById('ReactMountPoint'));
+}
+
+
+mainRender();

@@ -1,6 +1,10 @@
 import React from "react";
 import moment from 'moment';
 
+const LinkExt = (props) => (
+  <a {...props} target="_blank" />
+)
+
 export default class NewsItem extends React.Component {
 
   constructor(props) {
@@ -41,12 +45,12 @@ export default class NewsItem extends React.Component {
     var hosturl = this.getBaseURL(this.props.info.metalink);
 		return (
 			<div className="newsItem">
-				<a href={this.props.info.link} target="_blank">
+				<LinkExt href={this.props.info.link}>
 					<div className="headTitle">
             {this.props.info.title}
 					</div>
-        </a>
-        <div className="subTitle">{hosturl}, <span className="subTime">{this.state.formattedTimeSince}</span></div>
+        </LinkExt>
+        <div className="subTitle"><LinkExt href={this.props.info.sitelink}>{hosturl}</LinkExt></div>
 			</div>
 		);
 	}

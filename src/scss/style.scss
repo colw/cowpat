@@ -1,5 +1,98 @@
+// $bgcolor: #FFFFFF;
+// $primary-color: #000080;
+// $max-width: 900px;
+// $column-width: 290px;//$max-width / 3;
+// $tile-height: 200px;
+
+
+// body {
+//   font-family: "Open Sans", "sans-erif";
+//   font-weight: 800;
+//   line-height: 1.5;
+//   font-size: larger;
+//   background-color: $bgcolor;
+//   box-sizing: border-box;
+// }
+
+// #MainContent {
+//   max-width: $max-width;
+// }
+
+// // li {
+// //   list-style: none;
+// //   // margin-bottom: 1em;
+// //   padding: 0.5em;
+// // }
+
+// .pure-menu-link, a, a:visited {
+//   color: $primary-color;
+//   text-decoration: none;
+//   padding: 0.2em 1em;
+// }
+
+// .pure-menu-horizontal {
+//   white-space: normal;
+// }
+
+// .newsWrapper {
+//   width: 100%;
+// }
+
+// .newsItemWrapper {
+//   // padding: 6px;
+//   border: 1px solid $primary-color;
+//   height: $tile-height;
+//   width: $column-width;
+//   max-width: $column-width;
+//   display: inline-block;
+//   float: left;
+// }
+
+// .newsItem {
+//   margin: 6px;
+// }
+
+// .newsItem .subTitle {
+//   // background-color: #eee;
+//   font-size: 0.5em;
+//   display: inline-block;
+//   font-weight: 400;
+//   margin-left: 3em;
+// }
+
+// .subTime {
+//   display: none;
+// }
+
+// .example-enter {
+//   opacity: 0.01;
+// }
+
+// .example-enter.example-enter-active {
+//   opacity: 1;
+//   transition: opacity 500ms ease-in;
+// }
+
+// .example-leave {
+//   opacity: 1;
+// }
+
+// .example-leave.example-leave-active {
+//   opacity: 0.01;
+//   transition: opacity 300ms ease-in;
+// }
+
+// .example-appear {
+//   opacity: 0.01;
+// }
+
+// .example-appear.example-appear-active {
+//   opacity: 1;
+//   transition: opacity .5s ease-in;
+// }
+
 $font-stack: "Gill Sans MT", "Gill Sans", "Gill Sans Std", Verdana, "Bitstream Vera Sans";
-$subfont-stack: 'Bitstream Vera Sans';
+$subfont-stack: 'Roboto';
 $font-size-desktop: large;
 $font-size-mobile: xx-large;
 
@@ -26,7 +119,7 @@ $retina: "only screen and (-webkit-min-device-pixel-ratio: 2), (min-resolution: 
 
 body {
   background-color: $bgcolour;
-  font-family: $font-stack;
+  font-family: $subfont-stack;
   color: $primary-color;
 }
 
@@ -41,7 +134,7 @@ body {
 }
 
 #headerInfo {
-  font-family: $font-stack;
+  font-family: $subfont-stack;
 }
 
 #aboutCow {
@@ -178,17 +271,22 @@ body {
       li {
         margin-left: 3px;
         margin-right: 3px;
+        margin-top: 6px;
+      }
+
+      .tagItem {
       }
 
       .tagItem button {
+        cursor: pointer;
         border: none;
       }
 
-      .tagItem.actionRemoveTag:hover,  .tagItem.actionRemoveTag:focus {
-        button:before {
-          content: "x ";
-        }
-      }
+      // .tagItem.actionRemoveTag:hover,  .tagItem.actionRemoveTag:focus {
+      //   button:before {
+      //     content: "x ";
+      //   }
+      // }
 
       .tagItem.actionAddTag, .tagItem.actionAddTag {
         button:last-child {
@@ -196,17 +294,17 @@ body {
         }
       }
 
-      .tagItem.actionAddTag:hover, .tagItem.actionAddTag:focus {
-        button:first-child:before {
-          content: "o ";
-        }
-        button:last-child {
-          display: inline-block;
-        }
-        button:last-child:before {
-          content: "x";
-        }
-      }
+      // .tagItem.actionAddTag:hover, .tagItem.actionAddTag:focus {
+      //   button:first-child:before {
+      //     content: "o ";
+      //   }
+      //   button:last-child {
+      //     display: inline-block;
+      //   }
+      //   button:last-child:before {
+      //     content: "x";
+      //   }
+      // }
 
       .tagInclude button {
         color: $tag-color-include;
@@ -241,11 +339,11 @@ body {
     }
 
     #tagList {
-      .tagItem.actionRemoveTag:hover,  .tagItem.actionRemoveTag:focus {
-        button:before {
-          content: "x ";
-        }
-      }
+      // .tagItem.actionRemoveTag:hover,  .tagItem.actionRemoveTag:focus {
+      //   button:before {
+      //     content: "x ";
+      //   }
+      // }
 
       .tagItem.actionAddTag, .tagItem.actionAddTag {
         button:last-child {
@@ -253,17 +351,17 @@ body {
         }
       }
 
-      .tagItem.actionAddTag:hover, .tagItem.actionAddTag:focus {
-        button:first-child:before {
-          content: "o ";
-        }
-        button:last-child {
-          display: inline-block;
-        }
-        button:last-child:before {
-          content: "x";
-        }
-      }
+      // .tagItem.actionAddTag:hover, .tagItem.actionAddTag:focus {
+      //   button:first-child:before {
+      //     content: "o ";
+      //   }
+      //   button:last-child {
+      //     display: inline-block;
+      //   }
+      //   button:last-child:before {
+      //     content: "x";
+      //   }
+      // }
 
       li {
         display: block;
@@ -396,4 +494,57 @@ body {
     }
 
   }
+}
+
+.subTitle {
+  a, a:visited {
+    color: gray;
+  }
+}
+
+.tagItem {
+  padding: 2px;
+  margin: 10px;
+}
+
+.tagItem a {
+  background-color: lighten($subtitle-color, 20%);
+  color: white;
+}
+
+.tagItem a:hover, .tagItem a.active {
+  background-color: #333;
+  color: white;
+}
+
+.tagItem a {
+  margin: 4px;
+  padding: 4px;
+  text-decoration: none;
+}
+
+.load-more-wrapper {
+  text-align: center;
+  margin-top: 2em;
+}
+
+$load-more-size: 1.5em;
+
+.load-more-button {
+  background-color: #bbbbbb;
+  font-size: 1.5em;
+  color: white;
+  margin: 2px;
+  padding: 2px;
+  text-decoration: none;
+  width: $load-more-size;
+  height: $load-more-size;
+  line-height: $load-more-size;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.load-more-button:hover {
+  background-color: #333;
+  color: white;
 }

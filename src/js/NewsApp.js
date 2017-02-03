@@ -2,27 +2,27 @@ import React from 'react';
 import moment from 'moment';
 // import { Link } from 'react-router';
 
-import {newsItems,
-        numberOfReaders,
-        sourceList,
-        topWords,
-        getStateFromNewsItems,
-        getStateFromNumberOfReaders,
-        getStateFromSourceList,
-        getStateFromTopWords,
-      } from './client_model';
-
-import NewsSearchBar from './NewsSearchBar';
-import NewsTagList from './NewsTagList';
+import Menu from './menu';
+// import NewsSearchBar from './NewsSearchBar';
 import NewsWordList from './NewsWordList';
-import NewsInfo from "./NewsInfo";
-import NewsItem from "./NewsItem";
 import NewsList from "./NewsList";
 import NewsCow from "./NewsCow";
-import HowCow from './HowCow';
 
+require('../scss/normalize.css');
+// require('../scss/skeleton.css');
+import 'purecss/build/pure-min.css';
 require('../scss/style.scss');
-// require('purecss/build/pure.css');
+require('../scss/fa/scss/font-awesome.scss');
+
+function getTagFromPath() {
+  const path =  window.location.pathname.split('/');
+  console.log(path, window.location.href, window.location.pathname);
+  let tag = null;
+  if (path.length > 2 ) {
+    tag = path[2];
+  }
+  return tag;
+}
 
 export default class NewsApp extends React.Component {
 
@@ -31,63 +31,28 @@ export default class NewsApp extends React.Component {
     this.state = {
         filterText: ''
       , filterTags: []
-      , newsItems: getStateFromNewsItems()
-      , filteredNewsItems: []
-      , numberOfReaders: getStateFromNumberOfReaders()
-      , sourceList: getStateFromSourceList()
-      , topWords: getStateFromTopWords()
-      , minutes: 0
       , showAbout: false
+      , loading: false
     };
   }
 
-  tick() {
-    this.setState({minutes: this.state.minutes + 1});
+  fetchItems(tag) {
+      // const lastID = this.props.store.items[this.props.store.items.length-1].itemID;
+      this.setState({loading: false}, () => {
+        this.props.store.fetchItems(tag);        
+      })
   }
 
-  componentWillMount () {
-    this.intervals = [];
-  }
-
-  setInterval () {
-    this.intervals.push(setInterval.apply(null, arguments));
-  }
-
-  componentWillUnmount () {
-    this.intervals.map(clearInterval);
+  componentWillUpdate(nextProps) {
+    console.debug(this.props, nextProps)
+    if (nextProps.params.tag !== this.props.params.tag) {
+      this.fetchItems(nextProps.params.tag);
+    }
   }
 
   componentDidMount () {
-    newsItems.setChangeListener(this.onStorageChange.bind(this));
-    numberOfReaders.setChangeListener(this.onReaderChange.bind(this));
-    sourceList.setChangeListener(this.onSourceListChange.bind(this));
-    topWords.setChangeListener(this.onTopWordsChange.bind(this));
-    this.setInterval(this.tick.bind(this), 60000);
-    this.setState({filteredNewsItems: this.state.newsItems.slice()});
-  }
-
-  onStorageChange () {
-    var newNewsList = getStateFromNewsItems();
-    var tags = this.state.filterTags;
-    if (this.state.filterText.length > 0) {
-      tags = tags.concat(this.state.filterText);
-    }
-    var newFilteredNewsList = this.filterListWithTags(newNewsList, tags);
-    this.setState({newsItems: newNewsList, filteredNewsItems: newFilteredNewsList}); //woop
-  }
-
-  onReaderChange () {
-    this.setState({numberOfReaders: getStateFromNumberOfReaders()});
-  }
-
-  onSourceListChange () {
-    var s = getStateFromSourceList();
-    this.setState({sourceList: s});
-  }
-
-  onTopWordsChange () {
-    var s = getStateFromTopWords();
-    this.setState({topWords: s});
+    const t = getTagFromPath();
+    this.fetchItems(t);
   }
 
 	handleUserInput (filterText) {
@@ -129,14 +94,8 @@ export default class NewsApp extends React.Component {
     }
   }
 
-  handleTagClick (tagName) {
-    var tags = this.state.filterTags.filter(x => x != tagName);
-
-    if (this.state.filterText.length > 0)
-      tags = tags.concat(this.state.filterText);
-
-    var newFilteredNewsList = this.filterListWithTags(this.state.newsItems, tags);
-    this.setState({filterTags: tags, filteredNewsItems: newFilteredNewsList});
+  handleTagClick (tag) {
+    this.props.router.push(`/items/${tag}`);
   }
 
   filterListWithTags (list, tags) {
@@ -181,20 +140,33 @@ export default class NewsApp extends React.Component {
     }
   }
 
-	render() {
+  // isInText(text, filterText) {
+  //   return text.indexOf(filterText) !== -1;
+  // }
+
+  // isInItem(item, filterText) {
+  //   return 
+  // }
+
+  // filterList(list) {
+  //   return list.filter(isInItem);
+  // }
+
+
+  render() {
+    let loadMore = null;
+    if (this.props.store.items.length) {
+      loadMore = <div className="load-more-wrapper" onClick={this.props.store.fetchMore.bind(this.props.store)}><span className="load-more-button"><i className="fa fa-plus"></i></span></div>;
+    }
+
     return (
       <div id="MainContent">
         <div id="headerInfo">
-          <NewsCow />
-          <NewsSearchBar onUserInput={ this.handleUserInput.bind(this) } filterText={this.state.filterText} onFilterSubmit={this.handleSubmit.bind(this)}/>
-          <NewsTagList filterTags={this.state.filterTags} onTagClick={this.handleTagClick.bind(this)}/>
-          <NewsWordList wordList={this.state.topWords} onTagClick={this.handleSubmit.bind(this)}/>
+          <Menu items={this.props.store.tags} />
         </div>
         <div id="mainList">
-          {this.props.children ?
-            this.props.children :
-            <NewsList newsItems={this.state.filteredNewsItems} filterText={this.state.filterText.toLowerCase()} filterTags={this.state.filterTags}/>
-          }
+          <NewsList loading={this.state.loading} newsItems={this.props.store.items} filterText={this.state.filterText.toLowerCase()} filterTags={this.state.filterTags}/>
+          {loadMore}
         </div>
       </div>
 		);
