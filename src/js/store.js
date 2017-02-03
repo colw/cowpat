@@ -14,17 +14,20 @@ class Store {
 		this.tags = [];
 		this.currentTag = '';
 		this.listener = () => {};
+		this.fetching = false;
 	}
 	set(obj) {
 		this.items = obj.items || [];
 		this.tags = obj.tags || [];
 		this.currentTag = obj.currentTag || '';
+		this.fetching = false;
 		this.notify();
 	}
 	update(data) {
 	  	this.items = this.items.concat(data.items);
 	  	this.tags = data.tags || [];
 	  	this.currentTag = data.currentTag;
+		this.fetching = false;
 		this.notify();
 	}
 	notify() {
@@ -44,7 +47,7 @@ class Store {
 		fetchTag = fetchTag || this.currentTag;
 		oldestID = oldestID || null;
 		let tag = fetchTag;//getTagFromPath();
-
+		this.fetching = true;
 		fetch(`${FEEDSRC}${tag ? '/items/' + tag + '' : ''}${oldestID ? '?&oldest=' + oldestID: ''}`)
 		  .then(res => res.json())
 		  .then(json => {

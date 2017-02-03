@@ -26669,114 +26669,13 @@
 	      this.fetchItems(t);
 	    }
 	  }, {
-	    key: 'handleUserInput',
-	    value: function handleUserInput(filterText) {
-	
-	      var modFilterText = filterText.toLowerCase();
-	
-	      if (modFilterText[0] === '-') {
-	        this.setState({ filterText: filterText });
-	        return;
-	      }
-	      var tags = this.state.filterTags;
-	      if (modFilterText.length > 0) {
-	        tags = tags.concat(modFilterText);8;
-	      }
-	      var newFilteredNewsList = this.filterListWithTags(this.state.newsItems, tags);
-	
-	      this.setState({ filterText: filterText, filteredNewsItems: newFilteredNewsList });
-	    }
-	  }, {
-	    key: 'handleSubmit',
-	    value: function handleSubmit(filterText) {
-	      this.handleUserInput(filterText); // FIX This is here in case a user clicks
-	      // a top tag. Usually this is called
-	      // as a user types.
-	      // It also means it is run twice
-	      // if a user types new tag in.
-	      var newTags;
-	      if (filterText === '') return;
-	
-	      if (filterText[0] !== '-') {
-	        newTags = this.state.filterTags.concat(filterText.toLowerCase());
-	        this.setState({ filterText: '', filterTags: newTags });
-	        return;
-	      } else {
-	        newTags = this.state.filterTags.concat(filterText.toLowerCase());
-	        var newFilteredNewsList = this.filterListWithTags(this.state.newsItems, newTags);
-	        this.setState({ filterText: '', filterTags: newTags, filteredNewsItems: newFilteredNewsList });
-	        return;
-	      }
-	    }
-	  }, {
-	    key: 'handleTagClick',
-	    value: function handleTagClick(tag) {
-	      this.props.router.push('/items/' + tag);
-	    }
-	  }, {
-	    key: 'filterListWithTags',
-	    value: function filterListWithTags(list, tags) {
-	      if (list.length === 0) {
-	        return [];
-	      } else if (tags.length === 0) {
-	        return list;
-	      } else if (tags[0] === '-') {
-	        /* move empty string check elsewhere */
-	        return this.filterListWithTags(list, tags.slice(1));
-	      } else {
-	
-	        var searchText = function searchText(x) {
-	          return ((x.title ? x.title : '') + (x.metatitle ? x.metatitle : '') + (x.metalink ? x.metalink : '')).toLowerCase();
-	        };
-	
-	        var filterContains = function filterContains(curTag, x) {
-	          return function (x) {
-	            var xt = searchText(x);
-	            return xt.indexOf(curTag) !== -1;
-	          };
-	        };
-	
-	        var filterContainsNot = function filterContainsNot(curTag, x) {
-	          return function (x) {
-	            var xt = searchText(x);
-	            return xt.indexOf(curTag) === -1;
-	          };
-	        };
-	
-	        var curTag = tags[0];
-	        var filteredList;
-	        if (curTag[0] === '-') {
-	          curTag = curTag.slice(1);
-	          filteredList = list.filter(filterContainsNot(curTag));
-	        } else {
-	          filteredList = list.filter(filterContains(curTag));
-	        }
-	
-	        return this.filterListWithTags(filteredList, tags.slice(1));
-	      }
-	    }
-	
-	    // isInText(text, filterText) {
-	    //   return text.indexOf(filterText) !== -1;
-	    // }
-	
-	    // isInItem(item, filterText) {
-	    //   return 
-	    // }
-	
-	    // filterList(list) {
-	    //   return list.filter(isInItem);
-	    // }
-	
-	
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var loadMore = null;
 	      if (this.props.store.items.length) {
 	        loadMore = _react2.default.createElement(
 	          'div',
-	          { className: 'load-more-wrapper', onClick: this.props.store.fetchMore.bind(this.props.store) },
+	          { key: 2, className: 'load-more-wrapper', onClick: this.props.store.fetchMore.bind(this.props.store) },
 	          _react2.default.createElement(
 	            'span',
 	            { className: 'load-more-button' },
@@ -26785,20 +26684,22 @@
 	        );
 	      }
 	
-	      // <Menu items={this.props.store.tags} />
 	      return _react2.default.createElement(
 	        'div',
 	        { id: 'MainContent' },
 	        _react2.default.createElement(
 	          'div',
 	          { id: 'headerInfo' },
-	          _react2.default.createElement(_Header2.default, { title: "Ruminant", items: this.props.store.tags })
+	          _react2.default.createElement(_Header2.default, { router: this.props.router, title: "Ruminant", open: this.state.menuOpen, items: this.props.store.tags, current: this.props.store.currentTag, selectItem: this.handleSelectItem, iconToggle: this.toggleIcon })
 	        ),
 	        _react2.default.createElement(
 	          'div',
 	          { id: 'mainList' },
-	          _react2.default.createElement(_NewsList2.default, { loading: this.state.loading, newsItems: this.props.store.items, filterText: this.state.filterText.toLowerCase(), filterTags: this.state.filterTags }),
-	          loadMore
+	          !this.props.store.fetching ? [_react2.default.createElement(_NewsList2.default, { key: 1, loading: this.state.loading, newsItems: this.props.store.items, filterText: this.state.filterText.toLowerCase(), filterTags: this.state.filterTags }), loadMore] : _react2.default.createElement(
+	            'div',
+	            null,
+	            'Loading'
+	          )
 	        )
 	      );
 	    }
@@ -42263,16 +42164,17 @@
 	}
 	
 	var MenuItem = function MenuItem(_ref) {
-	  var tag = _ref.tag;
+	  var text = _ref.text,
+	      clickItem = _ref.clickItem;
 	  return _react2.default.createElement(
 	    'li',
 	    null,
 	    _react2.default.createElement(
 	      _reactRouter.Link,
-	      { to: '/items/' + tag, onClick: function onClick() {
+	      { activeClassName: 'active', onClick: function onClick() {
 	          return undefined.setState({ open: false });
 	        } },
-	      capitalise(tag)
+	      capitalise(text)
 	    )
 	  );
 	};
@@ -42289,6 +42191,7 @@
 	      open: false
 	    };
 	    _this.toggle = _this.toggle.bind(_this);
+	    _this.closeMenu = _this.closeMenu.bind(_this);
 	    return _this;
 	  }
 	
@@ -42302,12 +42205,34 @@
 	      });
 	    }
 	  }, {
+	    key: 'closeMenu',
+	    value: function closeMenu(e) {
+	      var _this3 = this;
+	
+	      this.setState({ open: false }, function () {
+	        console.debug(_this3.state.open);
+	      });
+	    }
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      console.debug(this.props.route);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this4 = this;
 	
 	      var makeList = function makeList(x, y) {
-	        console.debug(x, y);
-	        return _react2.default.createElement(MenuItem, { key: y, tag: x });
+	        return _react2.default.createElement(
+	          'li',
+	          { key: y },
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/items/' + x, activeClassName: 'active', onClick: _this4.closeMenu },
+	            capitalise(x)
+	          )
+	        );
 	      };
 	
 	      return _react2.default.createElement(
@@ -42324,7 +42249,7 @@
 	          _react2.default.createElement(
 	            'h1',
 	            { className: 'header-title' },
-	            this.props.title
+	            this.props.current ? '\u2018' + this.props.current + '\u2019' : this.props.title
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -42342,9 +42267,6 @@
 	
 	  return Header;
 	}(_react2.default.Component);
-	
-	// <div class="bm-burger-button" data-radium="true" style="z-index: 1;"><span data-radium="true"><span class="bm-burger-bars" data-radium="true" style="position: absolute; height: 20%; left: 0px; right: 0px; top: 0%; opacity: 1;"></span><span class="bm-burger-bars" data-radium="true" style="position: absolute; height: 20%; left: 0px; right: 0px; top: 40%; opacity: 1;"></span><span class="bm-burger-bars" data-radium="true" style="position: absolute; height: 20%; left: 0px; right: 0px; top: 80%; opacity: 1;"></span></span><button data-radium="true" style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; margin: 0px; padding: 0px; border: none; opacity: 0; font-size: 8px;">Open Menu</button></div>
-	
 	
 	exports.default = Header;
 
@@ -42383,7 +42305,7 @@
 	
 	
 	// module
-	exports.push([module.id, ".header-container {\n  position: relative;\n  margin: 0;\n  width: 100%; }\n\n.header-bar {\n  width: 100%;\n  text-align: center;\n  box-shadow: 0 3px 5px rgba(182, 182, 182, 0.75); }\n\nh1.header-title {\n  margin: 0; }\n\n.menu-icon {\n  font-size: 2em;\n  padding-left: 5px;\n  position: absolute;\n  top: 3px;\n  left: 10px; }\n\n.menu-icon.left {\n  float: left; }\n\n.menu-container {\n  position: absolute;\n  background-color: #FDFDFD;\n  width: 100%;\n  transition: 0.5s;\n  left: -100%; }\n\n.menu-container.open {\n  transition: 0.5s;\n  left: 0;\n  box-shadow: 0 5px 5px rgba(182, 182, 182, 0.75); }\n\n.menu-container ul {\n  font-size: 1.5em;\n  list-style-type: none; }\n  .menu-container ul li {\n    margin-bottom: 10px; }\n  .menu-container ul a, .menu-container ul a:visited {\n    color: #333;\n    text-decoration: none; }\n", ""]);
+	exports.push([module.id, ".header-container {\n  position: relative;\n  margin: 0;\n  width: 100%; }\n\n.header-bar {\n  width: 100%;\n  text-align: center; }\n\nh1.header-title {\n  margin: 0.5rem auto; }\n\n.menu-icon {\n  font-size: 2em;\n  padding-left: 5px;\n  position: absolute;\n  top: 3px;\n  left: 10px;\n  cursor: pointer; }\n\n.menu-icon.left {\n  float: left; }\n\n.menu-container {\n  position: absolute;\n  background-color: #FDFDFD;\n  width: 100%;\n  transition: 0.5s;\n  left: -100%; }\n\n.menu-container.open {\n  transition: 0.5s;\n  left: 0;\n  box-shadow: 0 5px 5px rgba(182, 182, 182, 0.75); }\n\n.menu-container ul {\n  font-size: 1.5em;\n  list-style-type: none; }\n  .menu-container ul li {\n    margin-bottom: 10px; }\n  .menu-container ul a, .menu-container ul a:visited {\n    color: #333;\n    text-decoration: none; }\n", ""]);
 	
 	// exports
 
@@ -44962,7 +44884,7 @@
 	
 	
 	// module
-	exports.push([module.id, "@charset \"UTF-8\";\nbody {\n  background-color: #FDFDFD;\n  font-family: \"Roboto\";\n  color: #333; }\n\n#emptyList {\n  text-align: center; }\n\n#nogoodnews {\n  margin: 2em;\n  color: gray;\n  font-size: smaller; }\n\n#headerInfo {\n  font-family: \"Roboto\"; }\n\n#aboutCow {\n  font-size: smaller; }\n  #aboutCow .tutTags {\n    margin-top: 0.5em;\n    list-style: none outside none;\n    display: block; }\n    #aboutCow .tutTags .tagItem {\n      margin-top: 3px;\n      margin-bottom: 3px; }\n    #aboutCow .tutTags .tagItem button {\n      display: block;\n      border: none; }\n    #aboutCow .tutTags .tagInclude button {\n      color: white;\n      background: cornFlowerBlue; }\n    #aboutCow .tutTags .tagExclude button {\n      color: white;\n      background: lightCoral; }\n    #aboutCow .tutTags .tagPopular button {\n      color: white;\n      background: greenPeas; }\n\n@media only screen and (min-width: 1024px), only screen and (max-width: 1023px) {\n  body {\n    font-size: large; }\n  #MainContent {\n    width: 100%;\n    margin: 0 0;\n    padding: 0em; }\n  #mainList {\n    display: inline-block;\n    width: 75%; }\n    #mainList ul {\n      list-style-type: circle;\n      list-style-position: outside;\n      list-style-image: none; }\n      #mainList ul .newsItem {\n        margin-top: 1em;\n        margin-bottom: 1em;\n        text-align: left; }\n        #mainList ul .newsItem a {\n          text-decoration: none; }\n        #mainList ul .newsItem .headTitle {\n          color: #333;\n          font-size: larger; }\n        #mainList ul .newsItem .subTitle {\n          font-family: \"Roboto\";\n          color: #888;\n          margin-top: 0.2em;\n          margin-left: 2em;\n          text-align: left;\n          font-size: small;\n          content: \"\\2013   \"; }\n        #mainList ul .newsItem .subTitle:before {\n          content: \"\\2013   \"; }\n  #headerInfo {\n    font-size: large; }\n    #headerInfo p {\n      margin: 0; }\n    #headerInfo #cow {\n      display: block; }\n      #headerInfo #cow img {\n        padding: 20px 0 10px 0;\n        max-width: 100px; }\n    #headerInfo #filterBox {\n      margin-top: 0.5em; }\n    #headerInfo #filterTextInput {\n      width: 100px; }\n    #headerInfo #sourceList {\n      cursor: pointer; }\n      #headerInfo #sourceList ul {\n        list-style-type: none;\n        list-style-position: outside;\n        list-style-type: none;\n        padding: 0;\n        margin: 0;\n        font-size: small;\n        color: gray; }\n    #headerInfo #tagList {\n      margin-top: 0.5em;\n      padding: 0; }\n      #headerInfo #tagList li {\n        margin-left: 3px;\n        margin-right: 3px;\n        margin-top: 6px; }\n      #headerInfo #tagList .tagItem button {\n        cursor: pointer;\n        border: none; }\n      #headerInfo #tagList .tagItem.actionAddTag button:last-child, #headerInfo #tagList .tagItem.actionAddTag button:last-child {\n        display: none; }\n      #headerInfo #tagList .tagInclude button {\n        color: white;\n        background: cornFlowerBlue; }\n      #headerInfo #tagList .tagExclude button {\n        color: white;\n        background: lightCoral; }\n      #headerInfo #tagList .tagPopular button {\n        color: white;\n        background: greenPeas; } }\n\n@media only screen and (min-width: 1024px) {\n  #headerInfo #newheader span {\n    display: block;\n    /*desktop*/ }\n  #headerInfo #tagList .tagItem.actionAddTag button:last-child, #headerInfo #tagList .tagItem.actionAddTag button:last-child {\n    display: none; }\n  #headerInfo #tagList li {\n    display: block; } }\n\n@media only screen and (max-width: 1023px) {\n  body {\n    font-size: large; }\n  #mainList {\n    width: 95%; }\n    #mainList ul {\n      list-style-type: none; }\n  #headerInfo #tagList li {\n    display: inline-block; } }\n\n@media only screen and (max-device-width: 480px) {\n  body {\n    font-size: xx-large; }\n  #mainList ul {\n    list-style-type: none;\n    list-style-position: outside;\n    list-style-image: none; }\n    #mainList ul .newsItem {\n      margin-top: 1em;\n      margin-bottom: 1em;\n      text-align: left; }\n      #mainList ul .newsItem a {\n        text-decoration: none; }\n      #mainList ul .newsItem .headTitle {\n        color: #333;\n        font-size: 48px; }\n      #mainList ul .newsItem .subTitle {\n        font-family: \"Roboto\";\n        color: #888;\n        margin-top: 0.2em;\n        margin-left: 2em;\n        text-align: left;\n        font-size: smaller;\n        content: \"\\2013   \"; }\n      #mainList ul .newsItem .subTitle:before {\n        content: \"\\2013   \"; }\n  #headerInfo {\n    font-size: larger; }\n    #headerInfo p {\n      margin: 0; }\n    #headerInfo #cow {\n      display: none; }\n    #headerInfo #filterBox {\n      margin-top: 0.5em;\n      margin-bottom: 0.5em; }\n    #headerInfo #filterTextInput {\n      width: 200px;\n      font-size: 24px; }\n    #headerInfo #tagList {\n      font-size: 24px;\n      margin-top: 0.5em;\n      padding: 0; }\n      #headerInfo #tagList li {\n        display: inline-block;\n        margin-left: 3px;\n        margin-right: 3px;\n        list-style-type: none;\n        list-style-position: outside;\n        list-style-image: none; }\n      #headerInfo #tagList .tagItem button {\n        font-size: 24px;\n        border: none; }\n      #headerInfo #tagList .tagInclude button {\n        color: white;\n        background: cornFlowerBlue; }\n      #headerInfo #tagList .tagExclude button {\n        color: white;\n        background: lightCoral; }\n      #headerInfo #tagList .tagPopular button {\n        color: white;\n        background: greenPeas; } }\n\n.subTitle a, .subTitle a:visited {\n  color: gray; }\n\n.tagItem {\n  padding: 2px;\n  margin: 10px; }\n\n.tagItem a {\n  background-color: #bbbbbb;\n  color: white; }\n\n.tagItem a:hover, .tagItem a.active {\n  background-color: #333;\n  color: white; }\n\n.tagItem a {\n  margin: 4px;\n  padding: 4px;\n  text-decoration: none; }\n\n.load-more-wrapper {\n  text-align: center;\n  margin-top: 2em; }\n\n.load-more-button {\n  background-color: #bbbbbb;\n  font-size: 1.5em;\n  color: white;\n  margin: 2px;\n  padding: 2px;\n  text-decoration: none;\n  width: 1.5em;\n  height: 1.5em;\n  line-height: 1.5em;\n  cursor: pointer;\n  display: inline-block; }\n\n.load-more-button:hover {\n  background-color: #333;\n  color: white; }\n", ""]);
+	exports.push([module.id, "@charset \"UTF-8\";\nbody {\n  background-color: #FDFDFD;\n  font-family: \"Libre Baskerville\", serif;\n  color: #333; }\n\n#emptyList {\n  text-align: center; }\n\n#nogoodnews {\n  margin: 2em;\n  color: gray;\n  font-size: smaller; }\n\n#headerInfo {\n  font-family: \"Libre Baskerville\", serif; }\n\n#aboutCow {\n  font-size: smaller; }\n  #aboutCow .tutTags {\n    margin-top: 0.5em;\n    list-style: none outside none;\n    display: block; }\n    #aboutCow .tutTags .tagItem {\n      margin-top: 3px;\n      margin-bottom: 3px; }\n    #aboutCow .tutTags .tagItem button {\n      display: block;\n      border: none; }\n    #aboutCow .tutTags .tagInclude button {\n      color: white;\n      background: cornFlowerBlue; }\n    #aboutCow .tutTags .tagExclude button {\n      color: white;\n      background: lightCoral; }\n    #aboutCow .tutTags .tagPopular button {\n      color: white;\n      background: greenPeas; }\n\n@media only screen and (min-width: 1024px), only screen and (max-width: 1023px) {\n  body {\n    font-size: large; }\n  #MainContent {\n    width: 100%;\n    margin: 0 0;\n    padding: 0em; }\n  #mainList {\n    display: inline-block;\n    width: 75%; }\n    #mainList ul {\n      list-style-type: circle;\n      list-style-position: outside;\n      list-style-image: none; }\n      #mainList ul .newsItem {\n        margin-top: 1em;\n        margin-bottom: 1em;\n        text-align: left; }\n        #mainList ul .newsItem a {\n          text-decoration: none; }\n        #mainList ul .newsItem .headTitle {\n          color: #333;\n          font-size: larger; }\n        #mainList ul .newsItem .subTitle {\n          font-family: \"Libre Baskerville\", serif;\n          color: #888;\n          margin-top: 0.2em;\n          margin-left: 2em;\n          text-align: left;\n          font-size: small;\n          content: \"\\2013   \"; }\n        #mainList ul .newsItem .subTitle:before {\n          content: \"\\2013   \"; }\n  #headerInfo {\n    font-size: large; }\n    #headerInfo p {\n      margin: 0; }\n    #headerInfo #cow {\n      display: block; }\n      #headerInfo #cow img {\n        padding: 20px 0 10px 0;\n        max-width: 100px; }\n    #headerInfo #filterBox {\n      margin-top: 0.5em; }\n    #headerInfo #filterTextInput {\n      width: 100px; }\n    #headerInfo #sourceList {\n      cursor: pointer; }\n      #headerInfo #sourceList ul {\n        list-style-type: none;\n        list-style-position: outside;\n        list-style-type: none;\n        padding: 0;\n        margin: 0;\n        font-size: small;\n        color: gray; }\n    #headerInfo #tagList {\n      margin-top: 0.5em;\n      padding: 0; }\n      #headerInfo #tagList li {\n        margin-left: 3px;\n        margin-right: 3px;\n        margin-top: 6px; }\n      #headerInfo #tagList .tagItem button {\n        cursor: pointer;\n        border: none; }\n      #headerInfo #tagList .tagItem.actionAddTag button:last-child, #headerInfo #tagList .tagItem.actionAddTag button:last-child {\n        display: none; }\n      #headerInfo #tagList .tagInclude button {\n        color: white;\n        background: cornFlowerBlue; }\n      #headerInfo #tagList .tagExclude button {\n        color: white;\n        background: lightCoral; }\n      #headerInfo #tagList .tagPopular button {\n        color: white;\n        background: greenPeas; } }\n\n@media only screen and (min-width: 1024px) {\n  #headerInfo #newheader span {\n    display: block;\n    /*desktop*/ }\n  #headerInfo #tagList .tagItem.actionAddTag button:last-child, #headerInfo #tagList .tagItem.actionAddTag button:last-child {\n    display: none; }\n  #headerInfo #tagList li {\n    display: block; } }\n\n@media only screen and (max-width: 1023px) {\n  body {\n    font-size: large; }\n  #mainList {\n    width: 95%; }\n    #mainList ul {\n      list-style-type: none; }\n  #headerInfo #tagList li {\n    display: inline-block; } }\n\n@media only screen and (max-device-width: 480px) {\n  body {\n    font-size: xx-large; }\n  #mainList ul {\n    list-style-type: none;\n    list-style-position: outside;\n    list-style-image: none; }\n    #mainList ul .newsItem {\n      margin-top: 1em;\n      margin-bottom: 1em;\n      text-align: left; }\n      #mainList ul .newsItem a {\n        text-decoration: none; }\n      #mainList ul .newsItem .headTitle {\n        color: #333;\n        font-size: 48px; }\n      #mainList ul .newsItem .subTitle {\n        font-family: \"Libre Baskerville\", serif;\n        color: #888;\n        margin-top: 0.2em;\n        margin-left: 2em;\n        text-align: left;\n        font-size: smaller;\n        content: \"\\2013   \"; }\n      #mainList ul .newsItem .subTitle:before {\n        content: \"\\2013   \"; }\n  #headerInfo {\n    font-size: larger; }\n    #headerInfo p {\n      margin: 0; }\n    #headerInfo #cow {\n      display: none; }\n    #headerInfo #filterBox {\n      margin-top: 0.5em;\n      margin-bottom: 0.5em; }\n    #headerInfo #filterTextInput {\n      width: 200px;\n      font-size: 24px; }\n    #headerInfo #tagList {\n      font-size: 24px;\n      margin-top: 0.5em;\n      padding: 0; }\n      #headerInfo #tagList li {\n        display: inline-block;\n        margin-left: 3px;\n        margin-right: 3px;\n        list-style-type: none;\n        list-style-position: outside;\n        list-style-image: none; }\n      #headerInfo #tagList .tagItem button {\n        font-size: 24px;\n        border: none; }\n      #headerInfo #tagList .tagInclude button {\n        color: white;\n        background: cornFlowerBlue; }\n      #headerInfo #tagList .tagExclude button {\n        color: white;\n        background: lightCoral; }\n      #headerInfo #tagList .tagPopular button {\n        color: white;\n        background: greenPeas; } }\n\n.subTitle a, .subTitle a:visited {\n  color: gray; }\n\n.tagItem {\n  padding: 2px;\n  margin: 10px; }\n\n.tagItem a {\n  background-color: #bbbbbb;\n  color: white; }\n\n.tagItem a:hover, .tagItem a.active {\n  background-color: #333;\n  color: white; }\n\n.tagItem a {\n  margin: 4px;\n  padding: 4px;\n  text-decoration: none; }\n\n.load-more-wrapper {\n  text-align: center;\n  margin-top: 2em; }\n\n.load-more-button {\n  background-color: #bbbbbb;\n  font-size: 1.5em;\n  color: white;\n  margin: 2px;\n  padding: 2px;\n  text-decoration: none;\n  width: 1.5em;\n  height: 1.5em;\n  line-height: 1.5em;\n  cursor: pointer;\n  display: inline-block; }\n\n.load-more-button:hover {\n  background-color: #333;\n  color: white; }\n", ""]);
 	
 	// exports
 
@@ -45215,6 +45137,7 @@
 			this.tags = [];
 			this.currentTag = '';
 			this.listener = function () {};
+			this.fetching = false;
 		}
 	
 		_createClass(Store, [{
@@ -45223,6 +45146,7 @@
 				this.items = obj.items || [];
 				this.tags = obj.tags || [];
 				this.currentTag = obj.currentTag || '';
+				this.fetching = false;
 				this.notify();
 			}
 		}, {
@@ -45231,6 +45155,7 @@
 				this.items = this.items.concat(data.items);
 				this.tags = data.tags || [];
 				this.currentTag = data.currentTag;
+				this.fetching = false;
 				this.notify();
 			}
 		}, {
@@ -45260,7 +45185,7 @@
 				fetchTag = fetchTag || this.currentTag;
 				oldestID = oldestID || null;
 				var tag = fetchTag; //getTagFromPath();
-	
+				this.fetching = true;
 				fetch('' + ("https://ruminator.herokuapp.com") + (tag ? '/items/' + tag + '' : '') + (oldestID ? '?&oldest=' + oldestID : '')).then(function (res) {
 					return res.json();
 				}).then(function (json) {

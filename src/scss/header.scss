@@ -13,11 +13,11 @@
 	width: 100%;
 	text-align: center;
 	// height: 2em;
-	box-shadow: 0 3px 5px rgba(182, 182, 182, 0.75);
+	// box-shadow: 0 3px 5px rgba(182, 182, 182, 0.75);
 }
 
 h1.header-title {
-	margin: 0;
+	margin: 0.5rem auto;
 }
 
 .menu-icon {
@@ -26,6 +26,7 @@ h1.header-title {
 	position: absolute;
 	top: 3px;
 	left: 10px;
+	cursor: pointer;
 }
 .menu-icon.left {
 	float: left;
