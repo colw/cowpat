@@ -3,6 +3,7 @@ import moment from 'moment';
 // import { Link } from 'react-router';
 
 import Menu from './menu';
+import Header from './Header';
 // import NewsSearchBar from './NewsSearchBar';
 import NewsWordList from './NewsWordList';
 import NewsList from "./NewsList";
@@ -10,7 +11,7 @@ import NewsCow from "./NewsCow";
 
 require('../scss/normalize.css');
 // require('../scss/skeleton.css');
-import 'purecss/build/pure-min.css';
+// import 'purecss/build/pure-min.css';
 require('../scss/style.scss');
 require('../scss/fa/scss/font-awesome.scss');
 
@@ -159,10 +160,11 @@ export default class NewsApp extends React.Component {
       loadMore = <div className="load-more-wrapper" onClick={this.props.store.fetchMore.bind(this.props.store)}><span className="load-more-button"><i className="fa fa-plus"></i></span></div>;
     }
 
+          // <Menu items={this.props.store.tags} />
     return (
       <div id="MainContent">
         <div id="headerInfo">
-          <Menu items={this.props.store.tags} />
+          <Header title={"Ruminant"} items={this.props.store.tags} />
         </div>
         <div id="mainList">
           <NewsList loading={this.state.loading} newsItems={this.props.store.items} filterText={this.state.filterText.toLowerCase()} filterTags={this.state.filterTags}/>

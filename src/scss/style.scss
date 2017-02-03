@@ -181,9 +181,10 @@ body {
   }
 
   #MainContent {
-    max-width: $maxwidth;
-    margin: 0 auto;
-    padding: 1em;
+    // max-width: $maxwidth;
+    width: 100%;
+    margin: 0 0;
+    padding: 0em;
   }
 
   #mainList {
@@ -330,7 +331,7 @@ body {
 @media #{$normal} {
 
   #headerInfo {
-    float: right; /*desktop*/
+    // float: right; /*desktop*/
 
     #newheader {
       span {

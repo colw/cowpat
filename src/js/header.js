@@ -2,44 +2,53 @@ import React from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router';
 
-require('../scss/menu.scss');
+require('../scss/header.scss');
 
-export default class Menu extends React.Component {
+function capitalise(t) {
+  return t[0].toUpperCase() + t.slice(1);
+}
+
+let MenuItem = ({tag}) => (
+  <li>
+    <Link to={`/items/${tag}`} onClick={() => this.setState({open: false})}>
+      {capitalise(tag)}
+    </Link>
+  </li>
+)
+
+export default class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: true,
+      open: false,
     }
     this.toggle = this.toggle.bind(this);
   }
   toggle() {
     this.setState({open: !this.state.open}, 
-      () => {false && console.debug(this.state.open)});
+      () => {console.debug(this.state.open)});
   }
   render() {
 
-    var makeList = (x) => (
-      <li key={x} className="menu-item">
-        <Link to={`/items/${x}`} onClick={() => this.setState({open: false})} activeClassName="active">{x.toLowerCase()}</Link>
-      </li>
-    );    
 
-    var menuContainer = classNames({
-      'burger-menu': true,
-      'container': true,
-      'open': this.state.open,
-    });
+    let makeList = (x,y) => {
+      console.debug(x,y);
+      return <MenuItem key={y} tag={x} />
+    }
 
     return (
-      <div className={menuContainer}>
-        <div className="burger-button-container">
-          <span className="burger-button" onClick={this.toggle}>
-            <i className="fa fa-bars" aria-hidden="true"></i>
+      <div className="header-container">
+        <div className="header-bar">
+          <span className="menu-icon left" onClick={this.toggle}>
+            <i className={"fa " + (this.state.open ? "fa-close" : "fa-bars")} aria-hidden="true"></i>
           </span>
-          </div>          
-        <div className="menu-children-container">
+          <h1 className="header-title">{this.props.title}</h1>
+        </div>
+        <div className={"menu-container " + (this.state.open ? "open" : "")}>
           <ul>
-            {this.props.items.map(makeList)}
+            {
+              this.props.items.map(makeList)
+            }
           </ul>
         </div>
       </div>
