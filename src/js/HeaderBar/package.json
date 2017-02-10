@@ -1,0 +1,11 @@
+{
+  "name": "react-header-bar",
+  "version": "0.0.1",
+  "description": "A React Top Header/Navigation bar",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "colw",
+  "license": "ISC"
+}

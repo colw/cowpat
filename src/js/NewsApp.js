@@ -3,7 +3,7 @@ import moment from 'moment';
 // import { Link } from 'react-router';
 
 import Menu from './menu';
-import Header from './Header';
+import Header from './HeaderBar';
 // import NewsSearchBar from './NewsSearchBar';
 import NewsWordList from './NewsWordList';
 import NewsList from "./NewsList";
@@ -14,6 +14,16 @@ require('../scss/normalize.css');
 // import 'purecss/build/pure-min.css';
 require('../scss/style.scss');
 require('../scss/fa/scss/font-awesome.scss');
+
+
+function capitalise(t) {
+  return t[0].toUpperCase() + t.slice(1);
+}
+
+function capitaliseEachWord(ws) {
+  console.debug(ws);
+  return ws.split(' ').map(capitalise).join(' ');
+}
 
 function getTagFromPath() {
   const path =  window.location.pathname.split('/');
@@ -63,12 +73,15 @@ export default class NewsApp extends React.Component {
       loadMore = <div key={2} className="load-more-wrapper" onClick={this.props.store.fetchMore.bind(this.props.store)}><span className="load-more-button"><i className="fa fa-plus"></i></span></div>;
     }
 
-
+    let title = 'Ruminant';
+    if (this.props.store.currentTag !== '') {
+      title = `‘${capitaliseEachWord(this.props.store.currentTag)}’`;
+    }
 
     return (
       <div id="MainContent">
         <div id="headerInfo">
-          <Header title={this.props.store.currentTag == '' ? 'Ruminant' : `‘${this.props.store.currentTag}’`} open={this.state.menuOpen} items={this.props.store.tags} current={this.props.store.currentTag} selectItem={this.handleSelectItem} iconToggle={this.toggleIcon} />
+          <Header title={title} open={this.state.menuOpen} items={this.props.store.tags} current={this.props.store.currentTag} selectItem={this.handleSelectItem} iconToggle={this.toggleIcon} />
         </div>
         <div id="mainList">
         {!this.props.store.fetching ? 

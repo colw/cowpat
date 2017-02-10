@@ -3,19 +3,16 @@ import classNames from 'classnames';
 import { Link } from 'react-router';
 
 
-require('../scss/header.scss');
+require('./style.css');
 
 function capitalise(t) {
   return t[0].toUpperCase() + t.slice(1);
 }
 
-let MenuItem = ({text, clickItem}) => (
-  <li>
-    <Link activeClassName="active" onClick={() => this.setState({open: false})}>
-      {capitalise(text)}
-    </Link>
-  </li>
-)
+function capitaliseEachWord(ws) {
+  console.debug(ws);
+  return ws.split(' ').map(capitalise).join(' ');
+}
 
 class Header extends React.Component {
   constructor(props) {
@@ -38,7 +35,7 @@ class Header extends React.Component {
     let makeList = (x,y) => (
       <li key={y}>
         <Link to={`/items/${x}`} activeClassName="active" onClick={this.closeMenu} onlyActiveOnIndex={true}>
-          {capitalise(x)}
+          {capitaliseEachWord(x)}
         </Link>
       </li>
     )
