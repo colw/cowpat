@@ -3,7 +3,7 @@ import moment from 'moment';
 // import { Link } from 'react-router';
 
 import Menu from './menu';
-import Header from './HeaderBar';
+import Header from './headerbar';
 // import NewsSearchBar from './NewsSearchBar';
 import NewsWordList from './NewsWordList';
 import NewsList from "./NewsList";
