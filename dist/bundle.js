@@ -26622,13 +26622,13 @@
 	}
 	
 	function capitaliseEachWord(ws) {
-	  console.debug(ws);
+	  // console.debug(ws);
 	  return decodeURI(ws).split(' ').map(capitalise).join(' ');
 	}
 	
 	function getTagFromPath() {
 	  var path = window.location.pathname.split('/');
-	  console.log(path, window.location.href, window.location.pathname);
+	  // console.log(path, window.location.href, window.location.pathname);
 	  var tag = null;
 	  if (path.length > 2) {
 	    tag = path[2];
@@ -26668,7 +26668,7 @@
 	    value: function componentWillUpdate(nextProps) {
 	      // console.debug(this.props, nextProps)
 	      if (nextProps.params.tag !== this.props.params.tag) {
-	        console.debug(nextProps.params.tag || '');
+	        // console.debug(nextProps.params.tag || '');
 	        this.fetchItems(nextProps.params.tag || '');
 	      }
 	    }
@@ -42179,7 +42179,7 @@
 	}
 	
 	function capitaliseEachWord(ws) {
-	  console.debug(ws);
+	  // console.debug(ws);
 	  return decodeURI(ws).split(' ').map(capitalise).join(' ');
 	}
 	
@@ -42202,25 +42202,17 @@
 	  _createClass(Header, [{
 	    key: 'toggle',
 	    value: function toggle() {
-	      var _this2 = this;
-	
-	      this.setState({ open: !this.state.open }, function () {
-	        console.debug(_this2.state.open);
-	      });
+	      this.setState({ open: !this.state.open });
 	    }
 	  }, {
 	    key: 'closeMenu',
 	    value: function closeMenu(e) {
-	      var _this3 = this;
-	
-	      this.setState({ open: false }, function () {
-	        console.debug(_this3.state.open);
-	      });
+	      this.setState({ open: false });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this4 = this;
+	      var _this2 = this;
 	
 	      var makeList = function makeList(x, y) {
 	        return _react2.default.createElement(
@@ -42228,7 +42220,7 @@
 	          { key: y },
 	          _react2.default.createElement(
 	            _reactRouter.Link,
-	            { to: '/items/' + x, activeClassName: 'active', onClick: _this4.closeMenu, onlyActiveOnIndex: true },
+	            { to: '/items/' + x, activeClassName: 'active', onClick: _this2.closeMenu, onlyActiveOnIndex: true },
 	            capitaliseEachWord(x)
 	          )
 	        );
@@ -45129,7 +45121,7 @@
 	
 	function getTagFromPath() {
 		var path = window.location.pathname.split('/');
-		console.log(path, window.location.href, window.location.pathname);
+		// console.log(path, window.location.href, window.location.pathname);
 		var tag = null;
 		if (path.length > 2) {
 			tag = path[2];
@@ -45200,8 +45192,8 @@
 					});
 					return json;
 				}).then(function (data) {
-					console.log(_this.currentTag !== fetchTag ? 'set' : 'updated');
-					console.log(_this.currentTag, fetchTag);
+					// console.log(this.currentTag !== fetchTag ? 'set' : 'updated');
+					// console.log(this.currentTag, fetchTag);
 					if (_this.currentTag !== fetchTag) {
 						data.currentTag = fetchTag;
 						_this.set(data);
