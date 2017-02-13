@@ -11,7 +11,7 @@ function capitalise(t) {
 
 function capitaliseEachWord(ws) {
   console.debug(ws);
-  return ws.split(' ').map(capitalise).join(' ');
+  return decodeURI(ws).split(' ').map(capitalise).join(' ');
 }
 
 class Header extends React.Component {
