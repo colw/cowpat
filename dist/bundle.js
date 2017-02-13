@@ -26583,9 +26583,9 @@
 	
 	var _menu2 = _interopRequireDefault(_menu);
 	
-	var _Header = __webpack_require__(351);
+	var _headerbar = __webpack_require__(351);
 	
-	var _Header2 = _interopRequireDefault(_Header);
+	var _headerbar2 = _interopRequireDefault(_headerbar);
 	
 	var _NewsWordList = __webpack_require__(354);
 	
@@ -26616,6 +26616,15 @@
 	// import 'purecss/build/pure-min.css';
 	__webpack_require__(374);
 	__webpack_require__(376);
+	
+	function capitalise(t) {
+	  return t[0].toUpperCase() + t.slice(1);
+	}
+	
+	function capitaliseEachWord(ws) {
+	  console.debug(ws);
+	  return decodeURI(ws).split(' ').map(capitalise).join(' ');
+	}
 	
 	function getTagFromPath() {
 	  var path = window.location.pathname.split('/');
@@ -26685,13 +26694,18 @@
 	        );
 	      }
 	
+	      var title = 'Ruminant';
+	      if (this.props.store.currentTag !== '') {
+	        title = '\u2018' + capitaliseEachWord(this.props.store.currentTag) + '\u2019';
+	      }
+	
 	      return _react2.default.createElement(
 	        'div',
 	        { id: 'MainContent' },
 	        _react2.default.createElement(
 	          'div',
 	          { id: 'headerInfo' },
-	          _react2.default.createElement(_Header2.default, { title: this.props.store.currentTag == '' ? 'Ruminant' : '\u2018' + this.props.store.currentTag + '\u2019', open: this.state.menuOpen, items: this.props.store.tags, current: this.props.store.currentTag, selectItem: this.handleSelectItem, iconToggle: this.toggleIcon })
+	          _react2.default.createElement(_headerbar2.default, { title: title, open: this.state.menuOpen, items: this.props.store.tags, current: this.props.store.currentTag, selectItem: this.handleSelectItem, iconToggle: this.toggleIcon })
 	        ),
 	        _react2.default.createElement(
 	          'div',
@@ -42164,21 +42178,10 @@
 	  return t[0].toUpperCase() + t.slice(1);
 	}
 	
-	var MenuItem = function MenuItem(_ref) {
-	  var text = _ref.text,
-	      clickItem = _ref.clickItem;
-	  return _react2.default.createElement(
-	    'li',
-	    null,
-	    _react2.default.createElement(
-	      _reactRouter.Link,
-	      { activeClassName: 'active', onClick: function onClick() {
-	          return undefined.setState({ open: false });
-	        } },
-	      capitalise(text)
-	    )
-	  );
-	};
+	function capitaliseEachWord(ws) {
+	  console.debug(ws);
+	  return decodeURI(ws).split(' ').map(capitalise).join(' ');
+	}
 	
 	var Header = function (_React$Component) {
 	  _inherits(Header, _React$Component);
@@ -42226,7 +42229,7 @@
 	          _react2.default.createElement(
 	            _reactRouter.Link,
 	            { to: '/items/' + x, activeClassName: 'active', onClick: _this4.closeMenu, onlyActiveOnIndex: true },
-	            capitalise(x)
+	            capitaliseEachWord(x)
 	          )
 	        );
 	      };
@@ -42291,8 +42294,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./header.scss", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./header.scss");
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./headerbar.css", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./headerbar.css");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -42310,7 +42313,7 @@
 	
 	
 	// module
-	exports.push([module.id, ".header-container {\n  position: relative;\n  margin: 0;\n  width: 100%; }\n\n.header-bar {\n  width: 100%;\n  text-align: center; }\n\nh1.header-title {\n  margin: 0.5rem auto; }\n\n.menu-icon {\n  font-size: 2em;\n  padding-left: 5px;\n  position: absolute;\n  top: 3px;\n  left: 10px;\n  cursor: pointer; }\n\n.menu-icon.left {\n  float: left; }\n\n.menu-container {\n  position: absolute;\n  background-color: #FDFDFD;\n  width: 100%;\n  transition: 0.5s;\n  left: -100%; }\n\n.menu-container.open {\n  transition: 0.5s;\n  left: 0;\n  box-shadow: 0 5px 5px rgba(182, 182, 182, 0.75); }\n\n.menu-container ul {\n  font-size: 1.5em;\n  list-style-type: none; }\n  .menu-container ul li {\n    margin-bottom: 10px; }\n  .menu-container ul a, .menu-container ul a:visited {\n    color: #333;\n    text-decoration: none; }\n  .menu-container ul a.active {\n    font-weight: bold; }\n", ""]);
+	exports.push([module.id, ".header-container {\n  position: relative;\n  margin: 0;\n  width: 100%;\n}\n\n.header-bar {\n  width: 100%;\n  text-align: center;\n}\n\nh1.header-title {\n  margin: 0.5rem auto;\n}\n\n.menu-icon {\n  font-size: 2em;\n  padding-left: 5px;\n  position: absolute;\n  top: 3px;\n  left: 10px;\n  cursor: pointer;\n}\n\n.menu-icon.left {\n  float: left;\n}\n\n.menu-container {\n  position: absolute;\n  background-color: #FDFDFD;\n  width: 100%;\n  transition: 0.5s;\n  left: -100%;\n}\n\n.menu-container.open {\n  transition: 0.5s;\n  left: 0;\n  box-shadow: 0 5px 5px rgba(182, 182, 182, 0.75);\n}\n\n.menu-container ul {\n  font-size: 1.5em;\n  list-style-type: none;\n}\n\n.menu-container ul li {\n  margin-bottom: 10px;\n}\n\n.menu-container ul a, .menu-container ul a:visited {\n  color: #333;\n  text-decoration: none;\n}\n\n.menu-container ul a.active {\n  font-weight: bold;\n}\n", ""]);
 	
 	// exports
 
@@ -44651,7 +44654,7 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var LinkExt = function LinkExt(props) {
-	  return _react2.default.createElement("a", _extends({}, props, { target: "_blank" }));
+	  return _react2.default.createElement("a", _extends({}, props, { target: "_blank", rel: "noopener" }));
 	};
 	
 	var NewsItem = function (_React$Component) {
