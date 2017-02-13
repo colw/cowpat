@@ -10,7 +10,7 @@ function capitalise(t) {
 }
 
 function capitaliseEachWord(ws) {
-  console.debug(ws);
+  // console.debug(ws);
   return decodeURI(ws).split(' ').map(capitalise).join(' ');
 }
 
@@ -24,12 +24,10 @@ class Header extends React.Component {
     this.closeMenu = this.closeMenu.bind(this);
   }
   toggle() {
-    this.setState({open: !this.state.open}, 
-      () => {console.debug(this.state.open)});
+    this.setState({open: !this.state.open});
   }
   closeMenu(e) {
-    this.setState({open: false}, 
-      () => {console.debug(this.state.open)});
+    this.setState({open: false});
   }
   render() {
     let makeList = (x,y) => (

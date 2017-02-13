@@ -1,6 +1,6 @@
 function getTagFromPath() {
 	const path =  window.location.pathname.split('/');
-	console.log(path, window.location.href, window.location.pathname);
+	// console.log(path, window.location.href, window.location.pathname);
 	let tag = null;
 	if (path.length > 2 ) {
 		tag = path[2];
@@ -55,8 +55,8 @@ class Store {
 		    return json
 		  })
 		  .then((data) => {
-	  		console.log(this.currentTag !== fetchTag ? 'set' : 'updated');
-	  		console.log(this.currentTag, fetchTag);
+	  		// console.log(this.currentTag !== fetchTag ? 'set' : 'updated');
+	  		// console.log(this.currentTag, fetchTag);
 		  	if (this.currentTag !== fetchTag) {
 		  		data.currentTag = fetchTag;
 				this.set(data);

@@ -12,6 +12,49 @@ app.use(express.static(__dirname + '/dist'));
 // 	res.sendFile(__dirname + '/dist/icons/' + req.url.split('/')[2]);
 // })
 
+// TODO Fix these hard coded routes.
+
+app.get('/dist/safari-pinned-tab.svg', function(req, res) {
+	console.log('tag req')
+	res.sendFile(__dirname + '/dist/safari-pinned-tab.svg');
+})
+app.get('/dist/mstile-150x150.png', function(req, res) {
+	console.log('tag req')
+	res.sendFile(__dirname + '/dist/mstile-150x150.png');
+})
+app.get('/dist/manifest.json', function(req, res) {
+	console.log('tag req')
+	res.sendFile(__dirname + '/dist/manifest.json');
+})
+app.get('/dist/favicon.ico', function(req, res) {
+	console.log('tag req')
+	res.sendFile(__dirname + '/dist/favicon.ico');
+})
+app.get('/dist/favicon-32x32.png', function(req, res) {
+	console.log('tag req')
+	res.sendFile(__dirname + '/dist/favicon-32x32.png');
+})
+
+app.get('/dist/favicon-16x16.png', function(req, res) {
+	console.log('tag req')
+	res.sendFile(__dirname + '/dist/favicon-16x16.png');
+})
+
+app.get('/dist/browserconfig.xml', function(req, res) {
+	console.log('tag req')
+	res.sendFile(__dirname + '/dist/browserconfig.xml');
+})
+
+app.get('/dist/apple-touch-icon.png', function(req, res) {
+	console.log('tag req')
+	res.sendFile(__dirname + '/dist/apple-touch-icon.png');
+})
+
+app.get('/dist/android-chrome-192x192.png', function(req, res) {
+	console.log('tag req')
+	res.sendFile(__dirname + '/dist/android-chrome-192x192.png');
+})
+
 app.get('/dist/bundle.js', function(req, res) {
 	console.log('tag req')
 	res.sendFile(__dirname + '/dist/bundle.js');

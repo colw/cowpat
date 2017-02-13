@@ -21,13 +21,13 @@ function capitalise(t) {
 }
 
 function capitaliseEachWord(ws) {
-  console.debug(ws);
+  // console.debug(ws);
   return decodeURI(ws).split(' ').map(capitalise).join(' ');
 }
 
 function getTagFromPath() {
   const path =  window.location.pathname.split('/');
-  console.log(path, window.location.href, window.location.pathname);
+  // console.log(path, window.location.href, window.location.pathname);
   let tag = null;
   if (path.length > 2 ) {
     tag = path[2];
@@ -57,7 +57,7 @@ export default class NewsApp extends React.Component {
   componentWillUpdate(nextProps) {
     // console.debug(this.props, nextProps)
     if (nextProps.params.tag !== this.props.params.tag) {
-      console.debug(nextProps.params.tag || '');
+      // console.debug(nextProps.params.tag || '');
       this.fetchItems(nextProps.params.tag || '');
     }
   }
