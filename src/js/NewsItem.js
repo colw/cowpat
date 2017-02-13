@@ -2,7 +2,7 @@ import React from "react";
 import moment from 'moment';
 
 const LinkExt = (props) => (
-  <a {...props} target="_blank" />
+  <a {...props} target="_blank" rel="noopener"/>
 )
 
 export default class NewsItem extends React.Component {
