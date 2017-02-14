@@ -1,0 +1,23 @@
+exports[`test NewsItem Stub 1`] = `
+<div
+  className="newsItem">
+  <a
+    href="https://www.washingtonpost.com/world/asia_pacific/afghan-official-7-killed-…-suicide-attack/2017/02/11/e3879406-f053-11e6-a100-fdaaf400369a_story.html"
+    rel="noopener"
+    target="_blank">
+    <div
+      className="headTitle">
+      Afghan official: 7 killed in a suicide attack
+    </div>
+  </a>
+  <div
+    className="subTitle">
+    <a
+      href="http://www.washingtonpost.com"
+      rel="noopener"
+      target="_blank">
+      washingtonpost.com
+    </a>
+  </div>
+</div>
+`;
