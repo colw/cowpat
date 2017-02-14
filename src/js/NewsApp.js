@@ -5,21 +5,14 @@ import Menu from './menu';
 import Header from './HeaderNav';
 import NewsList from "./NewsList";
 
+import { capitaliseEachWord } from './tools';
+
 require('../scss/normalize.css');
 // require('../scss/skeleton.css');
 // import 'purecss/build/pure-min.css';
 require('../scss/style.scss');
 require('../scss/fa/scss/font-awesome.scss');
 
-
-function capitalise(t) {
-  return t[0].toUpperCase() + t.slice(1);
-}
-
-function capitaliseEachWord(ws) {
-  // console.debug(ws);
-  return decodeURI(ws).split(' ').map(capitalise).join(' ');
-}
 
 function getTagFromPath() {
   const path =  window.location.pathname.split('/');

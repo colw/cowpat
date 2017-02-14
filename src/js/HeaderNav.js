@@ -2,33 +2,16 @@ import React from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router';
 
+import { capitaliseEachWord } from './tools';
 
 require('../scss/HeaderNav.scss');
 
-function capitalise(t) {
-  return t[0].toUpperCase() + t.slice(1);
-}
-
-function capitaliseEachWord(ws) {
-  // console.debug(ws);
-  return decodeURI(ws).split(' ').map(capitalise).join(' ');
-}
-
 class Header extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: false,
-    }
-    this.toggle = this.toggle.bind(this);
-    this.closeMenu = this.closeMenu.bind(this);
-  }
-  toggle() {
-    this.setState({open: !this.state.open});
-  }
-  closeMenu(e) {
-    this.setState({open: false});
-  }
+  state = {open: false}
+
+  toggle = () => this.setState({open: !this.state.open})
+  closeMenu = () => this.setState({open: false});
+
   render() {
     let makeList = (x,y) => (
       <li key={y}>

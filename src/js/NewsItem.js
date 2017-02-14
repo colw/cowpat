@@ -7,16 +7,6 @@ const LinkExt = (props) => (
 
 export default class NewsItem extends React.Component {
 
-  state = {formattedTimeSince: moment(this.props.info.fetchDate).fromNow()};
-
-  componentDidMount () {
-    this.setInterval(this.updateTime.bind(this), 30000);
-  }
-
-  updateTime () {
-    this.setState({formattedTimeSince: moment(this.props.info.fetchDate).fromNow()});
-  }
-
   getBaseURL (url) {
     if (url.slice(0,4) != 'http') {
       url = 'http://' + url;
@@ -24,18 +14,6 @@ export default class NewsItem extends React.Component {
     var a = document.createElement('a');
     a.href = url;
     return a.hostname.replace(/^www./, '');
-  }
-
-  componentWillMount () {
-    this.intervals = [];
-  }
-
-  setInterval () {
-    this.intervals.push(setInterval.apply(null, arguments));
-  }
-
-  componentWillUnmount () {
-    this.intervals.map(clearInterval);
   }
 
 	render () {
