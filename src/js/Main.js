@@ -3,8 +3,6 @@ import React from 'react';
 import { Router, Route, browserHistory } from 'react-router'
 
 import NewsApp from './NewsApp';
-import HowCow from './HowCow'
-
 import store from './store';
 import routes from './routes';
 
@@ -24,6 +22,5 @@ function mainRender() {
 	  <Router history={browserHistory} routes={routes} createElement={createComponent({store: store})} />
 	), document.getElementById('ReactMountPoint'));
 }
-
 
 mainRender();

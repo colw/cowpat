@@ -1,13 +1,9 @@
 import React from 'react';
 import moment from 'moment';
-// import { Link } from 'react-router';
 
 import Menu from './menu';
-import Header from './headerbar';
-// import NewsSearchBar from './NewsSearchBar';
-import NewsWordList from './NewsWordList';
+import Header from './HeaderNav';
 import NewsList from "./NewsList";
-import NewsCow from "./NewsCow";
 
 require('../scss/normalize.css');
 // require('../scss/skeleton.css');

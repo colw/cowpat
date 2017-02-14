@@ -7,10 +7,7 @@ const LinkExt = (props) => (
 
 export default class NewsItem extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {formattedTimeSince: moment(this.props.info.fetchDate).fromNow()};
-  }
+  state = {formattedTimeSince: moment(this.props.info.fetchDate).fromNow()};
 
   componentDidMount () {
     this.setInterval(this.updateTime.bind(this), 30000);
