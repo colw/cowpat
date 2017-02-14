@@ -1,0 +1,11 @@
+exports[`test External Link renders correctly 1`] = `
+<a
+  href="http://www.ruminant.press"
+  rel="noopener"
+  target="_blank">
+  <div
+    className="headTitle">
+    Ruminant
+  </div>
+</a>
+`;
