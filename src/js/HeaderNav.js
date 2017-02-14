@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { Link } from 'react-router';
 
 
-require('../scss/headerbar.css');
+require('../scss/HeaderNav.scss');
 
 function capitalise(t) {
   return t[0].toUpperCase() + t.slice(1);

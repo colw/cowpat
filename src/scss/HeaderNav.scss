@@ -27,33 +27,35 @@ h1.header-title {
 }
 
 .menu-container {
+
   position: absolute;
   background-color: #FDFDFD;
   width: 100%;
   transition: 0.5s;
   left: -100%;
+  
+  &.open {
+    transition: 0.5s;
+    left: 0;
+    box-shadow: 0 5px 5px rgba(182, 182, 182, 0.75);
+  }
+
+  ul {
+    font-size: 1.5em;
+    list-style-type: none;
+  }
+
+  ul li {
+    margin-bottom: 10px;
+  }
+
+  ul a, ul a:visited {
+    color: #333;
+    text-decoration: none;
+  }
+
+  ul a.active {
+    font-weight: bold;
+  }
 }
 
-.menu-container.open {
-  transition: 0.5s;
-  left: 0;
-  box-shadow: 0 5px 5px rgba(182, 182, 182, 0.75);
-}
-
-.menu-container ul {
-  font-size: 1.5em;
-  list-style-type: none;
-}
-
-.menu-container ul li {
-  margin-bottom: 10px;
-}
-
-.menu-container ul a, .menu-container ul a:visited {
-  color: #333;
-  text-decoration: none;
-}
-
-.menu-container ul a.active {
-  font-weight: bold;
-}

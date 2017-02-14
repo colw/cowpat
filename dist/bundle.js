@@ -42270,8 +42270,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./headerbar.css", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./headerbar.css");
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./HeaderNav.scss", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./HeaderNav.scss");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -42289,7 +42289,7 @@
 	
 	
 	// module
-	exports.push([module.id, ".header-container {\n  position: relative;\n  margin: 0;\n  width: 100%;\n}\n\n.header-bar {\n  width: 100%;\n  text-align: center;\n}\n\nh1.header-title {\n  margin: 0.5rem auto;\n}\n\n.menu-icon {\n  font-size: 2em;\n  padding-left: 5px;\n  position: absolute;\n  top: 3px;\n  left: 10px;\n  cursor: pointer;\n}\n\n.menu-icon.left {\n  float: left;\n}\n\n.menu-container {\n  position: absolute;\n  background-color: #FDFDFD;\n  width: 100%;\n  transition: 0.5s;\n  left: -100%;\n}\n\n.menu-container.open {\n  transition: 0.5s;\n  left: 0;\n  box-shadow: 0 5px 5px rgba(182, 182, 182, 0.75);\n}\n\n.menu-container ul {\n  font-size: 1.5em;\n  list-style-type: none;\n}\n\n.menu-container ul li {\n  margin-bottom: 10px;\n}\n\n.menu-container ul a, .menu-container ul a:visited {\n  color: #333;\n  text-decoration: none;\n}\n\n.menu-container ul a.active {\n  font-weight: bold;\n}\n", ""]);
+	exports.push([module.id, ".header-container {\n  position: relative;\n  margin: 0;\n  width: 100%; }\n\n.header-bar {\n  width: 100%;\n  text-align: center; }\n\nh1.header-title {\n  margin: 0.5rem auto; }\n\n.menu-icon {\n  font-size: 2em;\n  padding-left: 5px;\n  position: absolute;\n  top: 3px;\n  left: 10px;\n  cursor: pointer; }\n\n.menu-icon.left {\n  float: left; }\n\n.menu-container {\n  position: absolute;\n  background-color: #FDFDFD;\n  width: 100%;\n  transition: 0.5s;\n  left: -100%; }\n  .menu-container.open {\n    transition: 0.5s;\n    left: 0;\n    box-shadow: 0 5px 5px rgba(182, 182, 182, 0.75); }\n  .menu-container ul {\n    font-size: 1.5em;\n    list-style-type: none; }\n  .menu-container ul li {\n    margin-bottom: 10px; }\n  .menu-container ul a, .menu-container ul a:visited {\n    color: #333;\n    text-decoration: none; }\n  .menu-container ul a.active {\n    font-weight: bold; }\n", ""]);
 	
 	// exports
 
