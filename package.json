@@ -9,7 +9,7 @@
     "build": "webpack",
     "devwp": "NODE_ENV=development webpack-dev-server --hot --inline --port 8081",
     "dev-remote": "NODE_ENV=production webpack-dev-server --hot --inline --port 8081",
-    "deploy": "NODE_ENV=production webpack",
+    "deploy": "NODE_ENV=production webpack -p --config ./webpack.production.config.js",
     "test": "node node_modules/jest/bin/jest"
   },
   "engines": {
