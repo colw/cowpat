@@ -41,12 +41,18 @@ module.exports = {
       },
       {
         test: /\.(png|jpg)$/,
+        exclude: /src\/favicons/,
         loader: 'url-loader?limit=8192'
       },
       {
         test: /\.html$/,
         loader: "file?name=[name].[ext]"
       },
+      {
+        test: /\.(jpg|jpeg|gif|png|ico|xml|json|svg)$/,
+        include: path.join(__dirname, 'src/favicons'),
+        loader: "file?name=[name].[ext]"
+      },      
       {
         test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
         loader: "url?limit=10000&mimetype=application/font-woff"
@@ -61,6 +67,7 @@ module.exports = {
         loader: "file"
       }, {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        exclude: /src\/favicons/,
         loader: "url?limit=10000&mimetype=image/svg+xml"
       }
     ]

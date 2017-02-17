@@ -6,22 +6,19 @@ import store from './store';
 import routes from './routes';
 
 import "../index.html";
+import './favicons.js'
 
 store.setListener(mainRender);
 
 function mainRender() {
-
 	const createComponent = (store) => {
-
-      // let props = store.getState();
-
 	  return function(Component, props) {
 	    return <Component {...store} {...props} />
 	  }
 	}
 	ReactDOM.render((
 	  <Router history={browserHistory} routes={routes} createElement={createComponent({store: store})} />
-	), document.getElementById('ReactMountPoint'));
+	), document.getElementById('app'));
 }
 
 mainRender();
