@@ -7,10 +7,9 @@ var constants = new webpack.DefinePlugin({
 });
 
 module.exports = {
-  context: __dirname + '/src',
+  context: path.join(__dirname, '/src'),
   entry: {
     javascript: './js/Main.js',
-    html: './index.html'
   },
   output: {
     path: './dist',
