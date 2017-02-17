@@ -8,7 +8,7 @@
     "dev": "webpack-dev-server --hot --inline --port 8081",
     "build": "webpack",
     "devwp": "webpack-dev-server --hot --inline --port 8081",
-    "dev-remote": "webpack-dev-server --hot --inline --port 8081",
+    "dev-remote": "REMOTE_API=true webpack-dev-server --hot --inline --port 8081",
     "deploy": "webpack -p --config ./webpack.production.config.js",
     "test": "node node_modules/jest/bin/jest"
   },

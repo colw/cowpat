@@ -9,7 +9,8 @@ function getTagFromPath() {
 }
 
 class Store {
-	constructor() {
+	constructor(endpoint) {
+		this.apiURL = endpoint;
 		this.items = [];
 		this.tags = [];
 		this.currentTag = '';
@@ -45,7 +46,7 @@ class Store {
 		fetchTag = fetchTag || '';
 		oldestID = oldestID || null;
 		this.fetching = true;
-		fetch(`${FEEDSRC}${fetchTag ? '/items/' + fetchTag + '' : ''}${oldestID ? '?&oldest=' + oldestID: ''}`)
+		fetch(`${this.apiURL}${fetchTag ? '/items/' + fetchTag + '' : ''}${oldestID ? '?&oldest=' + oldestID: ''}`)
 		  .then(res => res.json())
 		  .then(json => {
 		    json.items = json.items.map(x => {
@@ -75,6 +76,6 @@ class Store {
 	}
 }
 
-const store = new Store();
+const store = new Store(API_URL);
 
 export default store;

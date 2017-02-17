@@ -8,14 +8,15 @@ const defineEnvironment = new webpack.DefinePlugin({
 });
 
 var defineConstants = new webpack.DefinePlugin({
-    FEEDSRC: JSON.stringify(process.env.NODE_ENV === 'production' ?
-      'https://ruminator.herokuapp.com' : 'http://localhost:9000'),
+  API_URL: JSON.stringify('https://ruminator.herokuapp.com')
 });
 
 var defineMinify = new webpack.optimize.UglifyJsPlugin({
   compress: { warnings: false },
   output: { comments: false },
 })
+
+var defineDedupe = new webpack.optimize.DedupePlugin();
 
 module.exports = {
   context: path.join(__dirname, '/src'),
@@ -64,5 +65,5 @@ module.exports = {
     extensions: ['', '.js', '.json', '.coffee']
   },
   // devtool: 'source-map',
-  plugins: [defineEnvironment, defineConstants, defineMinify]
+  plugins: [defineEnvironment, defineConstants, defineMinify, defineDedupe]
 };
