@@ -5,11 +5,11 @@
   "main": "app.js",
   "scripts": {
     "start": "webpack && node app.js",
-    "dev": "NODE_ENV=development webpack-dev-server --hot --inline --port 8081",
+    "dev": "webpack-dev-server --hot --inline --port 8081",
     "build": "webpack",
-    "devwp": "NODE_ENV=development webpack-dev-server --hot --inline --port 8081",
-    "dev-remote": "NODE_ENV=production webpack-dev-server --hot --inline --port 8081",
-    "deploy": "NODE_ENV=production webpack -p --config ./webpack.production.config.js",
+    "devwp": "webpack-dev-server --hot --inline --port 8081",
+    "dev-remote": "webpack-dev-server --hot --inline --port 8081",
+    "deploy": "webpack -p --config ./webpack.production.config.js",
     "test": "node node_modules/jest/bin/jest"
   },
   "engines": {

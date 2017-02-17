@@ -1,9 +1,15 @@
 var path = require('path');
 var webpack = require('webpack');
 
-var constants = new webpack.DefinePlugin({
-    ENVIRONMENT: JSON.stringify(process.env.NODE_ENV),
-    FEEDSRC: JSON.stringify(process.env.NODE_ENV === 'production' ? 'https://ruminator.herokuapp.com' : 'http://localhost:9000')
+const defineEnvironment = new webpack.DefinePlugin({
+  "process.env": { 
+     NODE_ENV: JSON.stringify("development") 
+   }
+})
+
+var defineConstants = new webpack.DefinePlugin({
+    FEEDSRC: JSON.stringify(process.env.NODE_ENV === 'production' ?
+      'https://ruminator.herokuapp.com' : 'http://localhost:9000'),
 });
 
 module.exports = {
@@ -21,7 +27,7 @@ module.exports = {
         test: /\.js?$/,
         include: path.join(__dirname, 'src/js'),
         exclude: /(node_modules|bower_components)/,
-        loader: 'babel', // 'babel-loader' is also a legal name to reference
+        loader: 'babel-loader',
         cacheDirectory: true
       },
       {
@@ -44,7 +50,7 @@ module.exports = {
       },
       {
         test: /\.(png|woff|woff2|eot|ttf|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'url'
+        loader: 'url-loader'
       },
     ]
   },
@@ -53,5 +59,5 @@ module.exports = {
     extensions: ['', '.js', '.json', '.coffee']
   },
   devtool: 'source-map',
-  plugins: [constants]
+  plugins: [defineEnvironment, defineConstants]
 };
