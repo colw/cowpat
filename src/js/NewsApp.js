@@ -8,7 +8,7 @@ import { capitaliseEachWord } from './tools';
 require('../scss/normalize.css');
 // require('../scss/skeleton.css');
 // import 'purecss/build/pure-min.css';
-require('../scss/fa/scss/font-awesome.scss');
+require('font-awesome/css/font-awesome.css');
 require('../scss/style.scss');
 
 

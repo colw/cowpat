@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var Visualizer = require('webpack-visualizer-plugin');
 
 const defineEnvironment = new webpack.DefinePlugin({
   "process.env": { 
@@ -17,6 +18,10 @@ var defineMinify = new webpack.optimize.UglifyJsPlugin({
 })
 
 var defineDedupe = new webpack.optimize.DedupePlugin();
+
+var visualizerPluging = new Visualizer({
+  filename: '../statistics.html'
+});
 
 module.exports = {
   context: path.join(__dirname, '/src'),
@@ -55,9 +60,21 @@ module.exports = {
         loader: "file?name=[name].[ext]"
       },
       {
-        test: /\.(png|woff|woff2|eot|ttf|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'url-loader'
-      },
+        test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&mimetype=application/font-woff"
+      }, {
+        test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&mimetype=application/font-woff"
+      }, {
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&mimetype=application/octet-stream"
+      }, {
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "file"
+      }, {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&mimetype=image/svg+xml"
+      }
     ]
   },
   resolve: {
@@ -65,5 +82,5 @@ module.exports = {
     extensions: ['', '.js', '.json', '.coffee']
   },
   // devtool: 'source-map',
-  plugins: [defineEnvironment, defineConstants, defineMinify, defineDedupe]
+  plugins: [defineEnvironment, defineConstants, defineMinify, defineDedupe, visualizerPluging]
 };

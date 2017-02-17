@@ -3,3 +3,4 @@ data
 .module-cache
 mongodb.log
 .DS_Store
+statistics.html
