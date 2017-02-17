@@ -8,8 +8,7 @@ const defineEnvironment = new webpack.DefinePlugin({
 });
 
 var defineConstants = new webpack.DefinePlugin({
-    FEEDSRC: JSON.stringify(process.env.NODE_ENV === 'production' ?
-      'https://ruminator.herokuapp.com' : 'http://localhost:9000'),
+  API_URL: JSON.stringify('https://ruminator.herokuapp.com')
 });
 
 var defineMinify = new webpack.optimize.UglifyJsPlugin({

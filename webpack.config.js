@@ -8,8 +8,7 @@ const defineEnvironment = new webpack.DefinePlugin({
 })
 
 var defineConstants = new webpack.DefinePlugin({
-    FEEDSRC: JSON.stringify(process.env.NODE_ENV === 'production' ?
-      'https://ruminator.herokuapp.com' : 'http://localhost:9000'),
+  API_URL: JSON.stringify(process.env.REMOTE_API ? 'https://ruminator.herokuapp.com' : 'http://localhost:9000')
 });
 
 module.exports = {
