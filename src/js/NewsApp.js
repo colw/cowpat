@@ -1,7 +1,5 @@
 import React from 'react';
-import moment from 'moment';
 
-import Menu from './menu';
 import Header from './HeaderNav';
 import NewsList from "./NewsList";
 
@@ -10,8 +8,8 @@ import { capitaliseEachWord } from './tools';
 require('../scss/normalize.css');
 // require('../scss/skeleton.css');
 // import 'purecss/build/pure-min.css';
-require('../scss/style.scss');
 require('../scss/fa/scss/font-awesome.scss');
+require('../scss/style.scss');
 
 
 function getTagFromPath() {

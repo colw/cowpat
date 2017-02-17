@@ -1,9 +1,7 @@
 import React from "react";
-import moment from 'moment';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 import NewsItem from "./NewsItem";
-import NewsCow from "./NewsCow";
 
 export default class NewsList extends React.Component {
   render () {

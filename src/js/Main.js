@@ -2,9 +2,10 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import { Router, Route, browserHistory } from 'react-router'
 
-import NewsApp from './NewsApp';
 import store from './store';
 import routes from './routes';
+
+import "../index.html";
 
 store.setListener(mainRender);
 
