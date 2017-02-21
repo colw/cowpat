@@ -1,0 +1,4 @@
+
+.fa-plus:before { content: '\e800'; } /* '' */
+.fa-close:before { content: '\e802'; } /* '' */
+.fa-bars:before { content: '\f0c9'; } /* '' */

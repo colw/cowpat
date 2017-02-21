@@ -36,7 +36,10 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        // include: path.join(__dirname, 'src/scss'),
+        include: [
+          path.join(__dirname, 'src/scss'),
+          path.join(__dirname, 'src/fontello/css')
+        ],
         loader: "style-loader!css-loader"
       },
       {
@@ -54,19 +57,19 @@ module.exports = {
         loader: "file?name=[name].[ext]"
       },      
       {
-        test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+        test: /\.woff(\?\d+)?$/,
         loader: "url?limit=10000&mimetype=application/font-woff"
       }, {
-        test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+        test: /\.woff2(\?\d+)?$/,
         loader: "url?limit=10000&mimetype=application/font-woff"
       }, {
-        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        test: /\.ttf(\?\d+)?$/,
         loader: "url?limit=10000&mimetype=application/octet-stream"
       }, {
-        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        test: /\.eot(\?\d+)?$/,
         loader: "file"
       }, {
-        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        test: /\.svg(\?\d+)?$/,
         exclude: /src\/favicons/,
         loader: "url?limit=10000&mimetype=image/svg+xml"
       }

@@ -6,11 +6,8 @@ import NewsList from "./NewsList";
 import { capitaliseEachWord } from './tools';
 
 require('../scss/normalize.css');
-// require('../scss/skeleton.css');
-// import 'purecss/build/pure-min.css';
-require('font-awesome/css/font-awesome.css');
+require('../fontello/css/fontello.css');
 require('../scss/style.scss');
-
 
 function getTagFromPath() {
   const path =  window.location.pathname.split('/');
