@@ -1,3 +1,5 @@
+import 'whatwg-fetch';
+
 function getTagFromPath() {
 	const path =  window.location.pathname.split('/');
 	// console.log(path, window.location.href, window.location.pathname);
