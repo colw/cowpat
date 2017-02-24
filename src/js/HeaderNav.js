@@ -1,27 +1,40 @@
 import React from 'react';
-import { Link } from 'react-router';
-
+import { Link } from 'react-router-dom';
+import store from './store';
 import { capitaliseEachWord } from './tools';
 
 require('../scss/HeaderNav.scss');
 
 class Header extends React.Component {
-  state = {open: false}
+  state = {open: false, tags: []}
 
   toggle = () => this.setState({open: !this.state.open})
-  closeMenu = () => this.setState({open: false});
+
+  componentDidMount() {
+    store.setListener(this.setTags);
+    this.fetchTags();
+  }
+  
+  fetchTags = () => {
+    store.fetchItems();
+  }
+
+  setTags = () => {
+    const tags = store.getState();
+    this.setState({tags: tags.tags});
+  }
 
   render() {
     let makeList = (x,y) => (
       <li key={y}>
-        <Link to={`/items/${x}`} activeClassName="active" onClick={this.closeMenu} onlyActiveOnIndex={true}>
+        <Link to={`/items/${x}`} onClick={() => this.setState({open: false})}>
           {capitaliseEachWord(x)}
         </Link>
       </li>
     )
 
     return (
-      <div className="header-container">
+      <div id="headerInfo" className="header-container">
         <div className="header-bar">
           <span className="menu-icon left" onClick={this.toggle}>
             <i className={"fa " + (this.state.open ? "fa-close" : "fa-bars")} aria-hidden="true"></i>
@@ -30,14 +43,12 @@ class Header extends React.Component {
         </div>
         <div className={"menu-container " + (this.state.open ? "open" : "")}>
           <ul>
-            <li key={this.props.items.length}>
-              <Link to={`/`} activeClassName="active" onClick={this.closeMenu}  onlyActiveOnIndex={true}>
+            <li key={this.state.tags.length}>
+              <Link to={`/`} onClick={() => this.setState({open: false})}>
                 Home
               </Link>
             </li>
-            {
-              this.props.items.map(makeList)
-            }
+            { this.state.tags.map(makeList) }
           </ul>
         </div>
       </div>

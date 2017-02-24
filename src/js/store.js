@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import 'whatwg-fetch';
 
 function getTagFromPath() {
@@ -16,26 +17,26 @@ class Store {
 		this.items = [];
 		this.tags = [];
 		this.currentTag = '';
-		this.listener = () => {};
+		this.listener = [];
 		this.fetching = false;
 	}
 	set(obj) {
-		this.items = obj.items || [];
+		this.items = _.uniqBy(obj.items, 'itemID') || []
 		this.tags = obj.tags || [];
 		this.currentTag = obj.currentTag || '';
 		this.fetching = false;
 	}
 	update(data) {
-	  	this.items = this.items.concat(data.items);
+	  	this.items = _.uniqBy(this.items.concat(data.items), 'itemID');;
 	  	this.tags = data.tags || [];
 	  	this.currentTag = data.currentTag;
 		this.fetching = false;
 	}
 	notify() {
-		this.listener();
+		this.listener.forEach(x=> x());
 	}
 	setListener(fn) {
-		this.listener = fn;
+		this.listener.push(fn);
 	}
 	getState() {
 		return {
