@@ -25,7 +25,7 @@ export default class NewsList extends React.Component {
 
   setNewsItems = () => {
     const state = store.getState();
-    console.debug(state);
+    // console.debug(state);
     this.setState({items: state.items});
   }
 
@@ -68,7 +68,7 @@ export default class NewsList extends React.Component {
       }
       const lastDate = acc[acc.length-1].data.date;
       const curDate = curVal.date;
-      console.debug(lastDate, curDate, lastDate < curDate);
+      // console.debug(lastDate, curDate, lastDate < curDate);
 
       if (caldiff(lastDate, curDate) > 0) {
         return [...acc, {type: 'timestamp', data: curVal}, {type: 'newsitem', data: curVal}]
@@ -85,7 +85,7 @@ export default class NewsList extends React.Component {
               // }
 
   render () {
-    console.debug('render', this.state.items);
+    // console.debug('render', this.state.items);
     if (this.props.loading) {
       return <div>Loading</div>
     }
