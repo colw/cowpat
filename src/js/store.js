@@ -20,14 +20,26 @@ class Store {
 		this.listener = [];
 		this.fetching = false;
 	}
+	convertDate(item) {
+		item.date = new Date(item.date);
+		return item;
+	}
+	constructItemList() {
+		this.items = _.uniqBy(this.items, 'itemID') || []
+		this.items = this.items.map(this.convertDate);
+	  	// this.items = _.sortBy(this.items, 'date');
+	  	this.items.reverse();  	
+	}
 	set(obj) {
-		this.items = _.uniqBy(obj.items, 'itemID') || []
+		this.items = obj.items;
+		this.constructItemList();
 		this.tags = obj.tags || [];
 		this.currentTag = obj.currentTag || '';
 		this.fetching = false;
 	}
 	update(data) {
-	  	this.items = _.uniqBy(this.items.concat(data.items), 'itemID');;
+		this.items = this.items.concat(data.items);
+		this.constructItemList();		
 	  	this.tags = data.tags || [];
 	  	this.currentTag = data.currentTag;
 		this.fetching = false;

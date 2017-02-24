@@ -483,3 +483,15 @@ $load-more-size: 1.5em;
   opacity: 1;
   transition: opacity .5s ease-in;
 }
+
+.newsItemSeparator {
+  text-align: right;
+  span {
+    display: inline-block;
+    width: 4em;
+    padding: 0 0.5em;
+    color: $bgcolour;
+    font-size: smaller;
+    background-color: lighten($subtitle-color, 20%);
+  }
+}

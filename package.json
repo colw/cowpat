@@ -31,6 +31,7 @@
   },
   "homepage": "https://github.com/colw/nxws",
   "dependencies": {
+    "date-fns": "^1.27.2",
     "express": "^4.13.3",
     "font-awesome": "^4.7.0",
     "lodash": "^4.17.4",
