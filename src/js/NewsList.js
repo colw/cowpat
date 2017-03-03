@@ -20,7 +20,7 @@ export default class NewsList extends React.Component {
   }
 
   fetchData = () => {
-    store.fetchItems(this.props.match.params.tag || '');
+    store.fetchItems(this.props.match ? this.props.match.params.tag : '');
   }
 
   setNewsItems = () => {
