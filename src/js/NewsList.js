@@ -41,14 +41,6 @@ export default class NewsList extends React.Component {
     </li>
   );
 
-  insertTimeSeparators = (acc, curVal, curIndex, items) => {
-    return [...acc, {type: 'timestamp', data: curVal}, {type: 'newsitem', data: curVal}];
-  }
-
-  removeDuplicateTimeSeparators = (acc, curVal, curIndex, items) => {
-    return [...acc, curVal];
-  }
-
   makeComponents = (item) => {
     if (item.type) {
       if (item.type === 'timestamp') {
@@ -60,32 +52,24 @@ export default class NewsList extends React.Component {
     return this.makeItem(item);      
   }
 
-  insertTimes = (list) => {
+  insertTimeStamps = (list) => {
     const l = list.slice();
-    const fn = (acc, curVal, curIndex, items) => {
-      if (curIndex === 0) {
-        return [{type: 'timestamp', data: curVal}, {type: 'newsitem', data: curVal}]
-      }
-      const lastDate = acc[acc.length-1].data.date;
-      const curDate = curVal.date;
-      // console.debug(lastDate, curDate, lastDate < curDate);
 
-      if (caldiff(lastDate, curDate) > 0) {
+    const fn = (acc, curVal, curIndex, items) => {
+      const lastDate = acc.length ? acc[acc.length-1].data.date : null;
+      const curDate = curVal.date;
+
+      if (curIndex === 0 || caldiff(lastDate, curDate) > 0) {
         return [...acc, {type: 'timestamp', data: curVal}, {type: 'newsitem', data: curVal}]
       }
+
       return [...acc, {type: 'newsitem', data: curVal}];
     }
 
     return l.reduce(fn, []);
   }
-              // { this.state.items
-              //   .reduce(this.insertTimeSeparators, [])
-              //   .reduce(this.removeDuplicateTimeSeparators, [])
-              //   .map(this.makeComponents)
-              // }
 
   render () {
-    // console.debug('render', this.state.items);
     if (this.props.loading) {
       return <div>Loading</div>
     }
@@ -105,7 +89,7 @@ export default class NewsList extends React.Component {
               transitionEnterTimeout={500}
               transitionLeaveTimeout={300}>
               {
-                this.insertTimes(this.state.items).map(this.makeComponents)
+                this.insertTimeStamps(this.state.items).map(this.makeComponents)
               }
             </ReactCSSTransitionGroup>
           </div>
