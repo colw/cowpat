@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {Route, withRouter} from 'react-router-dom';
 
-import { capitaliseEachWord } from './tools';
+import { capitaliseEachWord, getTagFromPath } from './tools';
 import Header from './HeaderNav';
 import NewsList from './NewsList';
 
-require('../scss/normalize.css');
-require('../fontello/css/fontello.css');
-require('../scss/style.scss');
+import '../scss/normalize.css';
+import '../fontello/css/fontello.css';
+import '../scss/style.scss';
 
 class App extends Component {
 
@@ -20,17 +20,18 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.props.store.setListener(this.setHeading);
-    this.fetchHeading();
-  }
-  
-  fetchHeading = () => {
-    this.props.store.fetchItems();
+    this.fetchData();
   }
 
-  setHeading = () => {
-    const state = this.props.store.getState();
-    this.setState({heading: state.currentTag});
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location.pathname !== this.props.location.pathname) {
+      this.fetchData();
+    }
+  }
+
+  fetchData = () => {
+    const t = getTagFromPath();
+    this.props.store.fetchItems(t);
   }
   
   renderNewsList = (props) => {
@@ -38,33 +39,30 @@ class App extends Component {
       <NewsList
         loading={this.state.loading}
         newsItems={this.props.store.items}
-        store={this.props.store}
         {...props} />
     )
   }
 
   renderHeader = (props) => {
-    let title = this.state.heading !== '' ?
-      `‘${capitaliseEachWord(this.state.heading)}’` : 'Ruminant';
+    const tag = this.props.store.getState().currentTag || 'Ruminant';
+    let title = `‘${capitaliseEachWord(tag)}’`;
     return (
       <Header
         title={title}
-        items={this.props.store.tags}
+        items={this.props.store.getState().tags}
         {...props} />
     )
   }
 
   render() {
     return (
-      <Router>
-        <div className="App">
-          <Route render={this.renderHeader} />
-          <Route path={'/'} exact={true} render={this.renderNewsList} />
-          <Route path={'/items/:tag'} render={this.renderNewsList} />
-        </div>
-      </Router>
+      <div className="App">
+        <Route render={this.renderHeader} />
+        <Route path={'/'} exact={true} render={this.renderNewsList} />
+        <Route path={'/items/:tag'} render={this.renderNewsList} />
+      </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);

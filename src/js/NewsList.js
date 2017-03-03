@@ -7,20 +7,6 @@ import NewsItem from "./NewsItem";
 export default class NewsList extends React.Component {
   state = {open: false, items: []}
 
-  componentDidMount() {
-    this.fetchData();
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.match.params.tag !== this.props.match.params.tag) {
-      this.fetchData();
-    }
-  }
-
-  fetchData = () => {
-    this.props.store.fetchItems(this.props.match ? this.props.match.params.tag : '');
-  }
-
   makeItem = (x) => (
     <li key={x.itemID} className="newsItemWrapper">
       <NewsItem info={x}/>
