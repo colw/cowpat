@@ -2,14 +2,12 @@ import React from "react";
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import caldiff from 'date-fns/difference_in_calendar_days';
 import datefmt from 'date-fns/format';
-import store from './store';
 import NewsItem from "./NewsItem";
 
 export default class NewsList extends React.Component {
   state = {open: false, items: []}
 
   componentDidMount() {
-    store.setListener(this.setNewsItems);
     this.fetchData();
   }
 
@@ -20,13 +18,7 @@ export default class NewsList extends React.Component {
   }
 
   fetchData = () => {
-    store.fetchItems(this.props.match ? this.props.match.params.tag : '');
-  }
-
-  setNewsItems = () => {
-    const state = store.getState();
-    // console.debug(state);
-    this.setState({items: state.items});
+    this.props.store.fetchItems(this.props.match ? this.props.match.params.tag : '');
   }
 
   makeItem = (x) => (
@@ -74,7 +66,7 @@ export default class NewsList extends React.Component {
       return <div>Loading</div>
     }
 
-    if (this.state.items.length === 0) {
+    if (this.props.newsItems.length === 0) {
       return (
         <div id="emptyList">No news is good news.</div>
       );
@@ -89,7 +81,7 @@ export default class NewsList extends React.Component {
               transitionEnterTimeout={500}
               transitionLeaveTimeout={300}>
               {
-                this.insertTimeStamps(this.state.items).map(this.makeComponents)
+                this.insertTimeStamps(this.props.newsItems).map(this.makeComponents)
               }
             </ReactCSSTransitionGroup>
           </div>

@@ -1,28 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import store from './store';
 import { capitaliseEachWord } from './tools';
 
-require('../scss/HeaderNav.scss');
+import '../scss/HeaderNav.scss';
 
 class Header extends React.Component {
   state = {open: false, tags: []}
 
   toggle = () => this.setState({open: !this.state.open})
-
-  componentDidMount() {
-    store.setListener(this.setTags);
-    this.fetchTags();
-  }
-  
-  fetchTags = () => {
-    store.fetchItems();
-  }
-
-  setTags = () => {
-    const tags = store.getState();
-    this.setState({tags: tags.tags});
-  }
 
   render() {
     let makeList = (x,y) => (
@@ -43,12 +28,12 @@ class Header extends React.Component {
         </div>
         <div className={"menu-container " + (this.state.open ? "open" : "")}>
           <ul>
-            <li key={this.state.tags.length}>
+            <li key={this.props.items.length}>
               <Link to={`/`} onClick={() => this.setState({open: false})}>
                 Home
               </Link>
             </li>
-            { this.state.tags.map(makeList) }
+            { this.props.items.map(makeList) }
           </ul>
         </div>
       </div>

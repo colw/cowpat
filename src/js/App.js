@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 
-import store from './store';
 import { capitaliseEachWord } from './tools';
-
 import Header from './HeaderNav';
 import NewsList from './NewsList';
 
@@ -22,16 +20,16 @@ class App extends Component {
   }
 
   componentDidMount() {
-    store.setListener(this.setHeading);
+    this.props.store.setListener(this.setHeading);
     this.fetchHeading();
   }
   
   fetchHeading = () => {
-    store.fetchItems();
+    this.props.store.fetchItems();
   }
 
   setHeading = () => {
-    const state = store.getState();
+    const state = this.props.store.getState();
     this.setState({heading: state.currentTag});
   }
   
@@ -40,6 +38,7 @@ class App extends Component {
       <NewsList
         loading={this.state.loading}
         newsItems={this.props.store.items}
+        store={this.props.store}
         {...props} />
     )
   }
