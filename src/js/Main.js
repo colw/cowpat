@@ -29,7 +29,6 @@ const fetchItems = (fetchTag, oldestID) => {
 }
 
 const initialState = {
-	apiURL: API_URL,
 	items: [],
 	tags: [],
 	currentTag: '',
