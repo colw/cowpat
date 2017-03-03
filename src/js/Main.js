@@ -3,15 +3,44 @@ import React from 'react';
 import {BrowserRouter as Router} from 'react-router-dom';
 
 import App from './App'
-import store from './store';
+import { createStore } from './store';
 
 import "../index.html";
 import './favicons.js'
+
+const fetchItems = (fetchTag, oldestID) => {
+	fetchTag = fetchTag || '';
+	oldestID = oldestID || null;
+	return fetch(`${API_URL}${fetchTag ? '/items/' + fetchTag + '' : ''}${oldestID ? '?&oldest=' + oldestID: ''}`)
+	  .then(res => res.json())
+	  .then(json => {
+	    json.items = json.items.map(x => {
+	      x.tags = JSON.parse(x.tags);
+	      return x;
+	    })
+	    return json;
+	  })
+}
+
+const initialState = {
+	apiURL: API_URL,
+	items: [],
+	tags: [],
+	currentTag: '',
+	fetching: false,
+}
+
+const newsReducer = (state = initialState, action) => {
+	console.debug('reducer', state, action);
+  return {...state, ...action.data};
+}
+
+const store = createStore(newsReducer, fetchItems);
 
 const render = () => {
 	ReactDOM.render(<Router><App store={store} /></Router>, document.getElementById('app'));	
 }
 
-store.setListener(render);
+store.subscribe(render);
 
 render();

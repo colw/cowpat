@@ -31,14 +31,15 @@ class App extends Component {
 
   fetchData = () => {
     const t = getTagFromPath();
-    this.props.store.fetchItems(t);
+    console.debug(this.props, this.props.store);
+    this.props.store.delayDispatch({type: 'FETCH_NEWS', tag: t});
   }
   
   renderNewsList = (props) => {
     return (
       <NewsList
         loading={this.state.loading}
-        newsItems={this.props.store.items}
+        newsItems={this.props.store.getState().items}
         {...props} />
     )
   }
