@@ -1,6 +1,8 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
 import {BrowserRouter as Router} from 'react-router-dom';
+import 'whatwg-fetch';
+import _ from 'lodash';
 
 import App from './App'
 import { createStore } from './store';
@@ -16,8 +18,12 @@ const fetchItems = (fetchTag, oldestID) => {
 	  .then(json => {
 	    json.items = json.items.map(x => {
 	      x.tags = JSON.parse(x.tags);
+	      x.date = new Date(x.date);
 	      return x;
 	    })
+			json.items = _.uniqBy(json.items, 'itemID') || []
+	  	// json.items = _.sortBy(json.items, 'date');
+	  	json.items.reverse();
 	    return json;
 	  })
 }
