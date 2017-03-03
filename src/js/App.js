@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Route, withRouter} from 'react-router-dom';
 
+import { fetchNews, requestNews, receiveNews } from './actions'
+
 import { capitaliseEachWord, getTagFromPath } from './tools';
 import Header from './HeaderNav';
 import NewsList from './NewsList';
@@ -31,8 +33,7 @@ class App extends Component {
 
   fetchData = () => {
     const t = getTagFromPath();
-    console.debug(this.props, this.props.store);
-    this.props.store.delayDispatch({type: 'FETCH_NEWS', tag: t});
+    this.props.store.dispatch(fetchNews(t));
   }
   
   renderNewsList = (props) => {

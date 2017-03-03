@@ -28,7 +28,7 @@ class Header extends React.Component {
         </div>
         <div className={"menu-container " + (this.state.open ? "open" : "")}>
           <ul>
-            <li key={this.props.items.length}>
+            <li key={ this.props.items.length }>
               <Link to={`/`} onClick={() => this.setState({open: false})}>
                 Home
               </Link>

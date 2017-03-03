@@ -12,6 +12,5 @@ export const getTagFromPath = () => {
 	if (path.length > 2 ) {
 		tag = path[2];
 	}
-	console.debug('path', tag);
 	return tag;
 }
