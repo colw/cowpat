@@ -9,7 +9,6 @@ const initialState = {
 };
 
 const newsItems = (state = initialState, action) => {
-console.debug(state, action);
 	switch(action.type) {
 		case REQUEST_NEWS:
 		  return {
