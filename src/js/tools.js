@@ -14,3 +14,12 @@ export const getTagFromPath = () => {
 	}
 	return tag;
 }
+
+export const getBaseURL = (url)  => {
+	if (url.slice(0,4) != 'http') {
+	  url = 'http://' + url;
+	}
+	var a = document.createElement('a');
+	a.href = url;
+	return a.hostname.replace(/^www./, '');
+}

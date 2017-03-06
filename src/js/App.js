@@ -13,14 +13,6 @@ import '../scss/style.scss';
 
 class App extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      loading: false,
-      heading: ''
-    };
-  }
-
   componentDidMount() {
     this.fetchData();
   }
@@ -39,7 +31,7 @@ class App extends Component {
   renderNewsList = (props) => {
     return (
       <NewsList
-        loading={this.state.loading}
+        loading={this.props.store.getState().fetching}
         newsItems={this.props.store.getState().items}
         {...props} />
     )

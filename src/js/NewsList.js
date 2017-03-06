@@ -2,11 +2,9 @@ import React from "react";
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import caldiff from 'date-fns/difference_in_calendar_days';
 import datefmt from 'date-fns/format';
-import NewsItem from "./NewsItem";
+import { NewsItem } from "./NewsItem";
 
 export default class NewsList extends React.Component {
-  state = {open: false, items: []}
-
   makeItem = (x) => (
     <li key={x.itemID} className="newsItemWrapper">
       <NewsItem info={x}/>
